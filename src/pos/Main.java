@@ -17,6 +17,7 @@ public class Main {
         productDAO.delete(1);
         System.out.println(productDAO.findById(4));
         System.out.println(productDAO.productDB);
+        System.out.println("asdsad prueba");
     }
     
 }
