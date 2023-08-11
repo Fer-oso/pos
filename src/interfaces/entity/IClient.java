@@ -1,9 +1,10 @@
-package interfaces.entityes;
+package interfaces.entity;
 
+import entitys.Client;
 import interfaces.crud.ICrud;
 import interfaces.repository.IRepository;
 import java.util.List;
-import models.Client;
+
 
 public interface IClient<T extends Client, ID> extends ICrud<T, ID>, IRepository<T, ID>{
 
