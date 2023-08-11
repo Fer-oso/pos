@@ -1,6 +1,6 @@
 package views.clients;
 
-import controllers.clients.ClientFindByIcController;
+import controllers.clients.ClientFindBySsnController;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -15,7 +15,7 @@ public class ClientFindBySsn extends javax.swing.JInternalFrame {
   
     public ClientFindBySsn(ClientServiceImp clientServiceImp) {
         initComponents();
-        var clientFindByIcController = new ClientFindByIcController(this,clientServiceImp);
+        var clientFindByIcController = new ClientFindBySsnController(this,clientServiceImp);
     }
     
     @SuppressWarnings("unchecked")

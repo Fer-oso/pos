@@ -11,7 +11,7 @@ import entitys.Client;
 import services.ClientServiceImp;
 import views.clients.ClientFindBySsn;
 
-public class ClientFindByIcController extends MouseAdapter implements ActionListener {
+public class ClientFindBySsnController extends MouseAdapter implements ActionListener {
 
     private final ClientFindBySsn clientFindBySsn;
     private final ClientServiceImp clientServiceImp;
@@ -22,7 +22,7 @@ public class ClientFindByIcController extends MouseAdapter implements ActionList
     private int id;
     private Client client;
 
-    public ClientFindByIcController(ClientFindBySsn clientFindBySsn, ClientServiceImp clientServiceImp) {
+    public ClientFindBySsnController(ClientFindBySsn clientFindBySsn, ClientServiceImp clientServiceImp) {
         this.clientFindBySsn = clientFindBySsn;
         this.clientServiceImp = clientServiceImp;
         listClients(findAll());
