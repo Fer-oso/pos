@@ -1,55 +1,68 @@
 package services;
 
+import interfaces.entity.product.IProduct;
 import java.util.List;
 import persistence.ProductRepository;
-import interfaces.entityes.IProduct;
-import models.Product;
 
-public class ProductServiceImp implements IProduct{
+import entitys.Product;
+import java.util.Optional;
 
-    ProductRepository productRepository;
-    
+public class ProductServiceImp implements IProduct<Product, Integer> {
+
+    private final ProductRepository productRepository;
+
     public ProductServiceImp(ProductRepository productRepository) {
-        this.productRepository=productRepository;
+        this.productRepository = productRepository;
     }
 
+   
     @Override
-    public Product save(Product product) {
+    public <S extends Product> S save(S product) {
         return productRepository.save(product);
     }
 
+  
     @Override
     public void show(Product product) {
-       productRepository.show(product);
+        productRepository.show(product);
+    }
+   
+    
+    @Override
+    public <S extends Product> S update(Integer id, S product) {
+        return productRepository.update(id, product);
     }
 
+  
     @Override
-    public Product update(int id,Product product) {
-      return productRepository.update(id,product);
-    }
-
-    @Override
-    public void delete(int id) {
+    public void delete(Integer id) {
         productRepository.delete(id);
     }
 
+ 
     @Override
     public List<Product> findAll() {
-       return productRepository.findAll();
+        return productRepository.findAll();
     }
 
     @Override
-    public Product findById(int id) {
-      return productRepository.findById(id);
+    public Optional<Product> findById(Integer id) {
+        return productRepository.findById(id);
     }
 
     @Override
     public List<Product> findByName(String name) {
-       return productRepository.findByName(name);
+        return productRepository.findByName(name);
     }
 
-    public List<Product> findByPc(String productCode) {
+    @Override
+    public Optional<Product> findByPc(String productCode) {
         return productRepository.findByPc(productCode);
+    }
+
+    @Override
+    public List<Product> findByBrand(String brand) {
+        return null;
     }
 
 }

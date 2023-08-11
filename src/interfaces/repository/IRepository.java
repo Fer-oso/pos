@@ -1,7 +1,8 @@
 package interfaces.repository;
 
-import interfaces.crud.ICrud;
+import interfaces.all.IFindAll;
+import interfaces.all.IFindById;
 
-public interface IRepository<T, ID> extends ICrud<T, ID>,IFindById<T, ID>, IFindAll {
+public interface IRepository<T, ID> extends IFindById<T, ID>, IFindAll<T> {
     
 }

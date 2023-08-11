@@ -1,4 +1,4 @@
-package models;
+package entitys;
 
 import java.util.List;
 
@@ -6,13 +6,18 @@ public class CarShop {
 
     private int id;
     private Client client;
-    private List<Product>products;
+    private List<Product> products;
+
+    private static Integer countId = 0;
 
     public CarShop() {
+         countId++;
+        this.id = countId;
     }
 
     public CarShop(int id, Client client, List<Product> products) {
-        this.id = id;
+         countId++;
+        this.id = countId;
         this.client = client;
         this.products = products;
     }
@@ -45,7 +50,5 @@ public class CarShop {
     public String toString() {
         return "CarShop{" + "id=" + id + ", client=" + client + ", products=" + products + '}';
     }
-    
-    
-    
+
 }

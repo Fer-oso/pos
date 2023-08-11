@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import controllers.ProductFindByNameController;
+import controllers.product.ProductFindByNameController;
 import services.ProductServiceImp;
 
 public class ProductFindByName extends javax.swing.JInternalFrame {

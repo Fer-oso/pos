@@ -1,17 +1,15 @@
-package models;
+package entitys;
 
-import models.CarShop;
-
-public class Cheking {
+public class Checking {
 
         private int id;
         private CarShop carshop;
         private int imps;
 
-    public Cheking() {
+    public Checking() {
     }
 
-    public Cheking(int id, CarShop carshop, int imps) {
+    public Checking(int id, CarShop carshop, int imps) {
         this.id = id;
         this.carshop = carshop;
         this.imps = imps;

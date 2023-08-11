@@ -1,14 +1,8 @@
-package models;
+package entitys;
 
-public class Product {
+import interfaces.entity.Entity;
 
-    public static Integer getCountId() {
-        return countId;
-    }
-
-    public static void setCountId(Integer aCountId) {
-        countId = aCountId;
-    }
+public class Product implements Entity<Integer> {
 
     private Integer id;
     private String name;
@@ -26,7 +20,7 @@ public class Product {
     }
 
     public Product(String name, Double price, boolean availability, Integer stock, String brand, String productCode) {
-          countId++;
+        countId++;
         this.id = countId;
         this.name = name;
         this.price = price;
@@ -34,15 +28,15 @@ public class Product {
         this.stock = stock;
         this.brand = brand;
         this.productCode = productCode;
-       
+
     }
 
-    
-
+    @Override
     public Integer getId() {
         return id;
     }
 
+    @Override
     public void setId(Integer id) {
         this.id = id;
     }
@@ -107,17 +101,4 @@ public class Product {
     public String toString() {
         return "Product{" + "id=" + id + ", name=" + name + ", price=" + price + ", availability=" + availability + ", stock=" + stock + ", brand=" + brand + ", productCode=" + productCode + ", quantity=" + quantity + '}';
     }
-
-    
-   
-    
-
-  
-    
-    
-
-   
-   
-    
-    
 }

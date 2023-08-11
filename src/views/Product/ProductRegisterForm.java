@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import controllers.ProductRegisterFormController;
+import controllers.product.ProductRegisterFormController;
 import services.ProductServiceImp;
 
 public class ProductRegisterForm extends javax.swing.JInternalFrame {
@@ -17,7 +17,7 @@ public class ProductRegisterForm extends javax.swing.JInternalFrame {
  
     public ProductRegisterForm(ProductServiceImp productService) {
         initComponents();
-        ProductRegisterFormController productRegisterFormController = new ProductRegisterFormController(this, productService);
+        var productRegisterFormController = new ProductRegisterFormController(this, productService);
     }
 
     @SuppressWarnings("unchecked")
@@ -100,7 +100,7 @@ public class ProductRegisterForm extends javax.swing.JInternalFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Register Form");
+        jLabel1.setText("Product Register Form");
         jpForm.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 220, 30));
 
         jpTable.setBackground(new java.awt.Color(255, 255, 255));

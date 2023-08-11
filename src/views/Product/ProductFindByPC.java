@@ -7,19 +7,18 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import controllers.ProductFindByPCController;
+import controllers.product.ProductFindByPcController;
 import services.ProductServiceImp;
 
-public class ProductFindByPC extends javax.swing.JInternalFrame {
+public class ProductFindByPc extends javax.swing.JInternalFrame {
 
     private static final long serialVersionUID = 1L;
-
- 
-    public ProductFindByPC(ProductServiceImp productService) {
+  
+    public ProductFindByPc(ProductServiceImp productService) {
         initComponents();
-        ProductFindByPCController productFindByPCController = new ProductFindByPCController(this, productService);
+        var productFindByPcController = new ProductFindByPcController(this,productService);
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -39,11 +38,12 @@ public class ProductFindByPC extends javax.swing.JInternalFrame {
         txtBrand = new javax.swing.JTextField();
         lblCode = new javax.swing.JLabel();
         txtCode = new javax.swing.JTextField();
-        btnEdit = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
         lblSearch = new javax.swing.JLabel();
         txtSearch = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
+        btnEdit = new javax.swing.JButton();
         jpTable = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtTableProducts = new javax.swing.JTable();
@@ -52,6 +52,7 @@ public class ProductFindByPC extends javax.swing.JInternalFrame {
         setBorder(null);
         setClosable(true);
         setIconifiable(true);
+        setMaximizable(true);
         setResizable(true);
         setMaximumSize(new java.awt.Dimension(1016, 512));
         setPreferredSize(new java.awt.Dimension(1016, 512));
@@ -93,8 +94,8 @@ public class ProductFindByPC extends javax.swing.JInternalFrame {
         jpForm.add(lblCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 60, 30));
         jpForm.add(txtCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 260, 140, 30));
 
-        btnEdit.setText("Edit");
-        jpForm.add(btnEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 90, 30));
+        btnDelete.setText("Delete");
+        jpForm.add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 90, 30));
 
         btnCancel.setText("Cancel");
         jpForm.add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 310, 90, 30));
@@ -108,6 +109,9 @@ public class ProductFindByPC extends javax.swing.JInternalFrame {
 
         btnSearch.setText("Search");
         jpForm.add(btnSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, 70, -1));
+
+        btnEdit.setText("Edit");
+        jpForm.add(btnEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 90, 30));
 
         jpTable.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -176,6 +180,14 @@ public class ProductFindByPC extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    public JButton getBtnDelete() {
+        return btnDelete;
+    }
+
+    public void setBtnDelete(JButton btnDelete) {
+        this.btnDelete = btnDelete;
+    }
 
     public JLabel getLblId() {
         return lblId;
@@ -308,6 +320,7 @@ public class ProductFindByPC extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnSearch;
     private javax.swing.JScrollPane jScrollPane1;

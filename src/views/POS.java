@@ -2,7 +2,6 @@ package views;
 
 import controllers.POSController;
 import views.Shop.ShopCarHistory;
-import views.Shop.ShopForm;
 import views.Shop.ShopCarLast;
 
 public class POS extends javax.swing.JFrame {
@@ -67,11 +66,6 @@ public class POS extends javax.swing.JFrame {
         jMenuShop.setText("Shop");
 
         jMenuItemShopForm.setText("Shop Form");
-        jMenuItemShopForm.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemShopFormActionPerformed(evt);
-            }
-        });
         jMenuShop.add(jMenuItemShopForm);
 
         jMenuShopCar.setText("Shop Car");
@@ -109,11 +103,6 @@ public class POS extends javax.swing.JFrame {
         jMenuClient.add(jMenuClientFind);
 
         jMenuItemClientRegister.setText("Register");
-        jMenuItemClientRegister.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemClientRegisterActionPerformed(evt);
-            }
-        });
         jMenuClient.add(jMenuItemClientRegister);
 
         jMenuBar1.add(jMenuClient);
@@ -156,18 +145,9 @@ public class POS extends javax.swing.JFrame {
             jDesktopPane1.add(new ShopCarLast()).setVisible(true);
     }//GEN-LAST:event_jMenuItemShopCarLastActionPerformed
 
-    private void jMenuItemShopFormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemShopFormActionPerformed
-        ShopForm shopForm = new ShopForm();
-            jDesktopPane1.add(shopForm).setVisible(true);
-    }//GEN-LAST:event_jMenuItemShopFormActionPerformed
-
     private void jMenuItemShopCarHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemShopCarHistoryActionPerformed
         jDesktopPane1.add(new ShopCarHistory()).setVisible(true);
     }//GEN-LAST:event_jMenuItemShopCarHistoryActionPerformed
-
-    private void jMenuItemClientRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemClientRegisterActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItemClientRegisterActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -204,8 +184,8 @@ public class POS extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     public javax.swing.JMenu jMenuClient;
     public javax.swing.JMenu jMenuClientFind;
-    private javax.swing.JMenuItem jMenuItemClientByCI;
-    private javax.swing.JMenuItem jMenuItemClientByName;
+    public javax.swing.JMenuItem jMenuItemClientByCI;
+    public javax.swing.JMenuItem jMenuItemClientByName;
     public javax.swing.JMenuItem jMenuItemClientRegister;
     public javax.swing.JMenuItem jMenuItemProductByName;
     public javax.swing.JMenuItem jMenuItemProductByPC;

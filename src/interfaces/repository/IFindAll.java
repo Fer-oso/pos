@@ -3,7 +3,7 @@ package interfaces.repository;
 import java.util.List;
 
 
-public interface IFindAll {
+public interface IFindAll<T>{
     
-    List<?> findAll();
+    List<T> findAll();
 }
