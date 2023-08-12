@@ -6,8 +6,9 @@ import persistence.ProductRepository;
 
 import entitys.Product;
 import java.util.Optional;
+import services.interfaces.IProductService;
 
-public class ProductServiceImp implements IProduct<Product, Integer> {
+public class ProductServiceImp implements IProductService<Product, Integer> {
 
     private final ProductRepository productRepository;
 
@@ -15,31 +16,26 @@ public class ProductServiceImp implements IProduct<Product, Integer> {
         this.productRepository = productRepository;
     }
 
-   
     @Override
     public <S extends Product> S save(S product) {
         return productRepository.save(product);
     }
 
-  
     @Override
     public void show(Product product) {
         productRepository.show(product);
     }
-   
-    
+
     @Override
     public <S extends Product> S update(Integer id, S product) {
         return productRepository.update(id, product);
     }
 
-  
     @Override
     public void delete(Integer id) {
         productRepository.delete(id);
     }
 
- 
     @Override
     public List<Product> findAll() {
         return productRepository.findAll();

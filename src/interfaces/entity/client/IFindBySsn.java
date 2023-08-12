@@ -1,9 +1,9 @@
 package interfaces.entity.client;
 
 import entitys.Client;
-import java.util.List;
+import java.util.Optional;
 
 public interface IFindBySsn<T extends Client> {
     
-    List<T> findBySsn(Integer ssn);
+    Optional<T> findBySsn(Integer ssn);
 }

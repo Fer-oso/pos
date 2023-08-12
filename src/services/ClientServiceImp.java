@@ -60,7 +60,7 @@ public class ClientServiceImp implements IclientService<Client, Integer> {
     }
 
     @Override
-    public List<Client> findBySsn(Integer ssn) {
+    public Optional<Client> findBySsn(Integer ssn) {
         return clientRepository.findBySsn(ssn);
     }
 

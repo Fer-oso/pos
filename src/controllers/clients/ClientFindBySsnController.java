@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import entitys.Client;
+import java.util.Optional;
 import services.ClientServiceImp;
 import views.clients.ClientFindBySsn;
 
@@ -68,7 +69,9 @@ public class ClientFindBySsnController extends MouseAdapter implements ActionLis
 
     private List<Client> findBySsn() {
         int ssn = Integer.parseInt(this.clientFindBySsn.getTxtSearch().getText());
-        List<Client> clientBySsn = clientServiceImp.findBySsn(ssn);
+        Client optionalClient = clientServiceImp.findBySsn(ssn).get();
+        List<Client> clientBySsn = new ArrayList<>();
+        clientBySsn.add(optionalClient);
         return clientBySsn;
     }
 

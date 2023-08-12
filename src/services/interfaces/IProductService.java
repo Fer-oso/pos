@@ -1,13 +1,13 @@
 package services.interfaces;
 
-import entitys.Client;
-import interfaces.entity.client.IClient;
+import entitys.Product;
+import interfaces.entity.product.IProduct;
 import java.util.List;
 import java.util.Optional;
 
-public interface IclientService<T extends Client,ID> extends IClient<T, ID>{  
+public interface IProductService<T extends Product, ID> extends IProduct<T, ID> {
 
- @Override
+    @Override
     public <S extends T> S save(S s);
 
     @Override
@@ -23,22 +23,15 @@ public interface IclientService<T extends Client,ID> extends IClient<T, ID>{
     public List<T> findByName(String name);
 
     @Override
-    public List<T> findByLastName(String lastName);
+    public List<T> findByBrand(String brand);
 
     @Override
-    public List<T> findByAge(Integer age);
-
-    @Override
-    public Optional<T> findBySsn(Integer ssn);
-
-    @Override
-    public List<T> findByPhoneNumber(Integer phoneNumber);
+    public Optional<T> findByPc(String productCode);
 
     @Override
     public Optional<T> findById(ID id);
 
     @Override
     public List<T> findAll();
-
 
 }
