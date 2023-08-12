@@ -4,6 +4,7 @@ import entitys.Product;
 import interfaces.all.IDelete;
 import interfaces.all.IFindAll;
 import interfaces.all.IFindById;
+import interfaces.all.IFindByName;
 import interfaces.all.ISave;
 import interfaces.all.IShow;
 import interfaces.all.IUpdate;
