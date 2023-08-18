@@ -2,8 +2,9 @@ package controllers.Shop;
 
 import entitys.Product;
 import entitys.SelectedProduct;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -12,168 +13,308 @@ import services.ProductServiceImp;
 
 import views.Shop.ShopForm;
 
-public class ShopFormController extends KeyAdapter {
+public class ShopFormController extends MouseAdapter implements ActionListener {
 
-    private final ShopForm shopForm;
-    private Product product;
     private final ProductServiceImp productServiceImp;
+    
+    private final ShopForm shopForm;
 
-    public ShopFormController(ShopForm shopForm, ProductServiceImp productServiceImp) {
-        this.shopForm = shopForm;
-        this.productServiceImp = productServiceImp;
-        this.shopForm.txtProductCode.addKeyListener(this);
-        this.shopForm.txtProductQuantityToSell.addKeyListener(this);
-        this.shopForm.tblShop.addKeyListener(this);
-    }
+    private DefaultTableModel model = new DefaultTableModel();
+    
+    private final List<SelectedProduct> listSelectedProducts = new ArrayList<>();
 
-    DefaultTableModel model = new DefaultTableModel();
+    private Product product;
+    
+    private SelectedProduct selectedProduct;
+
+    private int productStock;
+    
+    private int productQuantity;
 
     private double precioProductTabla = 0;
+    
     private int cantidadProductTabla = 0;
+    
     private double precioFinal = 0;
+    
     private double precioFinalProductsTabla = 0;
+    
     private double totalAPagar = 0;
+
+    private int stockActual;
 
     private double valor = 0;
 
+    int row;
+    int id;
+
+    public ShopFormController(ShopForm shopForm, ProductServiceImp productServiceImp) {
+        
+        this.shopForm = shopForm;
+        
+        this.productServiceImp = productServiceImp;
+        
+        this.shopForm.getTxtProductCode().addActionListener(this);
+        
+        this.shopForm.getTxtProductQuantityToSell().addActionListener(this);
+
+        this.shopForm.getjTableProducts().addMouseListener(this);
+
+    }
+
     private void findProduct() {
 
-        if (!"".equals(this.shopForm.txtProductCode.getText())) {
-            String productCode = (this.shopForm.txtProductCode.getText());
+        if (!"".equals(this.shopForm.getTxtProductCode().getText())) {
+            
+            String productCode = (this.shopForm.getTxtProductCode().getText());
+            
             product = productServiceImp.findByPc(productCode).get();
+            System.out.println(product);
 
             if (product.getName() != null) {
-                this.shopForm.txtProductName.setText("" + product.getName());
-                this.shopForm.txtProductBrand.setText("" + product.getBrand());
-                this.shopForm.txtProductPrice.setText("" + product.getPrice());
-                this.shopForm.txtProductStock.setText("" + product.getStock());
-                this.shopForm.txtProductQuantityToSell.requestFocus();
+                this.shopForm.getTxtProductName().setText("" + product.getName());
+                
+                this.shopForm.getTxtProductBrand().setText("" + product.getBrand());
+                
+                this.shopForm.getTxtProductPrice().setText("" + product.getPrice());
+                
+                this.shopForm.getTxtProductStock().setText("" + product.getStock());
+                
+                this.shopForm.getTxtProductQuantityToSell().requestFocus();
+                
             } else {
-                this.shopForm.txtProductName.setText("");
-                this.shopForm.txtProductBrand.setText("");
-                this.shopForm.txtProductPrice.setText("");
-                this.shopForm.txtProductStock.setText("");
-                this.shopForm.txtProductCode.requestFocus();
-                this.shopForm.txtProductQuantityToSell.setText("");
+                
+                this.shopForm.getTxtProductName().setText("");
+                
+                this.shopForm.getTxtProductBrand().setText("");
+                
+                this.shopForm.getTxtProductPrice().setText("");
+                
+                this.shopForm.getTxtProductStock().setText("");
+                
+                this.shopForm.getTxtProductCode().requestFocus();
+                
+                this.shopForm.getTxtProductQuantityToSell().setText("");
+                
             }
         } else {
+            
             JOptionPane.showMessageDialog(null, "Insert product code");
-            this.shopForm.txtProductCode.requestFocus();
-            this.shopForm.txtProductQuantityToSell.setText("");
+            
+            this.shopForm.getTxtProductCode().requestFocus();
+            
+            this.shopForm.getTxtProductQuantityToSell().setText("");
         }
     }
 
-    private void cantidadProduct() {
-        if (!"".equals(this.shopForm.txtProductQuantityToSell.getText())) {
-            listProductsCarshop();
-            this.shopForm.txtProductQuantityToSell.setText("");
-        }
-    }
+    private void checkQuantityLessStock() {
+        
+        if (!"".equals(this.shopForm.getTxtProductQuantityToSell().getText())) {
 
-    private void checkStockOfProducts() {
-        model = (DefaultTableModel) this.shopForm.tblShop.getModel();
+            productStock = Integer.parseInt(this.shopForm.getTxtProductStock().getText());
+            
+            productQuantity = Integer.parseInt(this.shopForm.getTxtProductQuantityToSell().getText());
 
-        for (int i = 0; i < this.shopForm.tblShop.getRowCount(); i++) {
+            if (productStock >= productQuantity) {
+     
+                addProductToList();
 
-            int cantidadStockTablaVenta = Integer.parseInt(String.valueOf(this.shopForm.tblShop.getModel().getValueAt(i, 3)));
-            int cantidadStockAlmacen = Integer.parseInt(this.shopForm.txtProductStock.getText());
-            if (cantidadStockTablaVenta > cantidadStockAlmacen) {
-                JOptionPane.showMessageDialog(null, "Cantidad supera el stock", "Error", JOptionPane.ERROR_MESSAGE);
-                this.shopForm.requestFocus();
             } else {
-                totalAPagar();
+                
+                JOptionPane.showMessageDialog(null, "Stock no disponible");
+
             }
         }
+    }
+
+   
+
+    private void addProductToList() {
+
+        if (listSelectedProducts.isEmpty()){
+            
+            selectedProduct = createSelectedProduct();
+            
+            listSelectedProducts.add(selectedProduct);
+            
+            stockActual = (productStock - productQuantity);
+
+            this.shopForm.getTxtProductStock().setText("" + stockActual);
+            
+            System.out.println(listSelectedProducts);
+               
+        } else {
+            
+            for (int i = 0; i < listSelectedProducts.size(); i++) {
+                
+                if (listSelectedProducts.get(i).getProductCode().equals(this.shopForm.getTxtProductCode().getText())) {
+                    
+                    JOptionPane.showMessageDialog(null, "producto ya esta en la lista");
+                    
+                    System.out.println(listSelectedProducts);
+                    
+                    actualizarTabla(model);
+                    
+                    
+                }else{
+                    
+                listSelectedProducts.add(selectedProduct);
+                
+                }
+            }
+        }
+    }
+    
+    private SelectedProduct createSelectedProduct() {
+        
+        Integer id = product.getId();
+        
+        String productCode = this.shopForm.getTxtProductCode().getText();
+        
+        String productName = this.shopForm.getTxtProductName().getText();
+        
+        String productBrand = this.shopForm.getTxtProductBrand().getText();
+        
+        double productPrice = Double.parseDouble(this.shopForm.getTxtProductPrice().getText());
+        
+        double finalPrice = productQuantity * productPrice;
+
+        this.shopForm.getTxtProductQuantityToSell().setText("");
+
+        return new SelectedProduct(id, productCode, productName, productBrand, productPrice, productQuantity, finalPrice);
 
     }
 
     private void listProductsCarshop() {
 
-        String productCode = this.shopForm.txtProductCode.getText();
-        String productName = this.shopForm.txtProductName.getText();
-        String productBrand = this.shopForm.txtProductBrand.getText();
-        double productPrice = Double.parseDouble(this.shopForm.txtProductPrice.getText());
-        int productStock = Integer.parseInt(this.shopForm.txtProductStock.getText());
-        int productQuantity = Integer.parseInt(this.shopForm.txtProductQuantityToSell.getText());
-        double finalPrice = productQuantity * productPrice;
+        model = (DefaultTableModel) this.shopForm.getjTableProducts().getModel();
 
-        SelectedProduct selectedProduct = new SelectedProduct(productCode, productName, productBrand, productPrice, productQuantity, finalPrice);
+        //MODELO TABLA
+        Object[] product = new Object[6];
 
-        if (productStock >= productQuantity) {    
-            List<SelectedProduct> listSelectedProducts = new ArrayList<>();
-            listSelectedProducts.add(selectedProduct);
-            model = (DefaultTableModel) this.shopForm.tblShop.getModel();
-            for (int i = 0; i < this.shopForm.tblShop.getRowCount(); i++) {
-                if (this.shopForm.tblShop.getValueAt(i, 0).equals(this.shopForm.txtProductCode.getText())) {
-                    JOptionPane.showMessageDialog(null, "product added");
-                    return;
-                }
+        for (int i = 0; i < listSelectedProducts.size(); i++) {
+            
+            product[0] = listSelectedProducts.get(i).getProductCode();
+            
+            product[1] = listSelectedProducts.get(i).getProductName();
+            
+            product[2] = listSelectedProducts.get(i).getProductBrand();
+            
+            product[3] = listSelectedProducts.get(i).getProductQuantity();
+            
+            product[4] = listSelectedProducts.get(i).getProductPrice();
+            
+            product[5] = listSelectedProducts.get(i).getFinalPrice();
+            
+            model.addRow(product);
+        }
+
+        this.shopForm.getjTableProducts().setModel(model);
+
+        calculateFinalPrice();
+    }
+
+    private void checkStockOfProducts() {
+        
+        for (int i = 0; i < this.shopForm.getjTableProducts().getRowCount(); i++) {
+
+            int cantidadStockTablaVenta = Integer.parseInt(String.valueOf(this.shopForm.getjTableProducts().getModel().getValueAt(i, 3)));
+            
+            int cantidadStockAlmacen = Integer.parseInt(this.shopForm.getTxtProductStock().getText());
+            
+            if (cantidadStockTablaVenta > cantidadStockAlmacen) {
+                
+                JOptionPane.showMessageDialog(null, "Cantidad supera el stock", "Error", JOptionPane.ERROR_MESSAGE);
+                
+                this.shopForm.requestFocus();
+                
+            } else {
+                
+                calculateFinalPrice();
             }
-
-            //MODELO TABLA
-            Object[] product = new Object[6];
-
-            for (int i = 0; i < listSelectedProducts.size(); i++) {
-                product[0] = listSelectedProducts.get(i).getProductCode();
-                product[1] = listSelectedProducts.get(i).getProductName();
-                product[2] = listSelectedProducts.get(i).getProductBrand();
-                product[3] = listSelectedProducts.get(i).getProductStock();
-                product[4] = listSelectedProducts.get(i).getProductPrice();
-                product[5] = listSelectedProducts.get(i).getFinalPrice();
-                model.addRow(product);
-            }
-
-            int stockActual = (productStock - productQuantity);
-
-            this.shopForm.tblShop.setModel(model);
-
-            //stockVenta.setText("" + stockActual);
-            totalAPagar();
-        } else {
-            JOptionPane.showMessageDialog(null, "Stock no disponible");
-
         }
     }
 
-    private void totalAPagar() {
+    private void calculateFinalPrice() {
 
-        for (int i = 0; i < this.shopForm.tblShop.getRowCount(); i++) {
-            cantidadProductTabla = Integer.parseInt(String.valueOf(this.shopForm.tblShop.getModel().getValueAt(i, 3)));
-            precioProductTabla = Double.parseDouble(String.valueOf(this.shopForm.tblShop.getModel().getValueAt(i, 4)));
+        for (int i = 0; i < this.shopForm.getjTableProducts().getRowCount(); i++) {
+            
+            cantidadProductTabla = Integer.parseInt(String.valueOf(this.shopForm.getjTableProducts().getModel().getValueAt(i, 3)));
+            
+            precioProductTabla = Double.parseDouble(String.valueOf(this.shopForm.getjTableProducts().getModel().getValueAt(i, 4)));
+            
             precioFinal = cantidadProductTabla * precioProductTabla;
-            /*       if (cantidadProductTabla > Integer.parseInt(this.shopForm.stockVenta.getText())) {
-              
-            }else{    }*/
-            this.shopForm.tblShop.getModel().setValueAt(precioFinal, i, 5);
+
+            this.shopForm.getjTableProducts().getModel().setValueAt(precioFinal, i, 5);
+            
             precioFinal = cantidadProductTabla * precioProductTabla;
         }
 
-        for (int i = 0; i < this.shopForm.tblShop.getRowCount(); i++) {
-            valor = Double.parseDouble(String.valueOf(this.shopForm.tblShop.getModel().getValueAt(i, 5)));
+        for (int i = 0; i < this.shopForm.getjTableProducts().getRowCount(); i++) {
+            
+            valor = Double.parseDouble(String.valueOf(this.shopForm.getjTableProducts().getModel().getValueAt(i, 5)));
+            
             totalAPagar = totalAPagar + valor;
-            this.shopForm.lblTotal.setText("" + totalAPagar);
+            
+            this.shopForm.getLblTotal().setText("" + totalAPagar);
+            
             System.out.println(valor);
+            
             System.out.println(totalAPagar);
         }
         totalAPagar = 0;
     }
 
-    @Override
-    public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-            findProduct();
-            cantidadProduct();
+    private void getProductSelectedOfTable() {
+        
+        row = this.shopForm.getjTableProducts().getSelectedRow();
+        
+        selectedProduct = listSelectedProducts.get(row);
+        
+        id = selectedProduct.getId();
+        
+        System.out.println(id);
+    }
+
+    private void actualizarTabla(DefaultTableModel modelo) {
+        
+        for (int i = 0; i < modelo.getRowCount(); i++) {
+            
+            modelo.removeRow(i);
+            
+            i = i - 1;
         }
     }
 
     @Override
-    public void keyReleased(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == this.shopForm.getTxtProductCode()) {
+            
+            findProduct();
+        }
+
+        if (e.getSource() == this.shopForm.getTxtProductQuantityToSell()) {
+            
+            checkQuantityLessStock();
+            
+            listProductsCarshop();
+            
             checkStockOfProducts();
         }
 
+        if (e.getSource() == shopForm.getjTableProducts()) {
+            
+            getProductSelectedOfTable();
+
+        }
     }
 
+//    public void mouseClicked(MouseEvent e) {
+//        if (e.getSource() == shopForm.getjTableProducts()) {
+//            getProductSelectedOfTable();
+//
+//        }
+//    }
 }
 
 /*

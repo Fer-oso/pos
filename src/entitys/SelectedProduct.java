@@ -1,7 +1,8 @@
 package entitys;
 
 public class SelectedProduct {
-
+    
+    private Integer id;
     private String productCode;
     private String productName;
     private String productBrand;
@@ -12,7 +13,8 @@ public class SelectedProduct {
     public SelectedProduct() {
     }
 
-    public SelectedProduct(String productCode, String productName, String productBrand, double productPrice, int productQuantity, double finalPrice) {
+    public SelectedProduct(Integer id, String productCode, String productName, String productBrand, double productPrice, int productQuantity, double finalPrice) {
+        this.id = id;
         this.productCode = productCode;
         this.productName = productName;
         this.productBrand = productBrand;
@@ -21,12 +23,12 @@ public class SelectedProduct {
         this.finalPrice = finalPrice;
     }
 
-    public double getFinalPrice() {
-        return finalPrice;
+    public Integer getId() {
+        return id;
     }
 
-    public void setFinalPrice(double finalPrice) {
-        this.finalPrice = finalPrice;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getProductCode() {
@@ -61,18 +63,28 @@ public class SelectedProduct {
         this.productPrice = productPrice;
     }
 
-    public int getProductStock() {
+    public int getProductQuantity() {
         return productQuantity;
     }
 
-    public void setProductStock(int productQuantity) {
+    public void setProductQuantity(int productQuantity) {
         this.productQuantity = productQuantity;
+    }
+
+    public double getFinalPrice() {
+        return finalPrice;
+    }
+
+    public void setFinalPrice(double finalPrice) {
+        this.finalPrice = finalPrice;
     }
 
     @Override
     public String toString() {
-        return "SelectedProduct{" + "productCode=" + productCode + ", productName=" + productName + ", productBrand=" + productBrand + ", productPrice=" + productPrice + ", productQuantity=" + productQuantity + ", finalPrice=" + finalPrice + '}';
+        return "SelectedProduct{" + "id=" + id + ", productCode=" + productCode + ", productName=" + productName + ", productBrand=" + productBrand + ", productPrice=" + productPrice + ", productQuantity=" + productQuantity + ", finalPrice=" + finalPrice + '}';
     }
+
+   
     
     
 }

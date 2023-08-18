@@ -11,8 +11,7 @@ import interfaces.all.IUpdate;
 
 public interface IClient<T extends Client, ID> extends
         ISave<T>, IShow<T>, IUpdate<T, ID>, IDelete<ID>,
-        IFindByName<T>, IfindByLastName<T>, IFindByAge<T>, IFindBySsn<T>, IfindByPhoneNumber<T>,
-        IFindById<T, ID>, IFindAll<T> {
+        IFindById<T, ID>, IFindAll<T>,
+        IFindByName<T>, IfindByLastName<T>, IFindByAge<T>, IFindBySsn<T>, IfindByPhoneNumber<T> {
 
-   
 }

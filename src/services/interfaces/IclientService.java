@@ -5,9 +5,9 @@ import interfaces.entity.client.IClient;
 import java.util.List;
 import java.util.Optional;
 
-public interface IclientService<T extends Client,ID> extends IClient<T, ID>{  
+public interface IclientService<T extends Client, ID> extends IClient<T, ID> {
 
- @Override
+    @Override
     public <S extends T> S save(S s);
 
     @Override
@@ -18,6 +18,12 @@ public interface IclientService<T extends Client,ID> extends IClient<T, ID>{
 
     @Override
     public void delete(ID id);
+
+    @Override
+    public List<T> findAll();
+
+    @Override
+    public Optional<T> findById(ID id);
 
     @Override
     public List<T> findByName(String name);
@@ -33,12 +39,5 @@ public interface IclientService<T extends Client,ID> extends IClient<T, ID>{
 
     @Override
     public List<T> findByPhoneNumber(Integer phoneNumber);
-
-    @Override
-    public Optional<T> findById(ID id);
-
-    @Override
-    public List<T> findAll();
-
 
 }

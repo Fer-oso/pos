@@ -20,6 +20,12 @@ public interface IProductService<T extends Product, ID> extends IProduct<T, ID> 
     public void delete(ID id);
 
     @Override
+    public List<T> findAll();
+
+    @Override
+    public Optional<T> findById(ID id);
+
+    @Override
     public List<T> findByName(String name);
 
     @Override
@@ -27,11 +33,5 @@ public interface IProductService<T extends Product, ID> extends IProduct<T, ID> 
 
     @Override
     public Optional<T> findByPc(String productCode);
-
-    @Override
-    public Optional<T> findById(ID id);
-
-    @Override
-    public List<T> findAll();
 
 }

@@ -9,12 +9,11 @@ import services.interfaces.IclientService;
 public class ClientServiceImp implements IclientService<Client, Integer> {
 
     private final ClientRepository clientRepository;
-    
+
     public ClientServiceImp(ClientRepository clientRepository) {
-        this.clientRepository =  clientRepository;
+        this.clientRepository = clientRepository;
     }
 
-    
     @Override
     public <S extends Client> S save(S s) {
         return clientRepository.save(s);
@@ -36,14 +35,15 @@ public class ClientServiceImp implements IclientService<Client, Integer> {
     }
 
     @Override
+    public List<Client> findAll() {
+        return clientRepository.findAll();
+    }
+
+    @Override
     public Optional<Client> findById(Integer id) {
         return clientRepository.findById(id);
     }
 
-    @Override
-    public List<Client> findAll() {
-        return clientRepository.findAll();
-    }
     @Override
     public List<Client> findByName(String name) {
         return clientRepository.findByName(name);
@@ -51,7 +51,7 @@ public class ClientServiceImp implements IclientService<Client, Integer> {
 
     @Override
     public List<Client> findByLastName(String lastName) {
-       return clientRepository.findByLastName(lastName);
+        return clientRepository.findByLastName(lastName);
     }
 
     @Override
@@ -68,6 +68,5 @@ public class ClientServiceImp implements IclientService<Client, Integer> {
     public List<Client> findByPhoneNumber(Integer phoneNumber) {
         return clientRepository.findByPhoneNumber(phoneNumber);
     }
-
 
 }

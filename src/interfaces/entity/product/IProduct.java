@@ -11,5 +11,6 @@ import interfaces.all.IUpdate;
 
 public interface IProduct<T extends Product, ID> extends 
         ISave<T>, IShow<T>, IUpdate<T, ID>, IDelete<ID>,
-        IFindByName<T>, IFindByPc<T>, IFindByBrand<T>,
-        IFindById<T, ID>, IFindAll<T> { }
+        IFindById<T, ID>, IFindAll<T>, 
+        IFindByName<T>, IFindByPc<T>, IFindByBrand<T>
+       { }
