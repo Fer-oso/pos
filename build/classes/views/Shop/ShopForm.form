@@ -119,7 +119,7 @@
                                           <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
                                           <Component id="txtProductQuantityToSell" min="-2" pref="72" max="-2" attributes="0"/>
                                           <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
-                                          <Component id="btnEliminarProductoVenta" min="-2" pref="30" max="-2" attributes="0"/>
+                                          <Component id="btnRemove" min="-2" pref="30" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -152,7 +152,7 @@
                           <Component id="txtProductPrice" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtProductQuantityToSell" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="btnEliminarProductoVenta" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="btnRemove" min="-2" pref="24" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="26" max="32767" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="260" max="-2" attributes="0"/>
@@ -187,9 +187,6 @@
           </AuxValues>
         </Component>
         <Component class="javax.swing.JTextField" name="txtProductCode">
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-          </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="lblProductBrand">
           <Properties>
@@ -203,9 +200,6 @@
           </AuxValues>
         </Component>
         <Component class="javax.swing.JTextField" name="txtProductBrand">
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-          </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="lblProductQuantity">
           <Properties>
@@ -219,9 +213,6 @@
           </AuxValues>
         </Component>
         <Component class="javax.swing.JTextField" name="txtProductQuantityToSell">
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-          </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="lblProductPrice">
           <Properties>
@@ -235,9 +226,6 @@
           </AuxValues>
         </Component>
         <Component class="javax.swing.JTextField" name="txtProductPrice">
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-          </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="lblProductStock">
           <Properties>
@@ -254,14 +242,8 @@
           <Properties>
             <Property name="focusable" type="boolean" value="false"/>
           </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-          </AuxValues>
         </Component>
-        <Component class="javax.swing.JButton" name="btnEliminarProductoVenta">
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-          </AuxValues>
+        <Component class="javax.swing.JButton" name="btnRemove">
         </Component>
         <Component class="javax.swing.JLabel" name="lblSsn">
           <Properties>
@@ -328,9 +310,6 @@
           </AuxValues>
         </Component>
         <Component class="javax.swing.JTextField" name="txtProductName">
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-          </AuxValues>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
           <AuxValues>

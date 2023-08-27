@@ -38,6 +38,6 @@ public interface IclientService<T extends Client, ID> extends IClient<T, ID> {
     public Optional<T> findBySsn(Integer ssn);
 
     @Override
-    public List<T> findByPhoneNumber(Integer phoneNumber);
+    public List<T> findByPhoneNumber(String phoneNumber);
 
 }

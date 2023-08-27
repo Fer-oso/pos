@@ -2,15 +2,16 @@
 package views.Shop;
 
 import controllers.Shop.ShopFormController;
+import services.ClientServiceImp;
 import services.ProductServiceImp;
 
 public class ShopForm extends javax.swing.JInternalFrame {
 
     private static final long serialVersionUID = 1L;
 
-    public ShopForm(ProductServiceImp productServiceImp) {
+    public ShopForm(ProductServiceImp productServiceImp,ClientServiceImp clientServiceImp) {
         initComponents();
-        ShopFormController shopFormController = new ShopFormController(this, productServiceImp);
+        ShopFormController shopFormController = new ShopFormController(this, productServiceImp, clientServiceImp);
     }
 
     @SuppressWarnings("unchecked")
@@ -28,7 +29,7 @@ public class ShopForm extends javax.swing.JInternalFrame {
         txtProductPrice = new javax.swing.JTextField();
         lblProductStock = new javax.swing.JLabel();
         txtProductStock = new javax.swing.JTextField();
-        btnEliminarProductoVenta = new javax.swing.JButton();
+        btnRemove = new javax.swing.JButton();
         lblSsn = new javax.swing.JLabel();
         txtClientSsn = new javax.swing.JTextField();
         txtClientName = new javax.swing.JTextField();
@@ -160,7 +161,7 @@ public class ShopForm extends javax.swing.JInternalFrame {
                                         .addGap(12, 12, 12)
                                         .addComponent(txtProductQuantityToSell, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(btnEliminarProductoVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                        .addComponent(btnRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(150, 150, 150))))
         );
         jpNuevaVentaLayout.setVerticalGroup(
@@ -183,7 +184,7 @@ public class ShopForm extends javax.swing.JInternalFrame {
                         .addComponent(txtProductStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtProductPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtProductQuantityToSell, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnEliminarProductoVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
@@ -209,23 +210,23 @@ public class ShopForm extends javax.swing.JInternalFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnEliminarProductoVenta;
-    private javax.swing.JButton btnVenta;
+    private javax.swing.JButton btnRemove;
+    public javax.swing.JButton btnVenta;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableProducts;
-    private javax.swing.JPanel jpNuevaVenta;
+    public javax.swing.JPanel jpNuevaVenta;
     private javax.swing.JLabel lblNameClient;
-    private javax.swing.JLabel lblProductBrand;
-    private javax.swing.JLabel lblProductCode;
-    private javax.swing.JLabel lblProductName;
-    private javax.swing.JLabel lblProductPrice;
-    private javax.swing.JLabel lblProductQuantity;
-    private javax.swing.JLabel lblProductStock;
-    private javax.swing.JLabel lblSsn;
-    private javax.swing.JLabel lblTotal;
+    public javax.swing.JLabel lblProductBrand;
+    public javax.swing.JLabel lblProductCode;
+    public javax.swing.JLabel lblProductName;
+    public javax.swing.JLabel lblProductPrice;
+    public javax.swing.JLabel lblProductQuantity;
+    public javax.swing.JLabel lblProductStock;
+    public javax.swing.JLabel lblSsn;
+    public javax.swing.JLabel lblTotal;
     private javax.swing.JLabel lblTotalPrice;
-    private javax.swing.JTextField txtClientName;
-    private javax.swing.JTextField txtClientSsn;
+    public javax.swing.JTextField txtClientName;
+    public javax.swing.JTextField txtClientSsn;
     private javax.swing.JTextField txtProductBrand;
     private javax.swing.JTextField txtProductCode;
     private javax.swing.JTextField txtProductName;
@@ -234,14 +235,7 @@ public class ShopForm extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtProductStock;
     // End of variables declaration//GEN-END:variables
 
-    public javax.swing.JButton getBtnEliminarProductoVenta() {
-        return btnEliminarProductoVenta;
-    }
-
-    public void setBtnEliminarProductoVenta(javax.swing.JButton btnEliminarProductoVenta) {
-        this.btnEliminarProductoVenta = btnEliminarProductoVenta;
-    }
-
+    
     public javax.swing.JButton getBtnVenta() {
         return btnVenta;
     }
@@ -402,5 +396,13 @@ public class ShopForm extends javax.swing.JInternalFrame {
 
     public void setjTableProducts(javax.swing.JTable jTableProducts) {
         this.jTableProducts = jTableProducts;
+    }
+
+    public javax.swing.JButton getBtnRemove() {
+        return btnRemove;
+    }
+
+    public void setBtnRemove(javax.swing.JButton btnRemove) {
+        this.btnRemove = btnRemove;
     }
 }

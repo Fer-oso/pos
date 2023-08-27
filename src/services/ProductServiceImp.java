@@ -1,6 +1,5 @@
 package services;
 
-import interfaces.entity.product.IProduct;
 import java.util.List;
 import persistence.ProductRepository;
 

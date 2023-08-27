@@ -5,5 +5,5 @@ import java.util.List;
 
 public interface IfindByPhoneNumber<T extends Client> {
     
-    List<T> findByPhoneNumber(Integer phoneNumber);
+    List<T> findByPhoneNumber(String phoneNumber);
 }

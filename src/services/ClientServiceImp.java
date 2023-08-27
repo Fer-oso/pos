@@ -65,7 +65,7 @@ public class ClientServiceImp implements IclientService<Client, Integer> {
     }
 
     @Override
-    public List<Client> findByPhoneNumber(Integer phoneNumber) {
+    public List<Client> findByPhoneNumber(String phoneNumber) {
         return clientRepository.findByPhoneNumber(phoneNumber);
     }
 

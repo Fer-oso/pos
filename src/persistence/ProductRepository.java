@@ -9,20 +9,21 @@ public class ProductRepository extends DaoRepository<Product, Integer> implement
 
     private final List<Product> productDB = super.entityList;
 
-    public ProductRepository() {}
+    public ProductRepository() {
+    }
 
     @Override
     public List<Product> findByName(String name) {
-       return productDB.stream().filter(product -> product.getName().equals(name)).toList();
+        return productDB.stream().filter(product -> product.getName().equals(name)).toList();
     }
 
     @Override
     public Optional<Product> findByPc(String productCode) {
-         return productDB.stream().filter(product -> product.getProductCode().equals(productCode)).findFirst();
+        return productDB.stream().filter(product -> product.getProductCode().equals(productCode)).findFirst();
     }
 
     @Override
     public List<Product> findByBrand(String brand) {
-         return productDB.stream().filter(product -> product.getBrand().equals(brand)).toList();
+        return productDB.stream().filter(product -> product.getBrand().equals(brand)).toList();
     }
 }

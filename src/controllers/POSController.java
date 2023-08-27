@@ -46,7 +46,7 @@ public class POSController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         
         if (e.getSource() == pos.jMenuItemShopForm) {
-            pos.jDesktopPane1.add(new ShopForm(productServiceImp)).setVisible(true);
+            pos.jDesktopPane1.add(new ShopForm(productServiceImp, clientServiceImp)).setVisible(true);
         }
         
         if (e.getSource() == pos.jMenuItemProductByName) {

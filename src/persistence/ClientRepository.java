@@ -30,7 +30,7 @@ public class ClientRepository extends DaoRepository<Client, Integer> implements 
     }
 
     @Override
-    public List<Client> findByPhoneNumber(Integer phoneNumber) {
+    public List<Client> findByPhoneNumber(String phoneNumber) {
           return  listClients.stream().filter(client -> client.getPhoneNumber().equals(phoneNumber)).toList();
     }
 
