@@ -4,14 +4,15 @@ package views.Shop;
 import controllers.Shop.ShopFormController;
 import services.ClientServiceImp;
 import services.ProductServiceImp;
+import services.ShoppingCartServiceImp;
 
 public class ShopForm extends javax.swing.JInternalFrame {
 
     private static final long serialVersionUID = 1L;
 
-    public ShopForm(ProductServiceImp productServiceImp,ClientServiceImp clientServiceImp) {
+    public ShopForm(ProductServiceImp productServiceImp, ClientServiceImp clientServiceImp, ShoppingCartServiceImp shoppingCartServiceImp) {
         initComponents();
-        ShopFormController shopFormController = new ShopFormController(this, productServiceImp, clientServiceImp);
+        ShopFormController shopFormController = new ShopFormController(this, productServiceImp, clientServiceImp, shoppingCartServiceImp);
     }
 
     @SuppressWarnings("unchecked")
@@ -34,7 +35,7 @@ public class ShopForm extends javax.swing.JInternalFrame {
         txtClientSsn = new javax.swing.JTextField();
         txtClientName = new javax.swing.JTextField();
         lblNameClient = new javax.swing.JLabel();
-        btnVenta = new javax.swing.JButton();
+        btnAddToShoppingCart = new javax.swing.JButton();
         lblTotalPrice = new javax.swing.JLabel();
         lblTotal = new javax.swing.JLabel();
         lblProductName = new javax.swing.JLabel();
@@ -79,6 +80,8 @@ public class ShopForm extends javax.swing.JInternalFrame {
         lblNameClient.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblNameClient.setText("Name");
 
+        btnAddToShoppingCart.setText("add to cart");
+
         lblTotalPrice.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblTotalPrice.setText("Total a pagar: $");
 
@@ -111,7 +114,7 @@ public class ShopForm extends javax.swing.JInternalFrame {
         jpNuevaVentaLayout.setHorizontalGroup(
             jpNuevaVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpNuevaVentaLayout.createSequentialGroup()
-                .addContainerGap(153, Short.MAX_VALUE)
+                .addContainerGap(138, Short.MAX_VALUE)
                 .addGroup(jpNuevaVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpNuevaVentaLayout.createSequentialGroup()
                         .addGroup(jpNuevaVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,7 +127,7 @@ public class ShopForm extends javax.swing.JInternalFrame {
                                 .addGap(10, 10, 10)
                                 .addComponent(txtClientName, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(30, 30, 30)
-                                .addComponent(btnVenta)
+                                .addComponent(btnAddToShoppingCart)
                                 .addGap(8, 8, 8)
                                 .addComponent(lblTotalPrice)
                                 .addGap(3, 3, 3)
@@ -195,7 +198,7 @@ public class ShopForm extends javax.swing.JInternalFrame {
                 .addGroup(jpNuevaVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtClientSsn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtClientName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAddToShoppingCart, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblTotalPrice)
                     .addComponent(lblTotal))
                 .addGap(27, 27, 27))
@@ -210,8 +213,8 @@ public class ShopForm extends javax.swing.JInternalFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton btnAddToShoppingCart;
     private javax.swing.JButton btnRemove;
-    public javax.swing.JButton btnVenta;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableProducts;
     public javax.swing.JPanel jpNuevaVenta;
@@ -234,15 +237,6 @@ public class ShopForm extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtProductQuantityToSell;
     private javax.swing.JTextField txtProductStock;
     // End of variables declaration//GEN-END:variables
-
-    
-    public javax.swing.JButton getBtnVenta() {
-        return btnVenta;
-    }
-
-    public void setBtnVenta(javax.swing.JButton btnVenta) {
-        this.btnVenta = btnVenta;
-    }
 
     public javax.swing.JLabel getLblNameClient() {
         return lblNameClient;
@@ -404,5 +398,13 @@ public class ShopForm extends javax.swing.JInternalFrame {
 
     public void setBtnRemove(javax.swing.JButton btnRemove) {
         this.btnRemove = btnRemove;
+    }
+
+    public javax.swing.JButton getBtnAddToShoppingCart() {
+        return btnAddToShoppingCart;
+    }
+
+    public void setBtnAddToShoppingCart(javax.swing.JButton btnAddToShoppingCart) {
+        this.btnAddToShoppingCart = btnAddToShoppingCart;
     }
 }

@@ -2,10 +2,14 @@ package persistence;
 
 import java.util.List;
 import entitys.Client;
-import interfaces.entity.client.IClient;
+import interfaces.all.IFindByName;
+import services.interfaces.clientservice.IFindByAge;
+import services.interfaces.clientservice.IFindBySsn;
+import services.interfaces.clientservice.IfindByLastName;
+import services.interfaces.clientservice.IfindByPhoneNumber;
 import java.util.Optional;
 
-public class ClientRepository extends DaoRepository<Client, Integer> implements IClient<Client, Integer> {
+public class ClientRepository extends DaoRepository<Client, Integer> implements IFindByName<Client>, IfindByLastName<Client>, IFindByAge<Client>, IFindBySsn<Client>, IfindByPhoneNumber<Client> {
 
     public List<Client> listClients = super.entityList;
 

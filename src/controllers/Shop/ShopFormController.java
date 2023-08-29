@@ -3,6 +3,7 @@ package controllers.Shop;
 import entitys.Client;
 import entitys.Product;
 import entitys.SelectedProduct;
+import entitys.ShoppingCart;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -14,19 +15,28 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import services.ClientServiceImp;
 import services.ProductServiceImp;
+import services.ShoppingCartServiceImp;
 
 import views.Shop.ShopForm;
+import views.Shop.ShoppingCartForm;
 
 public class ShopFormController extends MouseAdapter implements ActionListener {
 
+    /*Services*/
     private final ProductServiceImp productServiceImp;
 
     private final ClientServiceImp clientServiceImp;
 
+    private final ShoppingCartServiceImp shoppingCartServiceImp;
+
+    /*Views*/
     private final ShopForm shopForm;
+
+    private ShoppingCartForm shoppingCartForm;
 
     private DefaultTableModel model = new DefaultTableModel();
 
+    /*Global variables*/
     private final List<SelectedProduct> listSelectedProducts = new ArrayList<>();
 
     private Product product;
@@ -35,15 +45,18 @@ public class ShopFormController extends MouseAdapter implements ActionListener {
 
     private SelectedProduct selectedProduct;
 
-    int productQuantity;
+    private int productQuantityToSell;
 
-    int row;
+    private int row;
 
-    Integer id;
+    private Integer id;
 
-    Integer ssn;
+    private Integer ssn;
 
-    public ShopFormController(ShopForm shopForm, ProductServiceImp productServiceImp, ClientServiceImp clientServiceImp) {
+    private Double total;
+
+    //Constructors
+    public ShopFormController(ShopForm shopForm, ProductServiceImp productServiceImp, ClientServiceImp clientServiceImp, ShoppingCartServiceImp shoppingCartServiceImp) {
 
         this.shopForm = shopForm;
 
@@ -51,18 +64,73 @@ public class ShopFormController extends MouseAdapter implements ActionListener {
 
         this.clientServiceImp = clientServiceImp;
 
+        this.shoppingCartServiceImp = shoppingCartServiceImp;
+
         this.shopForm.getTxtProductCode().addActionListener(this);
 
         this.shopForm.getTxtProductQuantityToSell().addActionListener(this);
 
         this.shopForm.getBtnRemove().addActionListener(this);
-        
+
         this.shopForm.getTxtClientSsn().addActionListener(this);
+
+        this.shopForm.getBtnAddToShoppingCart().addActionListener(this);
 
         this.shopForm.getjTableProducts().addMouseListener(this);
 
     }
 
+    /*Actions Events*/
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        if (e.getSource() == this.shopForm.getTxtProductCode()) {
+
+            findProduct();
+        }
+
+        if (e.getSource() == this.shopForm.getTxtProductQuantityToSell()) {
+
+            checkQuantityLessStock();
+
+            refreshTable(model);
+
+            listProductsCarshop();
+
+        }
+
+        if (e.getSource() == this.shopForm.getBtnRemove()) {
+
+            removeProductToList(id);
+
+            refreshTable(model);
+
+            listProductsCarshop();
+        }
+
+        if (e.getSource() == this.shopForm.getTxtClientSsn()) {
+
+            findClient();
+        }
+
+        if (e.getSource() == this.shopForm.getBtnAddToShoppingCart()) {
+
+            addToShoppingCart();
+        }
+
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
+        if (e.getSource() == shopForm.getjTableProducts()) {
+
+            getProductSelectedOfTable();
+
+        }
+    }
+
+    /*Function o business logic*/
     private void findProduct() {
 
         if (!"".equals(this.shopForm.getTxtProductCode().getText())) {
@@ -113,15 +181,15 @@ public class ShopFormController extends MouseAdapter implements ActionListener {
 
     private void checkQuantityLessStock() {
 
-        int stockActual;
+        int actualStock;
 
         if (!"".equals(this.shopForm.getTxtProductQuantityToSell().getText())) {
 
             int productStock = Integer.parseInt(this.shopForm.getTxtProductStock().getText());
 
-            productQuantity = Integer.parseInt(this.shopForm.getTxtProductQuantityToSell().getText());
+            productQuantityToSell = Integer.parseInt(this.shopForm.getTxtProductQuantityToSell().getText());
 
-            if (productStock >= productQuantity) { // si el producto se puede vender
+            if (productStock >= productQuantityToSell) { // si el producto se puede vender
 
                 selectedProduct = createSelectedProduct(); // crea un producto seleccionado
 
@@ -129,9 +197,9 @@ public class ShopFormController extends MouseAdapter implements ActionListener {
 
                 addProductToList(selectedProduct); // añade a la lista el producto seleccionado
 
-                stockActual = (productStock - productQuantity);
+                actualStock = (productStock - productQuantityToSell);
 
-                this.shopForm.getTxtProductStock().setText("" + stockActual);
+                this.shopForm.getTxtProductStock().setText("" + actualStock);
 
             } else {
 
@@ -162,13 +230,15 @@ public class ShopFormController extends MouseAdapter implements ActionListener {
 
         } else {
 
-            for (int i = 0; i < listSelectedProducts.size(); i++) {
+            for (SelectedProduct p : listSelectedProducts) {
 
-                if (listSelectedProducts.get(i).getProductCode().equals(selectedProduct.getProductCode())) {
+                if (p.getProductCode().equals(selectedProduct.getProductCode())) {
 
                     JOptionPane.showMessageDialog(null, "producto ya esta en la lista");
 
-                    listSelectedProducts.get(i).setProductQuantity(listSelectedProducts.get(i).getProductQuantity() + productQuantity);
+                    p.setProductQuantity(p.getProductQuantity() + productQuantityToSell);
+
+                    p.setFinalPrice(p.getProductQuantity() * selectedProduct.getProductPrice());
 
                     existDuplicate = true; // change the value to true  if the product exist
 
@@ -200,9 +270,9 @@ public class ShopFormController extends MouseAdapter implements ActionListener {
 
         double productPrice = product.getPrice();
 
-        double finalPrice = productQuantity * productPrice;
+        double finalPrice = productQuantityToSell * productPrice;
 
-        return new SelectedProduct(id, productCode, productName, productBrand, productPrice, productQuantity, finalPrice);
+        return new SelectedProduct(id, productCode, productName, productBrand, productPrice, productQuantityToSell, finalPrice);
 
     }
 
@@ -238,36 +308,23 @@ public class ShopFormController extends MouseAdapter implements ActionListener {
 
     private void calculateFinalPrice() {
 
-        double precioProductTabla, precioFinal, totalAPagar = 0, valor = 0;
+        total = 0.0;
 
-        int cantidadProductTabla;
+        double finalPrice = 0.0;
 
-        for (int i = 0; i < this.shopForm.getjTableProducts().getRowCount(); i++) {
+        for (SelectedProduct selectedProduct : listSelectedProducts) {
 
-            cantidadProductTabla = Integer.parseInt(String.valueOf(this.shopForm.getjTableProducts().getModel().getValueAt(i, 3)));
+            finalPrice = selectedProduct.getFinalPrice() *1.21;
 
-            precioProductTabla = Double.parseDouble(String.valueOf(this.shopForm.getjTableProducts().getModel().getValueAt(i, 4)));
+            total += finalPrice;
 
-            precioFinal = cantidadProductTabla * precioProductTabla;
+            this.shopForm.getLblTotal().setText("" + total);
 
-            this.shopForm.getjTableProducts().getModel().setValueAt(precioFinal, i, 5);
+            System.out.println(finalPrice);
 
-            precioFinal = cantidadProductTabla * precioProductTabla;
+            System.out.println(total);
         }
 
-        for (int i = 0; i < this.shopForm.getjTableProducts().getRowCount(); i++) {
-
-            valor = Double.parseDouble(String.valueOf(this.shopForm.getjTableProducts().getModel().getValueAt(i, 5)));
-
-            totalAPagar = totalAPagar + valor;
-
-            this.shopForm.getLblTotal().setText("" + totalAPagar);
-
-            System.out.println(valor);
-
-            System.out.println(totalAPagar);
-        }
-        totalAPagar = 0;
     }
 
     private void getProductSelectedOfTable() {
@@ -281,57 +338,13 @@ public class ShopFormController extends MouseAdapter implements ActionListener {
         System.out.println(id);
     }
 
-    private void actualizarTabla(DefaultTableModel modelo) {
+    private void refreshTable(DefaultTableModel modelo) {
 
         for (int i = 0; i < modelo.getRowCount(); i++) {
 
             modelo.removeRow(i);
 
             i = i - 1;
-        }
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
-        if (e.getSource() == this.shopForm.getTxtProductCode()) {
-
-            findProduct();
-        }
-
-        if (e.getSource() == this.shopForm.getTxtProductQuantityToSell()) {
-
-            checkQuantityLessStock();
-
-            actualizarTabla(model);
-
-            listProductsCarshop();
-
-        }
-
-        if (e.getSource() == this.shopForm.getBtnRemove()) {
-
-            removeProductToList(id);
-
-            actualizarTabla(model);
-
-            listProductsCarshop();
-        }
-
-        if (e.getSource() == this.shopForm.getTxtClientSsn()) {
-
-            findClient();
-        }
-
-    }
-
-    @Override
-    public void mouseClicked(MouseEvent e) {
-
-        if (e.getSource() == shopForm.getjTableProducts()) {
-
-            getProductSelectedOfTable();
-
         }
     }
 
@@ -370,47 +383,33 @@ public class ShopFormController extends MouseAdapter implements ActionListener {
 
             } else {
 
-                JOptionPane.showMessageDialog(null, "Cliente no existe");
+                JOptionPane.showMessageDialog(null, "Client not found");
 
                 this.shopForm.getTxtClientSsn().setText("");
             }
 
+        } else {
+        
+            JOptionPane.showMessageDialog(null, "Ssn required");
+        
         }
+    }
+
+    private void addToShoppingCart() {
+        
+        if (client == null) {
+            
+            JOptionPane.showMessageDialog(null, "client required");
+            
+            return;
+        }
+
+        ShoppingCart shoppingCart = new ShoppingCart(client, listSelectedProducts, total);
+
+        this.shoppingCartForm = new ShoppingCartForm(shoppingCart, shoppingCartServiceImp);
+
+        shoppingCartForm.setVisible(true);
+
     }
 
 }
-
-/*
-
-   private void btnVentaActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        registarVenta();
-        registrarDetalleVenta();
-    }                                        
-
-  
-
-    private void registarVenta(){
-    String cliente = nombreClienteTablaVenta.getText();
-    String vendedor = lblVendedor.getText();
-    int total = Integer.parseInt(lblTotal.getText());
-        venta.setCliente(cliente);
-        venta.setVendedor(vendedor);
-        venta.setTotal(total);
-        ventaDAO.registarVenta(venta);
-    }
-    
-    private void registrarDetalleVenta(){
-        for (int i = 0; i < tablaNuevaVenta.getRowCount(); i++) {
-                String findProduct = tablaNuevaVenta.getValueAt(i, 0).toString();
-                int cantidadProduct = Integer.parseInt(tablaNuevaVenta.getValueAt(i, 3).toString());
-                int precioProduct =Integer.parseInt(tablaNuevaVenta.getValueAt(i, 4).toString());
-                int id = 1;
-               detalleVenta.setCodigoProduct(findProduct);
-               detalleVenta.setCantidad(cantidadProduct);
-               detalleVenta.setPrecio(precioProduct);
-               detalleVenta.setIdVenta(id);
-               ventaDAO.registrarDetallesVenta(detalleVenta);
-        }
-    }
-
- */

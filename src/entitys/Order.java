@@ -5,21 +5,31 @@ import java.util.List;
 public class Order {
     
     private int id;
+    
     private Client client;
-    private List<Product>products;
-    private int quantity;
+    
+    private List<SelectedProduct>products;
+    
     private double finalPrice;
+    
+    private static Integer countId = 0;
+    
+    public Order(Client client, List<SelectedProduct> products) {
+        
+        countId++;
 
-    public Order(Client client, List<Product> products) {
+        this.id = countId;
+        
         this.client = client;
+        
         this.products = products;
     }
 
-    public List<Product> getProduct() {
+    public List<SelectedProduct> getSelectedProduct() {
         return products;
     }
 
-    public void setProduct(List<Product> products) {
+    public void setSelectedProduct(List<SelectedProduct> products) {
         this.products = products;
     }
 
@@ -39,13 +49,6 @@ public class Order {
         this.client = client;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
 
     public double getFinalPrice() {
         return finalPrice;
@@ -57,7 +60,7 @@ public class Order {
 
     @Override
     public String toString() {
-        return "Order{" + "id=" + id + ", client=" + client + ", products=" + products + ", quantity=" + quantity + ", finalPrice=" + finalPrice + '}';
+        return "Order{" + "id=" + id + ", client=" + client + ", products=" + products + ", finalPrice=" + finalPrice + '}';
     }
     
     

@@ -1,11 +1,18 @@
-package services.interfaces;
+package services.interfaces.clientservice;
 
 import entitys.Client;
-import interfaces.entity.client.IClient;
+import interfaces.all.IDelete;
+import interfaces.all.IFindAll;
+import interfaces.all.IFindById;
+import interfaces.all.IFindByName;
+import interfaces.all.ISave;
+import interfaces.all.IShow;
+import interfaces.all.IUpdate;
 import java.util.List;
 import java.util.Optional;
 
-public interface IclientService<T extends Client, ID> extends IClient<T, ID> {
+public interface IclientService<T extends Client, ID> extends ISave<T>, IShow<T>, IUpdate<T, ID>, IDelete<ID>, IFindAll<T>, 
+                  IFindById<T, ID>, IFindByName<T>, IfindByLastName<T>, IFindByAge<T>, IFindBySsn<T>, IfindByPhoneNumber<T> {
 
     @Override
     public <S extends T> S save(S s);

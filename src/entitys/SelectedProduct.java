@@ -8,7 +8,7 @@ public class SelectedProduct {
     private String productBrand;
     private double productPrice;
     private int    productQuantity;
-    private double    finalPrice;
+    private double finalPrice;
 
     public SelectedProduct() {
     }

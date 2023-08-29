@@ -1,4 +1,4 @@
-package interfaces.entity.client;
+package services.interfaces.clientservice;
 
 import entitys.Client;
 import java.util.List;

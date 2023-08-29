@@ -1,8 +1,8 @@
 package entitys;
 
-import interfaces.entity.Entity;
+import interfaces.entity.client.IClient;
 
-public class Client implements Entity<Integer>{
+public class Client implements IClient<Client, Integer>{
 
     private Integer id;
     private String name;

@@ -4,8 +4,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import persistence.ClientRepository;
 import persistence.ProductRepository;
+import persistence.ShoppingCartRepository;
 import services.ClientServiceImp;
 import services.ProductServiceImp;
+import services.ShoppingCartServiceImp;
 import views.POS;
 import views.Products.ProductFindByName;
 import views.Products.ProductFindByPc;
@@ -23,13 +25,16 @@ public class POSController implements ActionListener {
     
     ClientRepository clientRepository = new ClientRepository();
     ClientServiceImp clientServiceImp = new ClientServiceImp(clientRepository);
-
     
+    ShoppingCartRepository shoppingCartRepository = new ShoppingCartRepository();
+    ShoppingCartServiceImp shoppingCartServiceImp = new ShoppingCartServiceImp(shoppingCartRepository);
     
     public POSController(POS pos) {
         this.pos = pos;
         
+        /*Shopping Views*/
         this.pos.jMenuItemShopForm.addActionListener(this);
+        
         
         /*Product Views*/
         this.pos.jMenuItemProductRegister.addActionListener(this);
@@ -40,15 +45,18 @@ public class POSController implements ActionListener {
         this.pos.jMenuItemClientRegister.addActionListener(this);
         this.pos.jMenuItemClientByName.addActionListener(this);
         this.pos.jMenuItemClientByCI.addActionListener(this);
+        
+        
+        
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         
         if (e.getSource() == pos.jMenuItemShopForm) {
-            pos.jDesktopPane1.add(new ShopForm(productServiceImp, clientServiceImp)).setVisible(true);
+            pos.jDesktopPane1.add(new ShopForm(productServiceImp,clientServiceImp, shoppingCartServiceImp )).setVisible(true);
         }
-        
+              
         if (e.getSource() == pos.jMenuItemProductByName) {
             pos.jDesktopPane1.add(new ProductFindByName(productServiceImp)).setVisible(true);
         }
