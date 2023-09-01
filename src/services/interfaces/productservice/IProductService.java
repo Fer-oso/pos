@@ -1,11 +1,18 @@
-package services.interfaces;
+package services.interfaces.productservice;
 
 import entitys.Product;
-import interfaces.entity.product.IProduct;
+import interfaces.all.IDelete;
+import interfaces.all.IFindAll;
+import interfaces.all.IFindById;
+import interfaces.all.IFindByName;
+import interfaces.all.ISave;
+import interfaces.all.IShow;
+import interfaces.all.IUpdate;
 import java.util.List;
 import java.util.Optional;
 
-public interface IProductService<T extends Product, ID> extends IProduct<T, ID> {
+public interface IProductService<T extends Product, ID> extends ISave<T>, IShow<T>, IUpdate<T, ID>, IDelete<ID>, 
+        IFindAll<T>, IFindById<T, ID>, IFindByName<T>, IFindByBrand<T>, IFindByPc<T> {
 
     @Override
     public <S extends T> S save(S s);

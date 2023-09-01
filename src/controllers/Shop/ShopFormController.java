@@ -20,7 +20,7 @@ import services.ShoppingCartServiceImp;
 import views.Shop.ShopForm;
 import views.Shop.ShoppingCartForm;
 
-public class ShopFormController extends MouseAdapter implements ActionListener {
+ public class ShopFormController extends MouseAdapter implements ActionListener {
 
     /*Services*/
     private final ProductServiceImp productServiceImp;
@@ -65,18 +65,8 @@ public class ShopFormController extends MouseAdapter implements ActionListener {
         this.clientServiceImp = clientServiceImp;
 
         this.shoppingCartServiceImp = shoppingCartServiceImp;
-
-        this.shopForm.getTxtProductCode().addActionListener(this);
-
-        this.shopForm.getTxtProductQuantityToSell().addActionListener(this);
-
-        this.shopForm.getBtnRemove().addActionListener(this);
-
-        this.shopForm.getTxtClientSsn().addActionListener(this);
-
-        this.shopForm.getBtnAddToShoppingCart().addActionListener(this);
-
-        this.shopForm.getjTableProducts().addMouseListener(this);
+        
+        initEvents();
 
     }
 
@@ -128,6 +118,22 @@ public class ShopFormController extends MouseAdapter implements ActionListener {
             getProductSelectedOfTable();
 
         }
+    }
+    
+    private void initEvents(){
+        
+        this.shopForm.getTxtProductCode().addActionListener(this);
+
+        this.shopForm.getTxtProductQuantityToSell().addActionListener(this);
+
+        this.shopForm.getBtnRemove().addActionListener(this);
+
+        this.shopForm.getTxtClientSsn().addActionListener(this);
+
+        this.shopForm.getBtnAddToShoppingCart().addActionListener(this);
+
+        this.shopForm.getjTableProducts().addMouseListener(this);
+    
     }
 
     /*Function o business logic*/
@@ -260,7 +266,7 @@ public class ShopFormController extends MouseAdapter implements ActionListener {
 
     private SelectedProduct createSelectedProduct() {
 
-        Integer id = product.getId();
+        id = product.getId();
 
         String productCode = product.getProductCode();
 
@@ -281,23 +287,23 @@ public class ShopFormController extends MouseAdapter implements ActionListener {
         model = (DefaultTableModel) this.shopForm.getjTableProducts().getModel();
 
         //MODELO TABLA
-        Object[] product = new Object[6];
+        Object[] objectProduct = new Object[6];
 
         for (int i = 0; i < listSelectedProducts.size(); i++) {
 
-            product[0] = listSelectedProducts.get(i).getProductCode();
+            objectProduct[0] = listSelectedProducts.get(i).getProductCode();
 
-            product[1] = listSelectedProducts.get(i).getProductName();
+            objectProduct[1] = listSelectedProducts.get(i).getProductName();
 
-            product[2] = listSelectedProducts.get(i).getProductBrand();
+            objectProduct[2] = listSelectedProducts.get(i).getProductBrand();
 
-            product[3] = listSelectedProducts.get(i).getProductQuantity();
+            objectProduct[3] = listSelectedProducts.get(i).getProductQuantity();
 
-            product[4] = listSelectedProducts.get(i).getProductPrice();
+            objectProduct[4] = listSelectedProducts.get(i).getProductPrice();
 
-            product[5] = listSelectedProducts.get(i).getFinalPrice();
+            objectProduct[5] = listSelectedProducts.get(i).getFinalPrice();
 
-            model.addRow(product);
+            model.addRow(objectProduct);
         }
 
         this.shopForm.getjTableProducts().setModel(model);
@@ -310,7 +316,7 @@ public class ShopFormController extends MouseAdapter implements ActionListener {
 
         total = 0.0;
 
-        double finalPrice = 0.0;
+        double finalPrice;
 
         for (SelectedProduct selectedProduct : listSelectedProducts) {
 

@@ -2,10 +2,12 @@ package persistence;
 
 import java.util.List;
 import entitys.Product;
-import interfaces.entity.product.IProduct;
+import interfaces.all.IFindByName;
 import java.util.Optional;
+import services.interfaces.productservice.IFindByBrand;
+import services.interfaces.productservice.IFindByPc;
 
-public class ProductRepository extends DaoRepository<Product, Integer> implements IProduct<Product, Integer> {
+public class ProductRepository extends DaoRepository<Product, Integer> implements IFindByName<Product>, IFindByPc<Product>, IFindByBrand<Product>{
 
     private final List<Product> productDB = super.entityList;
 

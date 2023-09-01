@@ -1,8 +1,6 @@
 package views;
 
 import controllers.POSController;
-import views.Shop.ShopCarHistory;
-import views.Shop.ShopCarLast;
 
 public class POS extends javax.swing.JFrame {
 
@@ -71,19 +69,9 @@ public class POS extends javax.swing.JFrame {
         jMenuShopCar.setText("Shop Car");
 
         jMenuItemShopCarLast.setText("Last");
-        jMenuItemShopCarLast.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemShopCarLastActionPerformed(evt);
-            }
-        });
         jMenuShopCar.add(jMenuItemShopCarLast);
 
         jMenuItemShopCarHistory.setText("History");
-        jMenuItemShopCarHistory.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemShopCarHistoryActionPerformed(evt);
-            }
-        });
         jMenuShopCar.add(jMenuItemShopCarHistory);
 
         jMenuShop.add(jMenuShopCar);
@@ -139,15 +127,6 @@ public class POS extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jMenuItemShopCarLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemShopCarLastActionPerformed
-        
-            jDesktopPane1.add(new ShopCarLast()).setVisible(true);
-    }//GEN-LAST:event_jMenuItemShopCarLastActionPerformed
-
-    private void jMenuItemShopCarHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemShopCarHistoryActionPerformed
-        jDesktopPane1.add(new ShopCarHistory()).setVisible(true);
-    }//GEN-LAST:event_jMenuItemShopCarHistoryActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

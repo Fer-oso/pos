@@ -3,9 +3,9 @@ package services;
 import entitys.ShoppingCart;
 import java.util.Optional;
 import persistence.ShoppingCartRepository;
-import services.interfaces.IShoppingCartService;
+import services.interfaces.shoppingcartservice.IShoppingCartService;
 
-public class ShoppingCartServiceImp implements IShoppingCartService {
+public class ShoppingCartServiceImp implements IShoppingCartService<ShoppingCart,Integer> {
 
     private final ShoppingCartRepository shoppingCartRepository;
 
@@ -13,9 +13,9 @@ public class ShoppingCartServiceImp implements IShoppingCartService {
         this.shoppingCartRepository = shoppingCartRepository;
     }
 
-    @Override
+   @Override
     public <S extends ShoppingCart> S save(S s) {
-        return shoppingCartRepository.save(s);
+       return shoppingCartRepository.save(s);
     }
 
     @Override
@@ -32,5 +32,7 @@ public class ShoppingCartServiceImp implements IShoppingCartService {
     public void delete(Integer id) {
         shoppingCartRepository.delete(id);
     }
+
+  
 
 }

@@ -1,9 +1,9 @@
 package entitys;
 
-import interfaces.entity.Entity;
+import interfaces.entity.shoppingCart.IShoppingCart;
 import java.util.List;
 
-public class ShoppingCart implements Entity<Integer> {
+public class ShoppingCart implements IShoppingCart<Integer> {
 
     private int id;
 

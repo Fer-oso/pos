@@ -5,7 +5,7 @@ import persistence.ProductRepository;
 
 import entitys.Product;
 import java.util.Optional;
-import services.interfaces.IProductService;
+import services.interfaces.productservice.IProductService;
 
 public class ProductServiceImp implements IProductService<Product, Integer> {
 

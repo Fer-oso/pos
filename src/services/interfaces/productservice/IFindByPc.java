@@ -1,4 +1,4 @@
-package interfaces.entity.product;
+package services.interfaces.productservice;
 
 import entitys.Product;
 import java.util.Optional;

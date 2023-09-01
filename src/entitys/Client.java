@@ -1,6 +1,9 @@
 package entitys;
 
 import interfaces.entity.client.IClient;
+import interfaces.entity.paymentMethod.PaymentMethod;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Client implements IClient<Client, Integer>{
 
@@ -12,23 +15,42 @@ public class Client implements IClient<Client, Integer>{
     private boolean availability;
     private String phoneNumber;
     private static Integer countId = 0;
+    
+    private final List<PaymentMethod> paymentMethods = new ArrayList<>(2);
 
     public Client() {
+        
         countId++;
+        
         this.id = countId;
+        
     }
 
-    public Client(String name, String lastName, Integer age, Integer ssn, boolean availability, String phoneNumber) {
+    public Client(String name, String lastName, Integer age, Integer ssn, boolean availability, String phoneNumber, PaymentMethod paymentMethod) {
+        
         countId++;
+        
         this.id = countId;
+        
         this.name = name;
+        
         this.lastName = lastName;
+        
         this.age = age;
+        
         this.ssn = ssn;
+        
         this.availability = availability;
-        this.phoneNumber = phoneNumber;
+        
+        this.phoneNumber = phoneNumber;   
+        
+        this.paymentMethods.add(new Cash());
+        
+        this.paymentMethods.add(new CreditCard());
+        
+        addPaymentMethod(paymentMethod);
     }
-
+    
     public static Integer getCountId() {
         return countId;
     }
@@ -94,10 +116,24 @@ public class Client implements IClient<Client, Integer>{
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+     
+    public final void addPaymentMethod(PaymentMethod paymentMethod) {
+
+            if (paymentMethod instanceof Cash) {
+               
+                this.paymentMethods.set(0, paymentMethod);
+                
+            } else {
+            
+                this.paymentMethods.set(1, paymentMethod);
+                
+            }
+            
+    }
 
     @Override
     public String toString() {
-        return "Client{" + "id=" + id + ", name=" + name + ", lastName=" + lastName + ", age=" + age + ", ssn=" + ssn + ", availability=" + availability + ", phoneNumber=" + phoneNumber + '}';
+        return "Client{" + "id=" + id + ", name=" + name + ", lastName=" + lastName + ", age=" + age + ", ssn=" + ssn + ", availability=" + availability + ", phoneNumber=" + phoneNumber + ", paymentMethods=" + paymentMethods + '}';
     }
 
 }

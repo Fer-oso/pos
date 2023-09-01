@@ -1,17 +1,19 @@
 package entitys;
 
 import interfaces.entity.paymentMethod.PaymentMethod;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CheckOut {
 
     private int id;
-    
+
     private ShoppingCart shoppingCart;
-    
-    private PaymentMethod paymentMethod;
-    
+
+    private final List<PaymentMethod> paymentMethods = new ArrayList<>(2);
+
     private boolean state;
-    
+
     private static Integer countId = 0;
 
     public CheckOut() {
@@ -19,19 +21,28 @@ public class CheckOut {
         countId++;
 
         this.id = countId;
+        
+        this.paymentMethods.add(new Cash());
+        
+        this.paymentMethods.add(new CreditCard());
 
     }
 
-    public CheckOut(ShoppingCart shoppingCart, PaymentMethod paymentMethod) {
-
+    public CheckOut(ShoppingCart shoppingCart, PaymentMethod paymentMethod, boolean state) {
+        
         countId++;
-
+        
         this.id = countId;
         
         this.shoppingCart = shoppingCart;
         
-        this.paymentMethod = paymentMethod;
+        this.paymentMethods.add(new Cash());
         
+        this.paymentMethods.add(new CreditCard());
+        
+        addPaymentMethod(paymentMethod);
+        
+        this.state = state;
     }
 
     public int getId() {
@@ -50,13 +61,25 @@ public class CheckOut {
         this.shoppingCart = shoppingCart;
     }
 
-    public PaymentMethod getPaymentMethod() {
-        return paymentMethod;
+    
+    public List<PaymentMethod> getPaymentMethod() {
+        return paymentMethods;
     }
 
-    public void setPaymentMethod(PaymentMethod paymentMethod) {
-        this.paymentMethod = paymentMethod;
+    public final void addPaymentMethod(PaymentMethod paymentMethod) {
+       
+            if (paymentMethods instanceof Cash) {
+               
+                this.paymentMethods.set(0, paymentMethod);
+                
+            } else {
+            
+                this.paymentMethods.set(1, paymentMethod);
+                
+            }
+
     }
+
 
     public boolean isState() {
         return state;
@@ -76,8 +99,7 @@ public class CheckOut {
 
     @Override
     public String toString() {
-        return "Checking{" + "id=" + id + ", shoppingCart=" + shoppingCart + ", paymentMethod=" + paymentMethod + ", state=" + state + '}';
+        return "Checking{" + "id=" + id + ", shoppingCart=" + shoppingCart + ", paymentMethod=" + paymentMethods + ", state=" + state + '}';
     }
 
-   
 }

@@ -1,4 +1,4 @@
-package services.interfaces;
+package services.interfaces.checkoutservice;
 
 import entitys.CheckOut;
 import interfaces.entity.checkout.ICheckOut;

@@ -2,8 +2,6 @@ package views.Shop;
 
 import controllers.Shop.ShoppingCartFormController;
 import entitys.ShoppingCart;
-import services.ClientServiceImp;
-import services.ProductServiceImp;
 import services.ShoppingCartServiceImp;
 
 public class ShoppingCartForm extends javax.swing.JFrame {

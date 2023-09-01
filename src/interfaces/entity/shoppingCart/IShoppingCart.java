@@ -1,11 +1,7 @@
 package interfaces.entity.shoppingCart;
 
-import entitys.ShoppingCart;
-import interfaces.all.IDelete;
-import interfaces.all.IFindById;
-import interfaces.all.ISave;
-import interfaces.all.IShow;
+import interfaces.entity.Entity;
 
-public interface IShoppingCart<ID> extends ISave<ShoppingCart>,IShow<ShoppingCart>,IFindById<ShoppingCart, ID>,IDelete<ID>{
+public interface IShoppingCart<ID> extends Entity<ID>{
     
 }

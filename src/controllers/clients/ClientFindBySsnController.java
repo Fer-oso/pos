@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import entitys.Client;
-import java.util.Optional;
 import services.ClientServiceImp;
 import views.clients.ClientFindBySsn;
 
@@ -24,32 +23,80 @@ public class ClientFindBySsnController extends MouseAdapter implements ActionLis
     private Client client;
 
     public ClientFindBySsnController(ClientFindBySsn clientFindBySsn, ClientServiceImp clientServiceImp) {
+        
         this.clientFindBySsn = clientFindBySsn;
         this.clientServiceImp = clientServiceImp;
         listClients(findAll());
+        addActionsListeners();
+    }
+
+    /*Actions*/
+    private void addActionsListeners() {
+
         this.clientFindBySsn.getJtTableClients().addMouseListener(this);
         this.clientFindBySsn.getBtnSearch().addActionListener(this);
         this.clientFindBySsn.getBtnEdit().addActionListener(this);
         this.clientFindBySsn.getBtnDelete().addActionListener(this);
         this.clientFindBySsn.getBtnCancel().addActionListener(this);
+
     }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == clientFindBySsn.getBtnSearch()) {
+            actualizarTabla(model);
+            listClients(findBySsn());
+            System.out.println(listClients);
+        }
+
+        if (e.getSource() == clientFindBySsn.getBtnEdit()) {
+            editClient();
+            actualizarTabla(model);
+            listClients(findAll());
+
+            System.out.println(listClients);
+
+        }
+
+        if (e.getSource() == clientFindBySsn.getBtnDelete()) {
+            deleteClient();
+            actualizarTabla(model);
+            listClients(findAll());
+
+            System.out.println(listClients);
+
+        }
+
+        if (e.getSource() == clientFindBySsn.getBtnCancel()) {
+            clearForm();
+        }
+
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        if (e.getSource() == clientFindBySsn.getJtTableClients()) {
+            getClientSelectedOfTable();
+            setFormWithSelectedClient(client);
+        }
+    }
+    
+    
+    /*Functions*/
 
     private void listClients(List<Client> listClients) {
         this.listClients = listClients;
         model = (DefaultTableModel) this.clientFindBySsn.getJtTableClients().getModel();
-        Object[] client = new Object[7];
 
-        for (int i = 0; i < listClients.size(); i++) {
-            client[0] = listClients.get(i).getId();
-            client[1] = listClients.get(i).getName();
-            client[2] = listClients.get(i).getLastName();
-            client[3] = listClients.get(i).getAge();
-            client[4] = listClients.get(i).isAvailability();
-            client[5] = listClients.get(i).getSsn();
-            client[6] = listClients.get(i).getPhoneNumber();
+        for (Client cl : this.listClients) {
 
-            model.addRow(client);
+            Object[] clientObject = {cl.getId(), cl.getName(), cl.getLastName(), cl.getAge(),
+                cl.isAvailability(), cl.getSsn(), cl.getPhoneNumber()};
+
+            model.addRow(clientObject);
+
         }
+
         this.clientFindBySsn.getJtTableClients().setModel(model);
 
     }
@@ -123,46 +170,6 @@ public class ClientFindBySsnController extends MouseAdapter implements ActionLis
         this.clientFindBySsn.getJcbAvailability().setSelected(false);
         this.clientFindBySsn.getTxtSsn().setText("");
         this.clientFindBySsn.getTxtPhone().setText("");
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == clientFindBySsn.getBtnSearch()) {
-            actualizarTabla(model);
-            listClients(findBySsn());
-            System.out.println(listClients);
-        }
-
-        if (e.getSource() == clientFindBySsn.getBtnEdit()) {
-            editClient();
-            actualizarTabla(model);
-            listClients(findAll());
-
-            System.out.println(listClients);
-
-        }
-
-        if (e.getSource() == clientFindBySsn.getBtnDelete()) {
-            deleteClient();
-            actualizarTabla(model);
-            listClients(findAll());
-
-            System.out.println(listClients);
-
-        }
-
-        if (e.getSource() == clientFindBySsn.getBtnCancel()) {
-            clearForm();
-        }
-
-    }
-
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        if (e.getSource() == clientFindBySsn.getJtTableClients()) {
-            getClientSelectedOfTable();
-            setFormWithSelectedClient(client);
-        }
     }
 
 }
