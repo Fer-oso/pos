@@ -1,6 +1,5 @@
 package views.clients;
 
-import controllers.clients.ClientFindBySsnController;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
