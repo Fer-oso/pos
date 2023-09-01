@@ -4,154 +4,94 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import entitys.Product;
 import services.ProductServiceImp;
-import views.Products.ProductFindByName;
+import views.Products.ProductFindByNameView;
 
 public class ProductFindByNameController extends MouseAdapter implements ActionListener {
 
+    private final ProductFindByNameView productFindByNameView;
+
     private final ProductServiceImp productService;
-    private final ProductFindByName productFindByName;
 
     private DefaultTableModel model = new DefaultTableModel();
-    List<Product> listProducts = new ArrayList<>();
-    int row;
-    int id;
-    Product product;
+    private List<Product> listProducts;
+    private int row;
+    private int id;
+    private Product product;
 
-    public ProductFindByNameController(ProductFindByName productFindByName, ProductServiceImp productService) {
-        this.productFindByName = productFindByName;
+    /*Constructors*/
+    
+    public ProductFindByNameController(ProductFindByNameView productFindByNameView, ProductServiceImp productService) {
+
+        this.productFindByNameView = productFindByNameView;
+
         this.productService = productService;
-        listProducts(findAll());
-        this.productFindByName.getJtTableProducts().addMouseListener(this);
-        this.productFindByName.getBtnSearch().addActionListener(this);
-        this.productFindByName.getBtnEdit().addActionListener(this);
-        this.productFindByName.getBtnDelete().addActionListener(this);
-        this.productFindByName.getBtnCancel().addActionListener(this);
+        
+        this.listProducts = productService.findAll();
 
+        listProducts();
+
+        addActionsListeners();
     }
 
-    private void listProducts(List<Product> listProducts) {
-        this.listProducts = listProducts;
-        model = (DefaultTableModel) this.productFindByName.getJtTableProducts().getModel();
-        Object[] product = new Object[7];
+    /*Actions*/
+    
+    private void addActionsListeners() {
 
-        for (int i = 0; i < listProducts.size(); i++) {
-            product[0] = listProducts.get(i).getId();
-            product[1] = listProducts.get(i).getName();
-            product[2] = listProducts.get(i).getPrice();
-            product[3] = listProducts.get(i).getStock();
-            product[4] = listProducts.get(i).isAvailability();
-            product[5] = listProducts.get(i).getBrand();
-            product[6] = listProducts.get(i).getProductCode();
+        productFindByNameView.getJtTableProducts().addMouseListener(this);
 
-            model.addRow(product);
-        }
-        this.productFindByName.getJtTableProducts().setModel(model);
+        productFindByNameView.getBtnSearch().addActionListener(this);
 
-    }
+        productFindByNameView.getBtnEdit().addActionListener(this);
 
-    private List<Product> findAll() {
-        return productService.findAll();
-    }
+        productFindByNameView.getBtnDelete().addActionListener(this);
 
-    private Product editProduct() {
-        setProductWithDataOfForm();
-        return productService.update(row, product);
-    }
-
-    private void deleteProduct() {
-        productService.delete(id);
-    }
-
-    private List<Product> findByName() {
-        String productName = this.productFindByName.getTxtSearch().getText();
-        List<Product> listProductByName = productService.findByName(productName);
-        return listProductByName;
-    }
-
-    private void getProductSelectedOfTable() {
-        row = this.productFindByName.getJtTableProducts().getSelectedRow();
-        product = listProducts.get(row);
-        id = product.getId();
-
-    }
-
-    private void setProductWithDataOfForm() {
-        product.setName(productFindByName.getTxtName().getText());
-        product.setPrice(Double.valueOf(productFindByName.getTxtPrice().getText()));
-        product.setStock(Integer.valueOf(productFindByName.getTxtStock().getText()));
-        product.setAvailability(productFindByName.getJcbAvailability().isSelected());
-        product.setBrand(productFindByName.getTxtBrand().getText());
-        product.setProductCode(productFindByName.getTxtCode().getText());
-    }
-
-    private void setFormWithSelectedProduct(Product product) {
-        this.productFindByName.getLblId().setText(String.valueOf(product.getId()));
-        this.productFindByName.getTxtName().setText(product.getName());
-        this.productFindByName.getTxtPrice().setText(String.valueOf(product.getPrice()));
-        this.productFindByName.getTxtStock().setText(String.valueOf(product.getStock()));
-        checkAvailability();
-        this.productFindByName.getTxtBrand().setText(product.getBrand());
-        this.productFindByName.getTxtCode().setText(product.getProductCode());
-    }
-
-    private void checkAvailability() {
-        if (product.isAvailability()) {
-
-            this.productFindByName.getJcbAvailability().setSelected(true);
-        } else {
-            this.productFindByName.getJcbAvailability().setSelected(false);
-        }
-    }
-
-    private void actualizarTabla(DefaultTableModel modelo) {
-        for (int i = 0; i < modelo.getRowCount(); i++) {
-            modelo.removeRow(i);
-            i = i - 1;
-        }
-    }
-
-    private void clearForm() {
-        this.productFindByName.getLblId().setText("");
-        this.productFindByName.getTxtName().setText("");
-        this.productFindByName.getTxtPrice().setText("");
-        this.productFindByName.getTxtStock().setText("");
-        this.productFindByName.getJcbAvailability().setSelected(false);
-        this.productFindByName.getTxtBrand().setText("");
-        this.productFindByName.getTxtCode().setText("");
+        productFindByNameView.getBtnCancel().addActionListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == productFindByName.getBtnSearch()) {
-            actualizarTabla(model);
-            listProducts(findByName());
+
+        if (e.getSource() == productFindByNameView.getBtnSearch()) {
+            
+            refreshTable();
+            
+            listProducts = findByName();
+
+            listProducts();
+
             System.out.println(listProducts);
         }
 
-        if (e.getSource() == productFindByName.getBtnEdit()) {
+        if (e.getSource() == productFindByNameView.getBtnEdit()) {
+
             editProduct();
-            actualizarTabla(model);
-            listProducts(findAll());
+
+            refreshTable();
+
+            listProducts();
 
             System.out.println(listProducts);
 
         }
 
-        if (e.getSource() == productFindByName.getBtnDelete()) {
+        if (e.getSource() == productFindByNameView.getBtnDelete()) {
+
             deleteProduct();
-            actualizarTabla(model);
-            listProducts(findAll());
+
+            refreshTable();
+
+            listProducts();
 
             System.out.println(listProducts);
 
         }
 
-        if (e.getSource() == productFindByName.getBtnCancel()) {
+        if (e.getSource() == productFindByNameView.getBtnCancel()) {
+
             clearForm();
         }
 
@@ -159,9 +99,129 @@ public class ProductFindByNameController extends MouseAdapter implements ActionL
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        if (e.getSource() == productFindByName.getJtTableProducts()) {
+
+        if (e.getSource() == productFindByNameView.getJtTableProducts()) {
+
             getProductSelectedOfTable();
-            setFormWithSelectedProduct(product);
+
+            setFormWithSelectedProduct();
         }
     }
+
+    /*Functions*/
+    
+    private void listProducts() {
+
+        model = (DefaultTableModel) productFindByNameView.getJtTableProducts().getModel();
+
+        for (var pr : listProducts) {
+
+            Object[] productObject = {pr.getId(), pr.getName(), pr.getPrice(), pr.isAvailability(),
+                pr.getStock(), pr.getBrand(), pr.getProductCode()};
+
+            model.addRow(productObject);
+        }
+        
+        this.productFindByNameView.getJtTableProducts().setModel(model);
+    }
+
+    private Product editProduct() {
+
+        setProductWithDataOfForm();
+
+        return productService.update(row, product);
+    }
+
+    private void deleteProduct() {
+
+        productService.delete(id);
+    }
+
+    private List<Product> findByName() {
+
+        String productName = productFindByNameView.getTxtSearch().getText();
+
+        return productService.findByName(productName);
+    }
+
+    private void getProductSelectedOfTable() {
+
+        row = this.productFindByNameView.getJtTableProducts().getSelectedRow();
+
+        product = listProducts.get(row);
+
+        id = product.getId();
+    }
+
+    private void setProductWithDataOfForm() {
+
+        product.setName(productFindByNameView.getTxtName().getText());
+
+        product.setPrice(Double.valueOf(productFindByNameView.getTxtPrice().getText()));
+
+        product.setStock(Integer.valueOf(productFindByNameView.getTxtStock().getText()));
+
+        product.setAvailability(productFindByNameView.getJcbAvailability().isSelected());
+
+        product.setBrand(productFindByNameView.getTxtBrand().getText());
+
+        product.setProductCode(productFindByNameView.getTxtCode().getText());
+    }
+
+    private void setFormWithSelectedProduct() {
+
+        productFindByNameView.getLblId().setText(String.valueOf(product.getId()));
+
+        productFindByNameView.getTxtName().setText(product.getName());
+
+        productFindByNameView.getTxtPrice().setText(String.valueOf(product.getPrice()));
+
+        productFindByNameView.getTxtStock().setText(String.valueOf(product.getStock()));
+
+        checkAvailability();
+
+        productFindByNameView.getTxtBrand().setText(product.getBrand());
+
+        productFindByNameView.getTxtCode().setText(product.getProductCode());
+    }
+
+    private void checkAvailability() {
+
+        if (product.isAvailability()) {
+
+            productFindByNameView.getJcbAvailability().setSelected(true);
+
+        } else {
+
+            productFindByNameView.getJcbAvailability().setSelected(false);
+        }
+    }
+
+    private void refreshTable() {
+
+        for (int i = 0; i < model.getRowCount(); i++) {
+
+            model.removeRow(i);
+
+            i = i - 1;
+        }
+    }
+
+    private void clearForm() {
+
+        productFindByNameView.getLblId().setText("");
+
+        productFindByNameView.getTxtName().setText("");
+
+        productFindByNameView.getTxtPrice().setText("");
+
+        productFindByNameView.getTxtStock().setText("");
+
+        productFindByNameView.getJcbAvailability().setSelected(false);
+
+        productFindByNameView.getTxtBrand().setText("");
+
+        productFindByNameView.getTxtCode().setText("");
+    }
+
 }

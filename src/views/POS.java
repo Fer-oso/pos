@@ -26,7 +26,7 @@ public class POS extends javax.swing.JFrame {
         jMenuClient = new javax.swing.JMenu();
         jMenuClientFind = new javax.swing.JMenu();
         jMenuItemClientByName = new javax.swing.JMenuItem();
-        jMenuItemClientByCI = new javax.swing.JMenuItem();
+        jMenuItemClientBySsn = new javax.swing.JMenuItem();
         jMenuItemClientRegister = new javax.swing.JMenuItem();
         jMenuProduct = new javax.swing.JMenu();
         jMenuProductFind = new javax.swing.JMenu();
@@ -85,8 +85,8 @@ public class POS extends javax.swing.JFrame {
         jMenuItemClientByName.setText("by name");
         jMenuClientFind.add(jMenuItemClientByName);
 
-        jMenuItemClientByCI.setText("by C.I");
-        jMenuClientFind.add(jMenuItemClientByCI);
+        jMenuItemClientBySsn.setText("by SSN");
+        jMenuClientFind.add(jMenuItemClientBySsn);
 
         jMenuClient.add(jMenuClientFind);
 
@@ -163,8 +163,8 @@ public class POS extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     public javax.swing.JMenu jMenuClient;
     public javax.swing.JMenu jMenuClientFind;
-    public javax.swing.JMenuItem jMenuItemClientByCI;
     public javax.swing.JMenuItem jMenuItemClientByName;
+    public javax.swing.JMenuItem jMenuItemClientBySsn;
     public javax.swing.JMenuItem jMenuItemClientRegister;
     public javax.swing.JMenuItem jMenuItemProductByName;
     public javax.swing.JMenuItem jMenuItemProductByPC;

@@ -4,53 +4,50 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import entitys.Client;
 import entitys.CreditCard;
 import services.ClientServiceImp;
-import views.clients.ClientRegisterForm;
+import views.clients.ClientRegisterFormView;
 
 public class ClientRegisterFormController extends MouseAdapter implements ActionListener {
 
-    private final ClientRegisterForm clientRegisterForm;
+    private final ClientRegisterFormView clientRegisterFormView;
 
     private final ClientServiceImp clientServiceImp;
 
     private DefaultTableModel model = new DefaultTableModel();
-
-    private List<Client> listClients = new ArrayList<>();
-
+    private List<Client> listClients;
     private Client client;
 
     /*Constructors*/
-    public ClientRegisterFormController(ClientRegisterForm clientRegisterForm, ClientServiceImp clientServiceImp) {
+    
+    public ClientRegisterFormController(ClientRegisterFormView clientRegisterFormView, ClientServiceImp clientServiceImp) {
 
-        this.clientRegisterForm = clientRegisterForm;
+        this.clientRegisterFormView = clientRegisterFormView;
 
         this.clientServiceImp = clientServiceImp;
 
         listClients();
 
         addACtionsListeners();
-
     }
 
     /*Actions*/
     private void addACtionsListeners() {
 
-        clientRegisterForm.getJtTableClients().addMouseListener(this);
+        clientRegisterFormView.getJtTableClients().addMouseListener(this);
 
-        clientRegisterForm.getBtnSave().addActionListener(this);
+        clientRegisterFormView.getBtnSave().addActionListener(this);
 
-        clientRegisterForm.getBtnCancel().addActionListener(this);
+        clientRegisterFormView.getBtnCancel().addActionListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if (e.getSource() == clientRegisterForm.getBtnSave()) {
+        if (e.getSource() == clientRegisterFormView.getBtnSave()) {
 
             createNewClient();
 
@@ -63,7 +60,7 @@ public class ClientRegisterFormController extends MouseAdapter implements Action
             System.out.println(listClients);
         }
 
-        if (e.getSource() == clientRegisterForm.getBtnCancel()) {
+        if (e.getSource() == clientRegisterFormView.getBtnCancel()) {
 
             clearForm();
         }
@@ -72,7 +69,7 @@ public class ClientRegisterFormController extends MouseAdapter implements Action
     @Override
     public void mouseClicked(MouseEvent e) {
 
-        if (e.getSource() == clientRegisterForm.getJtTableClients()) {
+        if (e.getSource() == clientRegisterFormView.getJtTableClients()) {
 
             getClientSelectedOfTable();
 
@@ -83,21 +80,19 @@ public class ClientRegisterFormController extends MouseAdapter implements Action
     /*Functions*/
     private void createNewClient() {
 
-        String name = clientRegisterForm.getTxtName().getText();
+        String name = clientRegisterFormView.getTxtName().getText();
 
-        String lastName = clientRegisterForm.getTxtLastname().getText();
+        String lastName = clientRegisterFormView.getTxtLastname().getText();
 
-        Integer age = Integer.valueOf(clientRegisterForm.getTxtAge().getText());
+        Integer age = Integer.valueOf(clientRegisterFormView.getTxtAge().getText());
 
-        boolean availability = clientRegisterForm.getJcbAvailability().isSelected();
+        boolean availability = clientRegisterFormView.getJcbAvailability().isSelected();
 
-        Integer ssn = Integer.valueOf(clientRegisterForm.getTxtSsn().getText());
+        Integer ssn = Integer.valueOf(clientRegisterFormView.getTxtSsn().getText());
 
-        String phoneNumber = clientRegisterForm.getTxtPhone().getText();
-        //int id = Integer.parseInt(clientRegisterForm.getLblId().getText());
+        String phoneNumber = clientRegisterFormView.getTxtPhone().getText();
 
         client = new Client(name, lastName, age, ssn, availability, phoneNumber, new CreditCard());
-
     }
 
     private Client save() {
@@ -109,7 +104,9 @@ public class ClientRegisterFormController extends MouseAdapter implements Action
 
         listClients = clientServiceImp.findAll();
 
-        model = (DefaultTableModel) clientRegisterForm.getJtTableClients().getModel();
+        model = (DefaultTableModel) clientRegisterFormView.getJtTableClients().getModel();
+
+        this.clientRegisterFormView.getJtTableClients().setModel(model);
 
         for (var cl : listClients) {
 
@@ -119,64 +116,59 @@ public class ClientRegisterFormController extends MouseAdapter implements Action
             model.addRow(clientObject);
         }
 
-        this.clientRegisterForm.getJtTableClients().setModel(model);
-
     }
 
     private void getClientSelectedOfTable() {
 
-        int row = clientRegisterForm.getJtTableClients().getSelectedRow();
+        int row = clientRegisterFormView.getJtTableClients().getSelectedRow();
 
         client = listClients.get(row);
-
     }
 
     private void setFormWithSelectedClient() {
 
-        clientRegisterForm.getLblId().setText(String.valueOf(client.getId()));
+        clientRegisterFormView.getLblId().setText(String.valueOf(client.getId()));
 
-        clientRegisterForm.getTxtName().setText(client.getName());
+        clientRegisterFormView.getTxtName().setText(client.getName());
 
-        clientRegisterForm.getTxtLastname().setText(String.valueOf(client.getLastName()));
+        clientRegisterFormView.getTxtLastname().setText(String.valueOf(client.getLastName()));
 
-        clientRegisterForm.getTxtAge().setText(String.valueOf(client.getAge()));
+        clientRegisterFormView.getTxtAge().setText(String.valueOf(client.getAge()));
 
         checkAvailability();
 
-        clientRegisterForm.getTxtSsn().setText(String.valueOf(client.getSsn()));
+        clientRegisterFormView.getTxtSsn().setText(String.valueOf(client.getSsn()));
 
-        clientRegisterForm.getTxtPhone().setText(client.getPhoneNumber());
+        clientRegisterFormView.getTxtPhone().setText(client.getPhoneNumber());
     }
 
     private void checkAvailability() {
 
         if (client.isAvailability()) {
 
-            this.clientRegisterForm.getJcbAvailability().setSelected(true);
+            this.clientRegisterFormView.getJcbAvailability().setSelected(true);
 
         } else {
 
-            this.clientRegisterForm.getJcbAvailability().setSelected(false);
-
+            this.clientRegisterFormView.getJcbAvailability().setSelected(false);
         }
     }
 
     private void clearForm() {
 
-        clientRegisterForm.getLblId().setText("");
+        clientRegisterFormView.getLblId().setText("");
 
-        clientRegisterForm.getTxtName().setText("");
+        clientRegisterFormView.getTxtName().setText("");
 
-        clientRegisterForm.getTxtLastname().setText("");
+        clientRegisterFormView.getTxtLastname().setText("");
 
-        clientRegisterForm.getTxtAge().setText("");
+        clientRegisterFormView.getTxtAge().setText("");
 
         checkAvailability();
 
-        clientRegisterForm.getTxtSsn().setText("");
+        clientRegisterFormView.getTxtSsn().setText("");
 
-        clientRegisterForm.getTxtPhone().setText("");
-
+        clientRegisterFormView.getTxtPhone().setText("");
     }
 
     private void refreshTable() {
@@ -188,7 +180,5 @@ public class ClientRegisterFormController extends MouseAdapter implements Action
             i = i - 1;
 
         }
-
     }
-
 }

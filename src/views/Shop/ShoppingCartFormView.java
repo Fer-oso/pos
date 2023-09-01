@@ -4,12 +4,12 @@ import controllers.Shop.ShoppingCartFormController;
 import entitys.ShoppingCart;
 import services.ShoppingCartServiceImp;
 
-public class ShoppingCartForm extends javax.swing.JFrame {
+public class ShoppingCartFormView extends javax.swing.JFrame {
 
     private static final long serialVersionUID = 1L;
 
   
-    public ShoppingCartForm(ShoppingCart shoppingCart, ShoppingCartServiceImp shoppingCartServiceImp) {
+    public ShoppingCartFormView(ShoppingCart shoppingCart, ShoppingCartServiceImp shoppingCartServiceImp) {
         initComponents();
         ShoppingCartFormController shoppingCartController = new ShoppingCartFormController(this, shoppingCart, shoppingCartServiceImp );
 

@@ -8,12 +8,12 @@ package views.Shop;
  *
  * @author elfisu
  */
-public class ShopCarHistory extends javax.swing.JInternalFrame {
+public class ShopCarLastView extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form ShopForm
      */
-    public ShopCarHistory() {
+    public ShopCarLastView() {
         initComponents();
     }
 
@@ -38,7 +38,7 @@ public class ShopCarHistory extends javax.swing.JInternalFrame {
         setMaximumSize(new java.awt.Dimension(1016, 512));
         setPreferredSize(new java.awt.Dimension(1016, 512));
 
-        jLabel2.setText("shopcarhistory");
+        jLabel2.setText("shopcarlast");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

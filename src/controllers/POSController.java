@@ -9,13 +9,13 @@ import services.ClientServiceImp;
 import services.ProductServiceImp;
 import services.ShoppingCartServiceImp;
 import views.POS;
-import views.Products.ProductFindByName;
-import views.Products.ProductFindByPc;
-import views.Products.ProductRegisterForm;
-import views.Shop.ShopForm;
-import views.clients.ClientFindBySsn;
-import views.clients.ClientFindByName;
-import views.clients.ClientRegisterForm;
+import views.Products.ProductFindByNameView;
+import views.Products.ProductFindByPcView;
+import views.Products.ProductRegisterFormView;
+import views.Shop.ShopFormView;
+import views.clients.ClientFindBySsnView;
+import views.clients.ClientFindByNameView;
+import views.clients.ClientRegisterFormView;
 
 public class POSController implements ActionListener {
 
@@ -30,7 +30,7 @@ public class POSController implements ActionListener {
     ShoppingCartRepository shoppingCartRepository = new ShoppingCartRepository();
     ShoppingCartServiceImp shoppingCartServiceImp = new ShoppingCartServiceImp(shoppingCartRepository);
     
-    ShopForm shopForm = new ShopForm(productServiceImp, clientServiceImp, shoppingCartServiceImp);
+    ShopFormView shopForm = new ShopFormView(productServiceImp, clientServiceImp, shoppingCartServiceImp);
 
     public POSController(POS pos) {
         this.pos = pos;
@@ -50,7 +50,7 @@ public class POSController implements ActionListener {
         /*Client Views*/
         this.pos.jMenuItemClientRegister.addActionListener(this);
         this.pos.jMenuItemClientByName.addActionListener(this);
-        this.pos.jMenuItemClientByCI.addActionListener(this);
+        this.pos.jMenuItemClientBySsn.addActionListener(this);
     }
 
     @Override
@@ -61,27 +61,27 @@ public class POSController implements ActionListener {
         }
 
         if (e.getSource() == pos.jMenuItemProductByName) {
-            pos.jDesktopPane1.add(new ProductFindByName(productServiceImp)).setVisible(true);
+            pos.jDesktopPane1.add(new ProductFindByNameView(productServiceImp)).setVisible(true);
         }
 
         if (e.getSource() == pos.jMenuItemProductByPC) {
-            pos.jDesktopPane1.add(new ProductFindByPc(productServiceImp)).setVisible(true);
+            pos.jDesktopPane1.add(new ProductFindByPcView(productServiceImp)).setVisible(true);
         }
 
         if (e.getSource() == pos.jMenuItemProductRegister) {
-            pos.jDesktopPane1.add(new ProductRegisterForm(productServiceImp)).setVisible(true);
+            pos.jDesktopPane1.add(new ProductRegisterFormView(productServiceImp)).setVisible(true);
         }
 
         if (e.getSource() == pos.jMenuItemClientRegister) {
-            pos.jDesktopPane1.add(new ClientRegisterForm(clientServiceImp)).setVisible(true);
+            pos.jDesktopPane1.add(new ClientRegisterFormView(clientServiceImp)).setVisible(true);
         }
 
         if (e.getSource() == pos.jMenuItemClientByName) {
-            pos.jDesktopPane1.add(new ClientFindByName(clientServiceImp)).setVisible(true);
+            pos.jDesktopPane1.add(new ClientFindByNameView(clientServiceImp)).setVisible(true);
         }
 
-        if (e.getSource() == pos.jMenuItemClientByCI) {
-            pos.jDesktopPane1.add(new ClientFindBySsn(clientServiceImp)).setVisible(true);
+        if (e.getSource() == pos.jMenuItemClientBySsn) {
+            pos.jDesktopPane1.add(new ClientFindBySsnView(clientServiceImp)).setVisible(true);
         }
     }
 

@@ -9,13 +9,13 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import services.ShoppingCartServiceImp;
 
-import views.Shop.ShoppingCartForm;
+import views.Shop.ShoppingCartFormView;
 
 public class ShoppingCartFormController extends MouseAdapter implements ActionListener {
 
     /*Views*/
     
-    private final ShoppingCartForm shoppingCartForm;
+    private final ShoppingCartFormView shoppingCartForm;
 
     /*Entitys*/
     
@@ -33,7 +33,7 @@ public class ShoppingCartFormController extends MouseAdapter implements ActionLi
 
     /*Constructors*/
     
-    public ShoppingCartFormController(ShoppingCartForm shoppingCartForm, ShoppingCart shoppingCart, ShoppingCartServiceImp shoppingCartServiceImp) {
+    public ShoppingCartFormController(ShoppingCartFormView shoppingCartForm, ShoppingCart shoppingCart, ShoppingCartServiceImp shoppingCartServiceImp) {
 
         this.shoppingCartForm = shoppingCartForm;
 

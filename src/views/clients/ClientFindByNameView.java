@@ -1,22 +1,21 @@
-package views.Products;
+package views.clients;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import controllers.products.ProductFindByPcController;
-import services.ProductServiceImp;
+import controllers.clients.ClientFindByNameController;
+import services.ClientServiceImp;
 
-public class ProductFindByPc extends javax.swing.JInternalFrame {
+public class ClientFindByNameView extends javax.swing.JInternalFrame {
 
     private static final long serialVersionUID = 1L;
   
-    public ProductFindByPc(ProductServiceImp productService) {
+    public ClientFindByNameView(ClientServiceImp clientServiceImp) {
         initComponents();
-        var productFindByPcController = new ProductFindByPcController(this,productService);
+        var clientFindByNameController = new ClientFindByNameController(this,clientServiceImp);
     }
     
     @SuppressWarnings("unchecked")
@@ -29,15 +28,15 @@ public class ProductFindByPc extends javax.swing.JInternalFrame {
         txtName = new javax.swing.JTextField();
         lblName = new javax.swing.JLabel();
         lblPrice = new javax.swing.JLabel();
-        txtPrice = new javax.swing.JTextField();
-        txtStock = new javax.swing.JTextField();
+        txtLastName = new javax.swing.JTextField();
+        txtAge = new javax.swing.JTextField();
         lblStock = new javax.swing.JLabel();
         lblAvailability = new javax.swing.JLabel();
         jcbAvailability = new javax.swing.JCheckBox();
         lblBrand = new javax.swing.JLabel();
-        txtBrand = new javax.swing.JTextField();
+        txtSsn = new javax.swing.JTextField();
         lblCode = new javax.swing.JLabel();
-        txtCode = new javax.swing.JTextField();
+        txtPhone = new javax.swing.JTextField();
         btnDelete = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
         lblSearch = new javax.swing.JLabel();
@@ -46,7 +45,7 @@ public class ProductFindByPc extends javax.swing.JInternalFrame {
         btnEdit = new javax.swing.JButton();
         jpTable = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jtTableProducts = new javax.swing.JTable();
+        jtTableClients = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(null);
@@ -68,13 +67,13 @@ public class ProductFindByPc extends javax.swing.JInternalFrame {
         jpForm.add(lblName, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 70, 30));
 
         lblPrice.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        lblPrice.setText("Price");
+        lblPrice.setText("Last name");
         jpForm.add(lblPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 60, 30));
-        jpForm.add(txtPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 140, 30));
-        jpForm.add(txtStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, 140, 30));
+        jpForm.add(txtLastName, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 140, 30));
+        jpForm.add(txtAge, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, 140, 30));
 
         lblStock.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        lblStock.setText("Stock");
+        lblStock.setText("Age");
         jpForm.add(lblStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 70, 30));
 
         lblAvailability.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
@@ -85,14 +84,14 @@ public class ProductFindByPc extends javax.swing.JInternalFrame {
         jpForm.add(jcbAvailability, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 180, 100, 30));
 
         lblBrand.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        lblBrand.setText("Brand");
+        lblBrand.setText("SSN");
         jpForm.add(lblBrand, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 70, 30));
-        jpForm.add(txtBrand, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 220, 140, 30));
+        jpForm.add(txtSsn, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 220, 140, 30));
 
         lblCode.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        lblCode.setText("Code");
+        lblCode.setText("Phone");
         jpForm.add(lblCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 60, 30));
-        jpForm.add(txtCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 260, 140, 30));
+        jpForm.add(txtPhone, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 260, 140, 30));
 
         btnDelete.setText("Delete");
         jpForm.add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 90, 30));
@@ -115,15 +114,15 @@ public class ProductFindByPc extends javax.swing.JInternalFrame {
 
         jpTable.setBackground(new java.awt.Color(255, 255, 255));
 
-        jtTableProducts.setModel(new javax.swing.table.DefaultTableModel(
+        jtTableClients.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Id", "Name", "Price", "Stock", "Availability", "Brand", "Product code"
+                "Id", "Name", "Lastname", "Age", "Availability", "SSN", "Phone"
             }
         ));
-        jScrollPane1.setViewportView(jtTableProducts);
+        jScrollPane1.setViewportView(jtTableClients);
 
         javax.swing.GroupLayout jpTableLayout = new javax.swing.GroupLayout(jpTable);
         jpTable.setLayout(jpTableLayout);
@@ -181,28 +180,20 @@ public class ProductFindByPc extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public JButton getBtnDelete() {
-        return btnDelete;
-    }
-
-    public void setBtnDelete(JButton btnDelete) {
-        this.btnDelete = btnDelete;
-    }
-
-    public JLabel getLblId() {
-        return lblId;
-    }
-
-    public void setLblId(JLabel lblId) {
-        this.lblId = lblId;
-    }
-    
     public JButton getBtnCancel() {
         return btnCancel;
     }
 
     public void setBtnCancel(JButton btnCancel) {
         this.btnCancel = btnCancel;
+    }
+
+    public JButton getBtnDelete() {
+        return btnDelete;
+    }
+
+    public void setBtnDelete(JButton btnDelete) {
+        this.btnDelete = btnDelete;
     }
 
     public JButton getBtnEdit() {
@@ -217,24 +208,8 @@ public class ProductFindByPc extends javax.swing.JInternalFrame {
         return btnSearch;
     }
 
-    public void setBtnSearch(JButton jButton1) {
-        this.btnSearch = jButton1;
-    }
-
-    public JScrollPane getjScrollPane1() {
-        return jScrollPane1;
-    }
-
-    public void setjScrollPane1(JScrollPane jScrollPane1) {
-        this.jScrollPane1 = jScrollPane1;
-    }
-
-    public JCheckBox getJcbAvailability() {
-        return jcbAvailability;
-    }
-
-    public void setJcbAvailability(JCheckBox jcbAvailability) {
-        this.jcbAvailability = jcbAvailability;
+    public void setBtnSearch(JButton btnSearch) {
+        this.btnSearch = btnSearch;
     }
 
     public JPanel getJpContainer() {
@@ -261,28 +236,53 @@ public class ProductFindByPc extends javax.swing.JInternalFrame {
         this.jpTable = jpTable;
     }
 
-    public JTable getJtTableProducts() {
-        return jtTableProducts;
+    public JCheckBox getJcbAvailability() {
+        return jcbAvailability;
     }
 
-    public void setJtTableProducts(JTable jtTableProducts) {
-        this.jtTableProducts = jtTableProducts;
+    public void setJcbAvailability(JCheckBox jcbAvailability) {
+        this.jcbAvailability = jcbAvailability;
     }
 
-    public JTextField getTxtBrand() {
-        return txtBrand;
+    public JTable getJtTableClients() {
+        return jtTableClients;
     }
 
-    public void setTxtBrand(JTextField txtBrand) {
-        this.txtBrand = txtBrand;
+    public void setJtTableClients(JTable jtTableClients) {
+        this.jtTableClients = jtTableClients;
     }
 
-    public JTextField getTxtCode() {
-        return txtCode;
+  
+    public JLabel getLblAvailability() {
+        return lblAvailability;
     }
 
-    public void setTxtCode(JTextField txtCode) {
-        this.txtCode = txtCode;
+    public void setLblAvailability(JLabel lblAvailability) {
+        this.lblAvailability = lblAvailability;
+    }
+
+    public JLabel getLblId() {
+        return lblId;
+    }
+
+    public void setLblId(JLabel lblId) {
+        this.lblId = lblId;
+    }
+
+    public JTextField getTxtAge() {
+        return txtAge;
+    }
+
+    public void setTxtAge(JTextField txtAge) {
+        this.txtAge = txtAge;
+    }
+
+    public JTextField getTxtLastName() {
+        return txtLastName;
+    }
+
+    public void setTxtLastName(JTextField txtLastName) {
+        this.txtLastName = txtLastName;
     }
 
     public JTextField getTxtName() {
@@ -293,12 +293,12 @@ public class ProductFindByPc extends javax.swing.JInternalFrame {
         this.txtName = txtName;
     }
 
-    public JTextField getTxtPrice() {
-        return txtPrice;
+    public JTextField getTxtPhone() {
+        return txtPhone;
     }
 
-    public void setTxtPrice(JTextField txtPrice) {
-        this.txtPrice = txtPrice;
+    public void setTxtPhone(JTextField txtPhone) {
+        this.txtPhone = txtPhone;
     }
 
     public JTextField getTxtSearch() {
@@ -309,26 +309,26 @@ public class ProductFindByPc extends javax.swing.JInternalFrame {
         this.txtSearch = txtSearch;
     }
 
-    public JTextField getTxtStock() {
-        return txtStock;
+    public JTextField getTxtSsn() {
+        return txtSsn;
     }
 
-    public void setTxtStock(JTextField txtStock) {
-        this.txtStock = txtStock;
+    public void setTxtSsn(JTextField txtSsn) {
+        this.txtSsn = txtSsn;
     }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCancel;
-    private javax.swing.JButton btnDelete;
-    private javax.swing.JButton btnEdit;
-    private javax.swing.JButton btnSearch;
+    public javax.swing.JButton btnCancel;
+    public javax.swing.JButton btnDelete;
+    public javax.swing.JButton btnEdit;
+    public javax.swing.JButton btnSearch;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JCheckBox jcbAvailability;
     private javax.swing.JPanel jpContainer;
     private javax.swing.JPanel jpForm;
     private javax.swing.JPanel jpTable;
-    private javax.swing.JTable jtTableProducts;
+    public javax.swing.JTable jtTableClients;
     private javax.swing.JLabel lblAvailability;
     private javax.swing.JLabel lblBrand;
     private javax.swing.JLabel lblCode;
@@ -337,11 +337,11 @@ public class ProductFindByPc extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblPrice;
     private javax.swing.JLabel lblSearch;
     private javax.swing.JLabel lblStock;
-    private javax.swing.JTextField txtBrand;
-    private javax.swing.JTextField txtCode;
-    private javax.swing.JTextField txtName;
-    private javax.swing.JTextField txtPrice;
-    private javax.swing.JTextField txtSearch;
-    private javax.swing.JTextField txtStock;
+    public javax.swing.JTextField txtAge;
+    public javax.swing.JTextField txtLastName;
+    public javax.swing.JTextField txtName;
+    public javax.swing.JTextField txtPhone;
+    public javax.swing.JTextField txtSearch;
+    public javax.swing.JTextField txtSsn;
     // End of variables declaration//GEN-END:variables
 }

@@ -2,18 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
-package views.clients;
+package views.Shop;
 
 /**
  *
  * @author elfisu
  */
-public class ClientRegister extends javax.swing.JInternalFrame {
+public class ShopCarHistoryview extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form ShopForm
      */
-    public ClientRegister() {
+    public ShopCarHistoryview() {
         initComponents();
     }
 
@@ -38,7 +38,7 @@ public class ClientRegister extends javax.swing.JInternalFrame {
         setMaximumSize(new java.awt.Dimension(1016, 512));
         setPreferredSize(new java.awt.Dimension(1016, 512));
 
-        jLabel2.setText("clientRegisetr");
+        jLabel2.setText("shopcarhistory");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

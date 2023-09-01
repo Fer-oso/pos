@@ -9,84 +9,105 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import entitys.Client;
 import services.ClientServiceImp;
-import views.clients.ClientFindBySsn;
+import views.clients.ClientFindBySsnView;
 
 public class ClientFindBySsnController extends MouseAdapter implements ActionListener {
 
-    private final ClientFindBySsn clientFindBySsn;
+    private final ClientFindBySsnView clientFindBySsnView;
+
     private final ClientServiceImp clientServiceImp;
 
     private DefaultTableModel model = new DefaultTableModel();
-    private List<Client> listClients = new ArrayList<>();
+    private List<Client> listClients;
     private int row;
     private int id;
     private Client client;
 
-    public ClientFindBySsnController(ClientFindBySsn clientFindBySsn, ClientServiceImp clientServiceImp) {
-        
-        this.clientFindBySsn = clientFindBySsn;
+    /*Constructors*/
+    public ClientFindBySsnController(ClientFindBySsnView clientFindBySsnView, ClientServiceImp clientServiceImp) {
+
+        this.clientFindBySsnView = clientFindBySsnView;
+
         this.clientServiceImp = clientServiceImp;
-        listClients(findAll());
+
+        this.listClients = clientServiceImp.findAll();
+
+        listClients();
+
         addActionsListeners();
     }
 
     /*Actions*/
     private void addActionsListeners() {
 
-        this.clientFindBySsn.getJtTableClients().addMouseListener(this);
-        this.clientFindBySsn.getBtnSearch().addActionListener(this);
-        this.clientFindBySsn.getBtnEdit().addActionListener(this);
-        this.clientFindBySsn.getBtnDelete().addActionListener(this);
-        this.clientFindBySsn.getBtnCancel().addActionListener(this);
+        clientFindBySsnView.getJtTableClients().addMouseListener(this);
 
+        clientFindBySsnView.getBtnSearch().addActionListener(this);
+
+        clientFindBySsnView.getBtnEdit().addActionListener(this);
+
+        clientFindBySsnView.getBtnDelete().addActionListener(this);
+
+        clientFindBySsnView.getBtnCancel().addActionListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == clientFindBySsn.getBtnSearch()) {
-            actualizarTabla(model);
-            listClients(findBySsn());
+
+        if (e.getSource() == clientFindBySsnView.getBtnSearch()) {
+
+            refreshTable();
+
+            listClients = findBySsn();
+
+            listClients();
+
             System.out.println(listClients);
         }
 
-        if (e.getSource() == clientFindBySsn.getBtnEdit()) {
+        if (e.getSource() == clientFindBySsnView.getBtnEdit()) {
+
             editClient();
-            actualizarTabla(model);
-            listClients(findAll());
+
+            refreshTable();
+
+            listClients();
 
             System.out.println(listClients);
-
         }
 
-        if (e.getSource() == clientFindBySsn.getBtnDelete()) {
+        if (e.getSource() == clientFindBySsnView.getBtnDelete()) {
+
             deleteClient();
-            actualizarTabla(model);
-            listClients(findAll());
+
+            refreshTable();
+
+            listClients();
 
             System.out.println(listClients);
-
         }
 
-        if (e.getSource() == clientFindBySsn.getBtnCancel()) {
+        if (e.getSource() == clientFindBySsnView.getBtnCancel()) {
+
             clearForm();
         }
-
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        if (e.getSource() == clientFindBySsn.getJtTableClients()) {
+
+        if (e.getSource() == clientFindBySsnView.getJtTableClients()) {
+
             getClientSelectedOfTable();
+
             setFormWithSelectedClient(client);
         }
     }
-    
-    
-    /*Functions*/
 
-    private void listClients(List<Client> listClients) {
-        this.listClients = listClients;
-        model = (DefaultTableModel) this.clientFindBySsn.getJtTableClients().getModel();
+    /*Functions*/
+    private void listClients() {
+
+        model = (DefaultTableModel) this.clientFindBySsnView.getJtTableClients().getModel();
 
         for (Client cl : this.listClients) {
 
@@ -94,82 +115,114 @@ public class ClientFindBySsnController extends MouseAdapter implements ActionLis
                 cl.isAvailability(), cl.getSsn(), cl.getPhoneNumber()};
 
             model.addRow(clientObject);
-
         }
 
-        this.clientFindBySsn.getJtTableClients().setModel(model);
-
+        this.clientFindBySsnView.getJtTableClients().setModel(model);
     }
 
-    private List<Client> findAll() {
-        return clientServiceImp.findAll();
+    private List<Client> findBySsn() {
+
+        int ssn = Integer.parseInt(this.clientFindBySsnView.getTxtSearch().getText());
+
+        Client optionalClient = clientServiceImp.findBySsn(ssn).get();
+
+        listClients = new ArrayList<>();
+
+        listClients.add(optionalClient);
+
+        return listClients;
     }
 
     private Client editClient() {
+
         setClientwithDataOfForm();
+
         return clientServiceImp.update(row, client);
     }
 
     private void deleteClient() {
+
         clientServiceImp.delete(id);
     }
 
-    private List<Client> findBySsn() {
-        int ssn = Integer.parseInt(this.clientFindBySsn.getTxtSearch().getText());
-        Client optionalClient = clientServiceImp.findBySsn(ssn).get();
-        List<Client> clientBySsn = new ArrayList<>();
-        clientBySsn.add(optionalClient);
-        return clientBySsn;
-    }
-
     private void getClientSelectedOfTable() {
-        row = this.clientFindBySsn.getJtTableClients().getSelectedRow();
+
+        row = clientFindBySsnView.getJtTableClients().getSelectedRow();
+
         client = listClients.get(row);
+        
         id = client.getId();
     }
 
     private void setClientwithDataOfForm() {
-        client.setName(clientFindBySsn.getTxtName().getText());
-        client.setLastName(clientFindBySsn.getTxtLastName().getText());
-        client.setAge(Integer.valueOf(clientFindBySsn.getTxtAge().getText()));
-        client.setAvailability(clientFindBySsn.getJcbAvailability().isSelected());
-        client.setSsn(Integer.valueOf(clientFindBySsn.getTxtSsn().getText()));
-        client.setPhoneNumber(clientFindBySsn.getTxtPhone().getText());
+
+        client.setName(clientFindBySsnView.getTxtName().getText());
+
+        client.setLastName(clientFindBySsnView.getTxtLastName().getText());
+
+        client.setAge(Integer.valueOf(clientFindBySsnView.getTxtAge().getText()));
+
+        client.setAvailability(clientFindBySsnView.getJcbAvailability().isSelected());
+
+        client.setSsn(Integer.valueOf(clientFindBySsnView.getTxtSsn().getText()));
+
+        client.setPhoneNumber(clientFindBySsnView.getTxtPhone().getText());
     }
 
     private void setFormWithSelectedClient(Client client) {
-        this.clientFindBySsn.getLblId().setText(String.valueOf(client.getId()));
-        this.clientFindBySsn.getTxtName().setText(client.getName());
-        this.clientFindBySsn.getTxtLastName().setText(String.valueOf(client.getLastName()));
-        this.clientFindBySsn.getTxtAge().setText(String.valueOf(client.getAge()));
+
+        clientFindBySsnView.getLblId().setText(String.valueOf(client.getId()));
+
+        clientFindBySsnView.getTxtName().setText(client.getName());
+
+        clientFindBySsnView.getTxtLastName().setText(String.valueOf(client.getLastName()));
+
+        clientFindBySsnView.getTxtAge().setText(String.valueOf(client.getAge()));
+
         checkAvailability();
-        this.clientFindBySsn.getTxtSsn().setText(String.valueOf(client.getSsn()));
-        this.clientFindBySsn.getTxtPhone().setText(client.getPhoneNumber());
+
+        clientFindBySsnView.getTxtSsn().setText(String.valueOf(client.getSsn()));
+
+        clientFindBySsnView.getTxtPhone().setText(client.getPhoneNumber());
     }
 
     private void checkAvailability() {
+
         if (client.isAvailability()) {
-            this.clientFindBySsn.getJcbAvailability().setSelected(true);
+
+            clientFindBySsnView.getJcbAvailability().setSelected(true);
+
         } else {
-            this.clientFindBySsn.getJcbAvailability().setSelected(false);
+
+            clientFindBySsnView.getJcbAvailability().setSelected(false);
         }
     }
 
-    private void actualizarTabla(DefaultTableModel modelo) {
-        for (int i = 0; i < modelo.getRowCount(); i++) {
-            modelo.removeRow(i);
+    private void refreshTable() {
+
+        for (int i = 0; i < model.getRowCount(); i++) {
+
+            model.removeRow(i);
+
             i = i - 1;
         }
     }
 
     private void clearForm() {
-        this.clientFindBySsn.getLblId().setText("");
-        this.clientFindBySsn.getTxtName().setText("");
-        this.clientFindBySsn.getTxtLastName().setText("");
-        this.clientFindBySsn.getTxtAge().setText("");
-        this.clientFindBySsn.getJcbAvailability().setSelected(false);
-        this.clientFindBySsn.getTxtSsn().setText("");
-        this.clientFindBySsn.getTxtPhone().setText("");
+
+        clientFindBySsnView.getLblId().setText("");
+
+        clientFindBySsnView.getTxtName().setText("");
+
+        clientFindBySsnView.getTxtLastName().setText("");
+
+        clientFindBySsnView.getTxtAge().setText("");
+
+        clientFindBySsnView.getJcbAvailability().setSelected(false);
+
+        clientFindBySsnView.getTxtSsn().setText("");
+
+        clientFindBySsnView.getTxtPhone().setText("");
     }
 
 }

@@ -7,19 +7,18 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import controllers.products.ProductRegisterFormController;
+import controllers.products.ProductFindByPcController;
 import services.ProductServiceImp;
 
-public class ProductRegisterForm extends javax.swing.JInternalFrame {
+public class ProductFindByPcView extends javax.swing.JInternalFrame {
 
     private static final long serialVersionUID = 1L;
-
- 
-    public ProductRegisterForm(ProductServiceImp productService) {
+  
+    public ProductFindByPcView(ProductServiceImp productService) {
         initComponents();
-        var productRegisterFormController = new ProductRegisterFormController(this, productService);
+        var productFindByPcController = new ProductFindByPcController(this,productService);
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -39,9 +38,12 @@ public class ProductRegisterForm extends javax.swing.JInternalFrame {
         txtBrand = new javax.swing.JTextField();
         lblCode = new javax.swing.JLabel();
         txtCode = new javax.swing.JTextField();
-        btnSave = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        lblSearch = new javax.swing.JLabel();
+        txtSearch = new javax.swing.JTextField();
+        btnSearch = new javax.swing.JButton();
+        btnEdit = new javax.swing.JButton();
         jpTable = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtTableProducts = new javax.swing.JTable();
@@ -92,16 +94,24 @@ public class ProductRegisterForm extends javax.swing.JInternalFrame {
         jpForm.add(lblCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 60, 30));
         jpForm.add(txtCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 260, 140, 30));
 
-        btnSave.setText("Save");
-        jpForm.add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 90, 30));
+        btnDelete.setText("Delete");
+        jpForm.add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 90, 30));
 
         btnCancel.setText("Cancel");
         jpForm.add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 310, 90, 30));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Product Register Form");
-        jpForm.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 220, 30));
+        lblSearch.setText("Search");
+        jpForm.add(lblSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 20));
+
+        txtSearch.setMinimumSize(new java.awt.Dimension(100, 22));
+        txtSearch.setPreferredSize(new java.awt.Dimension(100, 22));
+        jpForm.add(txtSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 100, 30));
+
+        btnSearch.setText("Search");
+        jpForm.add(btnSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, 70, -1));
+
+        btnEdit.setText("Edit");
+        jpForm.add(btnEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 90, 30));
 
         jpTable.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -119,13 +129,14 @@ public class ProductRegisterForm extends javax.swing.JInternalFrame {
         jpTable.setLayout(jpTableLayout);
         jpTableLayout.setHorizontalGroup(
             jpTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpTableLayout.createSequentialGroup()
+            .addGroup(jpTableLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 778, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 759, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         jpTableLayout.setVerticalGroup(
             jpTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         javax.swing.GroupLayout jpContainerLayout = new javax.swing.GroupLayout(jpContainer);
@@ -134,34 +145,49 @@ public class ProductRegisterForm extends javax.swing.JInternalFrame {
             jpContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpContainerLayout.createSequentialGroup()
                 .addGroup(jpContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jpForm, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jpForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jpContainerLayout.createSequentialGroup()
-                        .addGap(235, 235, 235)
+                        .addGap(68, 68, 68)
                         .addComponent(lblId)))
-                .addComponent(jpTable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jpTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jpContainerLayout.setVerticalGroup(
             jpContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpForm, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(jpContainerLayout.createSequentialGroup()
-                .addGap(107, 107, 107)
-                .addComponent(lblId))
-            .addComponent(jpTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jpForm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(jpContainerLayout.createSequentialGroup()
+                .addGroup(jpContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpContainerLayout.createSequentialGroup()
+                        .addGap(107, 107, 107)
+                        .addComponent(lblId))
+                    .addComponent(jpTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jpContainer, javax.swing.GroupLayout.DEFAULT_SIZE, 1016, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jpContainer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    public JButton getBtnDelete() {
+        return btnDelete;
+    }
+
+    public void setBtnDelete(JButton btnDelete) {
+        this.btnDelete = btnDelete;
+    }
 
     public JLabel getLblId() {
         return lblId;
@@ -179,12 +205,20 @@ public class ProductRegisterForm extends javax.swing.JInternalFrame {
         this.btnCancel = btnCancel;
     }
 
-    public JButton getBtnSave() {
-        return btnSave;
+    public JButton getBtnEdit() {
+        return btnEdit;
     }
 
-    public void setBtnSave(JButton btnSave) {
-        this.btnSave = btnSave;
+    public void setBtnEdit(JButton btnEdit) {
+        this.btnEdit = btnEdit;
+    }
+
+    public JButton getBtnSearch() {
+        return btnSearch;
+    }
+
+    public void setBtnSearch(JButton jButton1) {
+        this.btnSearch = jButton1;
     }
 
     public JScrollPane getjScrollPane1() {
@@ -267,6 +301,14 @@ public class ProductRegisterForm extends javax.swing.JInternalFrame {
         this.txtPrice = txtPrice;
     }
 
+    public JTextField getTxtSearch() {
+        return txtSearch;
+    }
+
+    public void setTxtSearch(JTextField txtSearch) {
+        this.txtSearch = txtSearch;
+    }
+
     public JTextField getTxtStock() {
         return txtStock;
     }
@@ -278,8 +320,9 @@ public class ProductRegisterForm extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
-    private javax.swing.JButton btnSave;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnEdit;
+    private javax.swing.JButton btnSearch;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JCheckBox jcbAvailability;
     private javax.swing.JPanel jpContainer;
@@ -292,11 +335,13 @@ public class ProductRegisterForm extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblId;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblPrice;
+    private javax.swing.JLabel lblSearch;
     private javax.swing.JLabel lblStock;
     private javax.swing.JTextField txtBrand;
     private javax.swing.JTextField txtCode;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPrice;
+    private javax.swing.JTextField txtSearch;
     private javax.swing.JTextField txtStock;
     // End of variables declaration//GEN-END:variables
 }

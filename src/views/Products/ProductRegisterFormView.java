@@ -1,21 +1,23 @@
-package views.clients;
+package views.Products;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import controllers.clients.ClientRegisterFormController;
-import javax.swing.JLabel;
-import services.ClientServiceImp;
+import controllers.products.ProductRegisterFormController;
+import services.ProductServiceImp;
 
-public class ClientRegisterForm extends javax.swing.JInternalFrame {
+public class ProductRegisterFormView extends javax.swing.JInternalFrame {
 
     private static final long serialVersionUID = 1L;
 
-    public ClientRegisterForm(ClientServiceImp clientServiceImp) {
+ 
+    public ProductRegisterFormView(ProductServiceImp productService) {
         initComponents();
-        var clientRegisterFormController = new ClientRegisterFormController(this, clientServiceImp);
+        var productRegisterFormController = new ProductRegisterFormController(this, productService);
     }
 
     @SuppressWarnings("unchecked")
@@ -27,22 +29,22 @@ public class ClientRegisterForm extends javax.swing.JInternalFrame {
         jpForm = new javax.swing.JPanel();
         txtName = new javax.swing.JTextField();
         lblName = new javax.swing.JLabel();
-        lblLastName = new javax.swing.JLabel();
-        txtLastname = new javax.swing.JTextField();
-        txtAge = new javax.swing.JTextField();
-        lblAge = new javax.swing.JLabel();
+        lblPrice = new javax.swing.JLabel();
+        txtPrice = new javax.swing.JTextField();
+        txtStock = new javax.swing.JTextField();
+        lblStock = new javax.swing.JLabel();
         lblAvailability = new javax.swing.JLabel();
         jcbAvailability = new javax.swing.JCheckBox();
-        lblSsn = new javax.swing.JLabel();
-        txtSsn = new javax.swing.JTextField();
-        lblPhone = new javax.swing.JLabel();
-        txtPhone = new javax.swing.JTextField();
+        lblBrand = new javax.swing.JLabel();
+        txtBrand = new javax.swing.JTextField();
+        lblCode = new javax.swing.JLabel();
+        txtCode = new javax.swing.JTextField();
         btnSave = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jpTable = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jtTableClients = new javax.swing.JTable();
+        jtTableProducts = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(null);
@@ -63,15 +65,15 @@ public class ClientRegisterForm extends javax.swing.JInternalFrame {
         lblName.setText("Name");
         jpForm.add(lblName, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 70, 30));
 
-        lblLastName.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        lblLastName.setText("Lastname");
-        jpForm.add(lblLastName, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 60, 30));
-        jpForm.add(txtLastname, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 140, 30));
-        jpForm.add(txtAge, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, 140, 30));
+        lblPrice.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        lblPrice.setText("Price");
+        jpForm.add(lblPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 60, 30));
+        jpForm.add(txtPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 140, 30));
+        jpForm.add(txtStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, 140, 30));
 
-        lblAge.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        lblAge.setText("Age");
-        jpForm.add(lblAge, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 70, 30));
+        lblStock.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        lblStock.setText("Stock");
+        jpForm.add(lblStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 70, 30));
 
         lblAvailability.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         lblAvailability.setText("Availability");
@@ -80,15 +82,15 @@ public class ClientRegisterForm extends javax.swing.JInternalFrame {
         jcbAvailability.setText("YES/NO");
         jpForm.add(jcbAvailability, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 180, 100, 30));
 
-        lblSsn.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        lblSsn.setText("Ssn");
-        jpForm.add(lblSsn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 70, 30));
-        jpForm.add(txtSsn, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 220, 140, 30));
+        lblBrand.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        lblBrand.setText("Brand");
+        jpForm.add(lblBrand, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 70, 30));
+        jpForm.add(txtBrand, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 220, 140, 30));
 
-        lblPhone.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        lblPhone.setText("Phone");
-        jpForm.add(lblPhone, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 60, 30));
-        jpForm.add(txtPhone, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 260, 140, 30));
+        lblCode.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        lblCode.setText("Code");
+        jpForm.add(lblCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 60, 30));
+        jpForm.add(txtCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 260, 140, 30));
 
         btnSave.setText("Save");
         jpForm.add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 90, 30));
@@ -98,20 +100,20 @@ public class ClientRegisterForm extends javax.swing.JInternalFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Client Register Form");
+        jLabel1.setText("Product Register Form");
         jpForm.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 220, 30));
 
         jpTable.setBackground(new java.awt.Color(255, 255, 255));
 
-        jtTableClients.setModel(new javax.swing.table.DefaultTableModel(
+        jtTableProducts.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Id", "Name", "LastName", "Age", "Availability", "Ssn", "Phone"
+                "Id", "Name", "Price", "Stock", "Availability", "Brand", "Product code"
             }
         ));
-        jScrollPane1.setViewportView(jtTableClients);
+        jScrollPane1.setViewportView(jtTableProducts);
 
         javax.swing.GroupLayout jpTableLayout = new javax.swing.GroupLayout(jpTable);
         jpTable.setLayout(jpTableLayout);
@@ -161,6 +163,38 @@ public class ClientRegisterForm extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public JLabel getLblId() {
+        return lblId;
+    }
+
+    public void setLblId(JLabel lblId) {
+        this.lblId = lblId;
+    }
+    
+    public JButton getBtnCancel() {
+        return btnCancel;
+    }
+
+    public void setBtnCancel(JButton btnCancel) {
+        this.btnCancel = btnCancel;
+    }
+
+    public JButton getBtnSave() {
+        return btnSave;
+    }
+
+    public void setBtnSave(JButton btnSave) {
+        this.btnSave = btnSave;
+    }
+
+    public JScrollPane getjScrollPane1() {
+        return jScrollPane1;
+    }
+
+    public void setjScrollPane1(JScrollPane jScrollPane1) {
+        this.jScrollPane1 = jScrollPane1;
+    }
+
     public JCheckBox getJcbAvailability() {
         return jcbAvailability;
     }
@@ -193,44 +227,28 @@ public class ClientRegisterForm extends javax.swing.JInternalFrame {
         this.jpTable = jpTable;
     }
 
-    public JButton getBtnCancel() {
-        return btnCancel;
+    public JTable getJtTableProducts() {
+        return jtTableProducts;
     }
 
-    public void setBtnCancel(JButton btnCancel) {
-        this.btnCancel = btnCancel;
+    public void setJtTableProducts(JTable jtTableProducts) {
+        this.jtTableProducts = jtTableProducts;
     }
 
-    public JButton getBtnSave() {
-        return btnSave;
+    public JTextField getTxtBrand() {
+        return txtBrand;
     }
 
-    public void setBtnSave(JButton btnSave) {
-        this.btnSave = btnSave;
+    public void setTxtBrand(JTextField txtBrand) {
+        this.txtBrand = txtBrand;
     }
 
-    public JTable getJtTableClients() {
-        return jtTableClients;
+    public JTextField getTxtCode() {
+        return txtCode;
     }
 
-    public void setJtTableClients(JTable jtTableClients) {
-        this.jtTableClients = jtTableClients;
-    }
-
-    public JTextField getTxtAge() {
-        return txtAge;
-    }
-
-    public void setTxtAge(JTextField txtAge) {
-        this.txtAge = txtAge;
-    }
-
-    public JTextField getTxtLastname() {
-        return txtLastname;
-    }
-
-    public void setTxtLastname(JTextField txtLastname) {
-        this.txtLastname = txtLastname;
+    public void setTxtCode(JTextField txtCode) {
+        this.txtCode = txtCode;
     }
 
     public JTextField getTxtName() {
@@ -241,53 +259,44 @@ public class ClientRegisterForm extends javax.swing.JInternalFrame {
         this.txtName = txtName;
     }
 
-    public JTextField getTxtPhone() {
-        return txtPhone;
+    public JTextField getTxtPrice() {
+        return txtPrice;
     }
 
-    public void setTxtPhone(JTextField txtPhone) {
-        this.txtPhone = txtPhone;
+    public void setTxtPrice(JTextField txtPrice) {
+        this.txtPrice = txtPrice;
     }
 
-    public JTextField getTxtSsn() {
-        return txtSsn;
+    public JTextField getTxtStock() {
+        return txtStock;
     }
 
-    public void setTxtSsn(JTextField txtSsn) {
-        this.txtSsn = txtSsn;
+    public void setTxtStock(JTextField txtStock) {
+        this.txtStock = txtStock;
     }
-
-    public JLabel getLblId() {
-        return lblId;
-    }
-
-    public void setLblId(JLabel lblId) {
-        this.lblId = lblId;
-    }
-   
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton btnCancel;
-    public javax.swing.JButton btnSave;
+    private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnSave;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    public javax.swing.JCheckBox jcbAvailability;
+    private javax.swing.JCheckBox jcbAvailability;
     private javax.swing.JPanel jpContainer;
     private javax.swing.JPanel jpForm;
     private javax.swing.JPanel jpTable;
-    private javax.swing.JTable jtTableClients;
-    private javax.swing.JLabel lblAge;
+    private javax.swing.JTable jtTableProducts;
     private javax.swing.JLabel lblAvailability;
+    private javax.swing.JLabel lblBrand;
+    private javax.swing.JLabel lblCode;
     private javax.swing.JLabel lblId;
-    private javax.swing.JLabel lblLastName;
     private javax.swing.JLabel lblName;
-    private javax.swing.JLabel lblPhone;
-    private javax.swing.JLabel lblSsn;
-    public javax.swing.JTextField txtAge;
-    public javax.swing.JTextField txtLastname;
+    private javax.swing.JLabel lblPrice;
+    private javax.swing.JLabel lblStock;
+    private javax.swing.JTextField txtBrand;
+    private javax.swing.JTextField txtCode;
     private javax.swing.JTextField txtName;
-    public javax.swing.JTextField txtPhone;
-    public javax.swing.JTextField txtSsn;
+    private javax.swing.JTextField txtPrice;
+    private javax.swing.JTextField txtStock;
     // End of variables declaration//GEN-END:variables
 }

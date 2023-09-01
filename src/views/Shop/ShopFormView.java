@@ -6,11 +6,11 @@ import services.ClientServiceImp;
 import services.ProductServiceImp;
 import services.ShoppingCartServiceImp;
 
-public class ShopForm extends javax.swing.JInternalFrame {
+public class ShopFormView extends javax.swing.JInternalFrame {
 
     private static final long serialVersionUID = 1L;
 
-    public ShopForm(ProductServiceImp productServiceImp, ClientServiceImp clientServiceImp, ShoppingCartServiceImp shoppingCartServiceImp) {
+    public ShopFormView(ProductServiceImp productServiceImp, ClientServiceImp clientServiceImp, ShoppingCartServiceImp shoppingCartServiceImp) {
         initComponents();
         ShopFormController shopFormController = new ShopFormController(this, productServiceImp, clientServiceImp, shoppingCartServiceImp);
     }

@@ -72,9 +72,9 @@
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                   </AuxValues>
                 </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItemClientByCI">
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItemClientBySsn">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="by C.I"/>
+                    <Property name="text" type="java.lang.String" value="by SSN"/>
                   </Properties>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>

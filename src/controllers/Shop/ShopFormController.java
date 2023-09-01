@@ -17,8 +17,8 @@ import services.ClientServiceImp;
 import services.ProductServiceImp;
 import services.ShoppingCartServiceImp;
 
-import views.Shop.ShopForm;
-import views.Shop.ShoppingCartForm;
+import views.Shop.ShopFormView;
+import views.Shop.ShoppingCartFormView;
 
  public class ShopFormController extends MouseAdapter implements ActionListener {
 
@@ -30,9 +30,9 @@ import views.Shop.ShoppingCartForm;
     private final ShoppingCartServiceImp shoppingCartServiceImp;
 
     /*Views*/
-    private final ShopForm shopForm;
+    private final ShopFormView shopForm;
 
-    private ShoppingCartForm shoppingCartForm;
+    private ShoppingCartFormView shoppingCartForm;
 
     private DefaultTableModel model = new DefaultTableModel();
 
@@ -56,7 +56,7 @@ import views.Shop.ShoppingCartForm;
     private Double total;
 
     //Constructors
-    public ShopFormController(ShopForm shopForm, ProductServiceImp productServiceImp, ClientServiceImp clientServiceImp, ShoppingCartServiceImp shoppingCartServiceImp) {
+    public ShopFormController(ShopFormView shopForm, ProductServiceImp productServiceImp, ClientServiceImp clientServiceImp, ShoppingCartServiceImp shoppingCartServiceImp) {
 
         this.shopForm = shopForm;
 
@@ -412,7 +412,7 @@ import views.Shop.ShoppingCartForm;
 
         ShoppingCart shoppingCart = new ShoppingCart(client, listSelectedProducts, total);
 
-        this.shoppingCartForm = new ShoppingCartForm(shoppingCart, shoppingCartServiceImp);
+        this.shoppingCartForm = new ShoppingCartFormView(shoppingCart, shoppingCartServiceImp);
 
         shoppingCartForm.setVisible(true);
 
