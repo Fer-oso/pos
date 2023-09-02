@@ -5,11 +5,17 @@ import interfaces.entity.paymentMethod.PaymentMethod;
 public class CreditCard implements PaymentMethod {
 
     private Integer id;
+    
     private String name;
+    
     private Integer SSN;
+    
     private Integer quantity;
+    
     private String cardNumber;
+    
     private Integer secretCode;
+    
     private static Integer countId = 0;
 
     public CreditCard() {

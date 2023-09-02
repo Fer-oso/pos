@@ -11,18 +11,6 @@
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/XFAO03/Documents/pos/src/views/Shop/ShopForm.java</file>
-            <file>file:/C:/Users/XFAO03/Documents/pos/src/controllers/clients/ClientFindByNameController.java</file>
-            <file>file:/C:/Users/XFAO03/Documents/pos/src/controllers/clients/ClientRegisterFormController.java</file>
-            <file>file:/C:/Users/XFAO03/Documents/pos/src/entitys/CheckOut.java</file>
-            <file>file:/C:/Users/XFAO03/Documents/pos/src/entitys/CreditCard.java</file>
-            <file>file:/C:/Users/XFAO03/Documents/pos/src/services/ClientServiceImp.java</file>
-            <file>file:/C:/Users/XFAO03/Documents/pos/src/services/interfaces/clientservice/IclientService.java</file>
-            <file>file:/C:/Users/XFAO03/Documents/pos/src/pos/Main.java</file>
-            <file>file:/C:/Users/XFAO03/Documents/pos/src/persistence/DaoRepository.java</file>
-            <file>file:/C:/Users/XFAO03/Documents/pos/src/entitys/Client.java</file>
-            <file>file:/C:/Users/XFAO03/Documents/pos/src/entitys/Cash.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

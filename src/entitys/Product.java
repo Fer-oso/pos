@@ -1,34 +1,50 @@
 package entitys;
 
-import interfaces.entity.Entity;
+import interfaces.entity.product.IProduct;
 
-public class Product implements Entity<Integer> {
+public class Product implements IProduct<Product,Integer> {
 
     private Integer id;
+
     private String name;
+
     private Double price;
+
     private boolean availability;
+
     private Integer stock;
+
     private String brand;
+
     private String productCode;
+
     private Integer quantity;
+
     private static Integer countId = 0;
 
     public Product() {
+
         countId++;
         this.id = countId;
     }
 
     public Product(String name, Double price, boolean availability, Integer stock, String brand, String productCode) {
-        countId++;
-        this.id = countId;
-        this.name = name;
-        this.price = price;
-        this.availability = availability;
-        this.stock = stock;
-        this.brand = brand;
-        this.productCode = productCode;
 
+        countId++;
+
+        this.id = countId;
+
+        this.name = name;
+
+        this.price = price;
+
+        this.availability = availability;
+
+        this.stock = stock;
+
+        this.brand = brand;
+
+        this.productCode = productCode;
     }
 
     @Override
@@ -99,6 +115,6 @@ public class Product implements Entity<Integer> {
 
     @Override
     public String toString() {
-        return "Product{" + "id=" + id + ", name=" + name + ", price=" + price + ", availability=" + availability + ", stock=" + stock + ", brand=" + brand + ", productCode=" + productCode +'}';
+        return "Product{" + "id=" + id + ", name=" + name + ", price=" + price + ", availability=" + availability + ", stock=" + stock + ", brand=" + brand + ", productCode=" + productCode + '}';
     }
 }

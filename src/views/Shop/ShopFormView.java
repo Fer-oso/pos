@@ -1,7 +1,7 @@
 
 package views.Shop;
 
-import controllers.Shop.ShopFormController;
+import controllers.Shop.shopformcontroller.ShopFormController;
 import services.ClientServiceImp;
 import services.ProductServiceImp;
 import services.ShoppingCartServiceImp;

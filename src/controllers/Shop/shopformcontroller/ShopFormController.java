@@ -1,4 +1,4 @@
-package controllers.Shop;
+package controllers.Shop.shopformcontroller;
 
 import entitys.Client;
 import entitys.Product;
@@ -20,7 +20,7 @@ import services.ShoppingCartServiceImp;
 import views.Shop.ShopFormView;
 import views.Shop.ShoppingCartFormView;
 
- public class ShopFormController extends MouseAdapter implements ActionListener {
+public class ShopFormController extends MouseAdapter implements ActionListener {
 
     /*Services*/
     private final ProductServiceImp productServiceImp;
@@ -31,12 +31,11 @@ import views.Shop.ShoppingCartFormView;
 
     /*Views*/
     private final ShopFormView shopForm;
-
-    private ShoppingCartFormView shoppingCartForm;
-
-    private DefaultTableModel model = new DefaultTableModel();
-
+    
     /*Global variables*/
+    
+    private DefaultTableModel model = new DefaultTableModel();
+    
     private final List<SelectedProduct> listSelectedProducts = new ArrayList<>();
 
     private Product product;
@@ -65,31 +64,44 @@ import views.Shop.ShoppingCartFormView;
         this.clientServiceImp = clientServiceImp;
 
         this.shoppingCartServiceImp = shoppingCartServiceImp;
-        
-        initEvents();
 
+        addACtionsListeners();
     }
 
     /*Actions Events*/
+    private void addACtionsListeners() {
+
+        shopForm.getTxtProductCode().addActionListener(this);
+
+        shopForm.getTxtProductQuantityToSell().addActionListener(this);
+
+        shopForm.getBtnRemove().addActionListener(this);
+
+        shopForm.getTxtClientSsn().addActionListener(this);
+
+        shopForm.getBtnAddToShoppingCart().addActionListener(this);
+
+        shopForm.getjTableProducts().addMouseListener(this);
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if (e.getSource() == this.shopForm.getTxtProductCode()) {
+        if (e.getSource() == shopForm.getTxtProductCode()) {
 
             findProduct();
         }
 
-        if (e.getSource() == this.shopForm.getTxtProductQuantityToSell()) {
+        if (e.getSource() == shopForm.getTxtProductQuantityToSell()) {
 
             checkQuantityLessStock();
 
             refreshTable(model);
 
             listProductsCarshop();
-
         }
 
-        if (e.getSource() == this.shopForm.getBtnRemove()) {
+        if (e.getSource() == shopForm.getBtnRemove()) {
 
             removeProductToList(id);
 
@@ -98,16 +110,15 @@ import views.Shop.ShoppingCartFormView;
             listProductsCarshop();
         }
 
-        if (e.getSource() == this.shopForm.getTxtClientSsn()) {
+        if (e.getSource() == shopForm.getTxtClientSsn()) {
 
             findClient();
         }
 
-        if (e.getSource() == this.shopForm.getBtnAddToShoppingCart()) {
+        if (e.getSource() == shopForm.getBtnAddToShoppingCart()) {
 
             addToShoppingCart();
         }
-
     }
 
     @Override
@@ -116,32 +127,15 @@ import views.Shop.ShoppingCartFormView;
         if (e.getSource() == shopForm.getjTableProducts()) {
 
             getProductSelectedOfTable();
-
         }
-    }
-    
-    private void initEvents(){
-        
-        this.shopForm.getTxtProductCode().addActionListener(this);
-
-        this.shopForm.getTxtProductQuantityToSell().addActionListener(this);
-
-        this.shopForm.getBtnRemove().addActionListener(this);
-
-        this.shopForm.getTxtClientSsn().addActionListener(this);
-
-        this.shopForm.getBtnAddToShoppingCart().addActionListener(this);
-
-        this.shopForm.getjTableProducts().addMouseListener(this);
-    
     }
 
     /*Function o business logic*/
     private void findProduct() {
 
-        if (!"".equals(this.shopForm.getTxtProductCode().getText())) {
+        if (!"".equals(shopForm.getTxtProductCode().getText())) {
 
-            String productCode = this.shopForm.getTxtProductCode().getText();
+            String productCode = shopForm.getTxtProductCode().getText();
 
             product = productServiceImp.findByPc(productCode).get();
 
@@ -149,39 +143,38 @@ import views.Shop.ShoppingCartFormView;
 
             if (product.getName() != null) {
 
-                this.shopForm.getTxtProductName().setText("" + product.getName());
+                shopForm.getTxtProductName().setText("" + product.getName());
 
-                this.shopForm.getTxtProductBrand().setText("" + product.getBrand());
+                shopForm.getTxtProductBrand().setText("" + product.getBrand());
 
-                this.shopForm.getTxtProductPrice().setText("" + product.getPrice());
+                shopForm.getTxtProductPrice().setText("" + product.getPrice());
 
-                this.shopForm.getTxtProductStock().setText("" + product.getStock());
+                shopForm.getTxtProductStock().setText("" + product.getStock());
 
-                this.shopForm.getTxtProductQuantityToSell().requestFocus();
+                shopForm.getTxtProductQuantityToSell().requestFocus();
 
             } else {
 
-                this.shopForm.getTxtProductName().setText("");
+                shopForm.getTxtProductName().setText("");
 
-                this.shopForm.getTxtProductBrand().setText("");
+                shopForm.getTxtProductBrand().setText("");
 
-                this.shopForm.getTxtProductPrice().setText("");
+                shopForm.getTxtProductPrice().setText("");
 
-                this.shopForm.getTxtProductStock().setText("");
+                shopForm.getTxtProductStock().setText("");
 
-                this.shopForm.getTxtProductCode().requestFocus();
+                shopForm.getTxtProductCode().requestFocus();
 
-                this.shopForm.getTxtProductQuantityToSell().setText("");
-
+                shopForm.getTxtProductQuantityToSell().setText("");
             }
 
         } else {
 
             JOptionPane.showMessageDialog(null, "Insert product code");
 
-            this.shopForm.getTxtProductCode().requestFocus();
+            shopForm.getTxtProductCode().requestFocus();
 
-            this.shopForm.getTxtProductQuantityToSell().setText("");
+            shopForm.getTxtProductQuantityToSell().setText("");
         }
     }
 
@@ -189,39 +182,54 @@ import views.Shop.ShoppingCartFormView;
 
         int actualStock;
 
-        if (!"".equals(this.shopForm.getTxtProductQuantityToSell().getText())) {
+        if (!"".equals(shopForm.getTxtProductQuantityToSell().getText())) {
 
-            int productStock = Integer.parseInt(this.shopForm.getTxtProductStock().getText());
+            int productStock = Integer.parseInt(shopForm.getTxtProductStock().getText());
 
-            productQuantityToSell = Integer.parseInt(this.shopForm.getTxtProductQuantityToSell().getText());
+            productQuantityToSell = Integer.parseInt(shopForm.getTxtProductQuantityToSell().getText());
 
             if (productStock >= productQuantityToSell) { // si el producto se puede vender
 
                 selectedProduct = createSelectedProduct(); // crea un producto seleccionado
 
-                this.shopForm.getTxtProductQuantityToSell().setText("");
+                shopForm.getTxtProductQuantityToSell().setText("");
 
                 addProductToList(selectedProduct); // añade a la lista el producto seleccionado
 
                 actualStock = (productStock - productQuantityToSell);
 
-                this.shopForm.getTxtProductStock().setText("" + actualStock);
+                shopForm.getTxtProductStock().setText("" + actualStock);
 
             } else {
 
                 JOptionPane.showMessageDialog(null, "Stock no disponible");
-
             }
-
+            
         } else {
 
             JOptionPane.showMessageDialog(null, "Insert quantity ");
 
-            this.shopForm.getTxtProductQuantityToSell().requestFocus();
+            shopForm.getTxtProductQuantityToSell().requestFocus();
 
-            this.shopForm.getTxtProductQuantityToSell().setText("");
-
+            shopForm.getTxtProductQuantityToSell().setText("");
         }
+    }
+
+    private SelectedProduct createSelectedProduct() {
+
+        id = product.getId();
+
+        String productCode = product.getProductCode();
+
+        String productName = product.getName();
+
+        String productBrand = product.getBrand();
+
+        double productPrice = product.getPrice();
+
+        double finalPrice = productQuantityToSell * productPrice;
+
+        return new SelectedProduct(id, productCode, productName, productBrand, productPrice, productQuantityToSell, finalPrice);
     }
 
     private void addProductToList(SelectedProduct selectedProduct) {
@@ -249,67 +257,31 @@ import views.Shop.ShoppingCartFormView;
                     existDuplicate = true; // change the value to true  if the product exist
 
                     break;
-
                 }
-
             }
 
             if (!existDuplicate) {
 
                 listSelectedProducts.add(selectedProduct);
-
             }
-
         }
-
-    }
-
-    private SelectedProduct createSelectedProduct() {
-
-        id = product.getId();
-
-        String productCode = product.getProductCode();
-
-        String productName = product.getName();
-
-        String productBrand = product.getBrand();
-
-        double productPrice = product.getPrice();
-
-        double finalPrice = productQuantityToSell * productPrice;
-
-        return new SelectedProduct(id, productCode, productName, productBrand, productPrice, productQuantityToSell, finalPrice);
-
     }
 
     private void listProductsCarshop() {
 
-        model = (DefaultTableModel) this.shopForm.getjTableProducts().getModel();
+        model = (DefaultTableModel) shopForm.getjTableProducts().getModel();
 
-        //MODELO TABLA
-        Object[] objectProduct = new Object[6];
+        for (SelectedProduct sp : listSelectedProducts) {
 
-        for (int i = 0; i < listSelectedProducts.size(); i++) {
-
-            objectProduct[0] = listSelectedProducts.get(i).getProductCode();
-
-            objectProduct[1] = listSelectedProducts.get(i).getProductName();
-
-            objectProduct[2] = listSelectedProducts.get(i).getProductBrand();
-
-            objectProduct[3] = listSelectedProducts.get(i).getProductQuantity();
-
-            objectProduct[4] = listSelectedProducts.get(i).getProductPrice();
-
-            objectProduct[5] = listSelectedProducts.get(i).getFinalPrice();
+            Object[] objectProduct = {sp.getProductCode(), sp.getProductName(), sp.getProductBrand(),
+                sp.getProductQuantity(), sp.getProductPrice(), sp.getFinalPrice()};
 
             model.addRow(objectProduct);
         }
 
-        this.shopForm.getjTableProducts().setModel(model);
+        shopForm.getjTableProducts().setModel(model);
 
         calculateFinalPrice();
-
     }
 
     private void calculateFinalPrice() {
@@ -318,24 +290,23 @@ import views.Shop.ShoppingCartFormView;
 
         double finalPrice;
 
-        for (SelectedProduct selectedProduct : listSelectedProducts) {
+        for (var sp : listSelectedProducts) {
 
-            finalPrice = selectedProduct.getFinalPrice() *1.21;
+            finalPrice = sp.getFinalPrice() * 1.21;
 
             total += finalPrice;
 
-            this.shopForm.getLblTotal().setText("" + total);
+            shopForm.getLblTotal().setText("" + total);
 
             System.out.println(finalPrice);
 
             System.out.println(total);
         }
-
     }
 
     private void getProductSelectedOfTable() {
 
-        row = this.shopForm.getjTableProducts().getSelectedRow();
+        row = shopForm.getjTableProducts().getSelectedRow();
 
         selectedProduct = listSelectedProducts.get(row);
 
@@ -360,11 +331,11 @@ import views.Shop.ShoppingCartFormView;
 
         while (iteratorList.hasNext()) {
 
-            this.selectedProduct = iteratorList.next();
+            selectedProduct = iteratorList.next();
 
-            if (this.selectedProduct.getId().equals(id)) {
+            if (selectedProduct.getId().equals(id)) {
 
-                System.out.println("" + this.selectedProduct);
+                System.out.println("" + selectedProduct);
 
                 iteratorList.remove();
 
@@ -377,45 +348,42 @@ import views.Shop.ShoppingCartFormView;
 
     private void findClient() {
 
-        if (!"".equals(this.shopForm.getTxtClientSsn().getText())) {
+        if (!"".equals(shopForm.getTxtClientSsn().getText())) {
 
-            ssn = Integer.valueOf(this.shopForm.getTxtClientSsn().getText());
+            ssn = Integer.valueOf(shopForm.getTxtClientSsn().getText());
 
             client = clientServiceImp.findBySsn(ssn).get();
 
             if (client.getName() != null) {
 
-                this.shopForm.getTxtClientName().setText("" + client.getName());
+                shopForm.getTxtClientName().setText("" + client.getName());
 
             } else {
 
                 JOptionPane.showMessageDialog(null, "Client not found");
 
-                this.shopForm.getTxtClientSsn().setText("");
+                shopForm.getTxtClientSsn().setText("");
             }
 
         } else {
-        
+
             JOptionPane.showMessageDialog(null, "Ssn required");
-        
         }
     }
 
     private void addToShoppingCart() {
-        
+
         if (client == null) {
-            
+
             JOptionPane.showMessageDialog(null, "client required");
-            
+
             return;
         }
 
         ShoppingCart shoppingCart = new ShoppingCart(client, listSelectedProducts, total);
 
-        this.shoppingCartForm = new ShoppingCartFormView(shoppingCart, shoppingCartServiceImp);
+        ShoppingCartFormView shoppingCartForm = new ShoppingCartFormView(shoppingCart, shoppingCartServiceImp);
 
         shoppingCartForm.setVisible(true);
-
     }
-
 }

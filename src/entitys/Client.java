@@ -8,12 +8,19 @@ import java.util.List;
 public class Client implements IClient<Client, Integer>{
 
     private Integer id;
+    
     private String name;
+    
     private String lastName;
+    
     private Integer age;
+    
     private Integer ssn;
+    
     private boolean availability;
+    
     private String phoneNumber;
+    
     private static Integer countId = 0;
     
     private final List<PaymentMethod> paymentMethods = new ArrayList<>(2);
@@ -22,8 +29,7 @@ public class Client implements IClient<Client, Integer>{
         
         countId++;
         
-        this.id = countId;
-        
+        this.id = countId;   
     }
 
     public Client(String name, String lastName, Integer age, Integer ssn, boolean availability, String phoneNumber, PaymentMethod paymentMethod) {
@@ -51,14 +57,6 @@ public class Client implements IClient<Client, Integer>{
         addPaymentMethod(paymentMethod);
     }
     
-    public static Integer getCountId() {
-        return countId;
-    }
-
-    public static void setCountId(Integer aCountId) {
-        countId = aCountId;
-    }
-
     @Override
     public Integer getId() {
         return id;
@@ -125,15 +123,12 @@ public class Client implements IClient<Client, Integer>{
                 
             } else {
             
-                this.paymentMethods.set(1, paymentMethod);
-                
-            }
-            
+                this.paymentMethods.set(1, paymentMethod);            
+            }    
     }
 
     @Override
     public String toString() {
         return "Client{" + "id=" + id + ", name=" + name + ", lastName=" + lastName + ", age=" + age + ", ssn=" + ssn + ", availability=" + availability + ", phoneNumber=" + phoneNumber + ", paymentMethods=" + paymentMethods + '}';
     }
-
 }

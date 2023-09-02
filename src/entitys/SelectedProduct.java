@@ -3,23 +3,36 @@ package entitys;
 public class SelectedProduct {
     
     private Integer id;
+    
     private String productCode;
+    
     private String productName;
+    
     private String productBrand;
+    
     private double productPrice;
+    
     private int    productQuantity;
+    
     private double finalPrice;
 
     public SelectedProduct() {
     }
 
     public SelectedProduct(Integer id, String productCode, String productName, String productBrand, double productPrice, int productQuantity, double finalPrice) {
+       
         this.id = id;
+        
         this.productCode = productCode;
+        
         this.productName = productName;
+        
         this.productBrand = productBrand;
+        
         this.productPrice = productPrice;
+        
         this.productQuantity = productQuantity;
+        
         this.finalPrice = finalPrice;
     }
 

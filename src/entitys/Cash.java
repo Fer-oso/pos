@@ -11,7 +11,6 @@ public class Cash implements PaymentMethod {
     public Cash(Double quantity) {
         
         this.quantity = quantity;
-       
     }
 
     public Double getQuantity() {
@@ -21,5 +20,4 @@ public class Cash implements PaymentMethod {
     public void setQuantity(Double quantity) {
         this.quantity = quantity;
     }  
-
 }

@@ -33,11 +33,11 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
 
         listClients();
 
-        addActions();
+        addActionsListeners();
     }
 
     /*Actions*/
-    private void addActions() {
+    private void addActionsListeners() {
 
         clientFindByNameView.getJtTableClients().addMouseListener(this);
 

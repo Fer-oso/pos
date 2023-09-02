@@ -1,12 +1,13 @@
 package entitys;
 
+import interfaces.entity.checkout.ICheckOut;
 import interfaces.entity.paymentMethod.PaymentMethod;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CheckOut {
+public class CheckOut implements ICheckOut<Integer>{
 
-    private int id;
+    private Integer id;
 
     private ShoppingCart shoppingCart;
 
@@ -21,38 +22,34 @@ public class CheckOut {
         countId++;
 
         this.id = countId;
-        
-        this.paymentMethods.add(new Cash());
-        
-        this.paymentMethods.add(new CreditCard());
 
+        this.paymentMethods.add(new Cash());
+
+        this.paymentMethods.add(new CreditCard());
     }
 
-    public CheckOut(ShoppingCart shoppingCart, PaymentMethod paymentMethod, boolean state) {
-        
+    public CheckOut(ShoppingCart shoppingCart) {
+
         countId++;
-        
+
         this.id = countId;
-        
+
         this.shoppingCart = shoppingCart;
-        
+
         this.paymentMethods.add(new Cash());
-        
+
         this.paymentMethods.add(new CreditCard());
-        
-        addPaymentMethod(paymentMethod);
-        
-        this.state = state;
     }
 
-    public int getId() {
-        return id;
+    public Integer getId() {
+       return id;
     }
 
-    public void setId(int id) {
+    @Override
+    public void setId(Integer id) {
         this.id = id;
     }
-
+    
     public ShoppingCart getShoppingCart() {
         return shoppingCart;
     }
@@ -61,25 +58,9 @@ public class CheckOut {
         this.shoppingCart = shoppingCart;
     }
 
-    
     public List<PaymentMethod> getPaymentMethod() {
         return paymentMethods;
     }
-
-    public final void addPaymentMethod(PaymentMethod paymentMethod) {
-       
-            if (paymentMethods instanceof Cash) {
-               
-                this.paymentMethods.set(0, paymentMethod);
-                
-            } else {
-            
-                this.paymentMethods.set(1, paymentMethod);
-                
-            }
-
-    }
-
 
     public boolean isState() {
         return state;
@@ -89,17 +70,20 @@ public class CheckOut {
         this.state = state;
     }
 
-    public static Integer getCountId() {
-        return countId;
-    }
+    public final void addPaymentMethod(PaymentMethod paymentMethod) {
 
-    public static void setCountId(Integer countId) {
-        CheckOut.countId = countId;
-    }
+        if (paymentMethods instanceof Cash) {
 
+            this.paymentMethods.set(0, paymentMethod);
+
+        } else {
+
+            this.paymentMethods.set(1, paymentMethod);
+        }
+    }
+    
     @Override
     public String toString() {
         return "Checking{" + "id=" + id + ", shoppingCart=" + shoppingCart + ", paymentMethod=" + paymentMethods + ", state=" + state + '}';
     }
-
 }

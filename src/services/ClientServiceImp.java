@@ -4,9 +4,9 @@ import java.util.List;
 import entitys.Client;
 import java.util.Optional;
 import persistence.ClientRepository;
-import services.interfaces.clientservice.IclientService;
+import services.interfaces.clientservice.IClientService;
 
-public class ClientServiceImp implements IclientService<Client, Integer> {
+public class ClientServiceImp implements IClientService<Client, Integer> {
 
     private final ClientRepository clientRepository;
 

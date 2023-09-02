@@ -5,7 +5,7 @@ import java.util.List;
 
 public class ShoppingCart implements IShoppingCart<Integer> {
 
-    private int id;
+    private Integer id;
 
     private Client client;
 
@@ -72,8 +72,5 @@ public class ShoppingCart implements IShoppingCart<Integer> {
     @Override
     public String toString() {
         return "ShoppingCart{" + "id=" + id + ", client=" + client + ", products=" + products + ", total=" + total + '}';
-    }
-
-   
-   
+    }  
 }
