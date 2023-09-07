@@ -41,6 +41,7 @@ public class CheckOut implements ICheckOut<Integer>{
         this.paymentMethods.add(new CreditCard());
     }
 
+    @Override
     public Integer getId() {
        return id;
     }

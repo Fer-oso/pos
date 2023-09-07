@@ -8,6 +8,7 @@ public class POS extends javax.swing.JFrame {
 
     public POS() {
         initComponents();
+        this.setLocationRelativeTo(this);
         POSController posController = new POSController(this);
     }
 

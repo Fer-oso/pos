@@ -23,16 +23,18 @@ public class Client implements IClient<Client, Integer>{
     
     private static Integer countId = 0;
     
-    private final List<PaymentMethod> paymentMethods = new ArrayList<>(2);
+    private List<PaymentMethod> paymentMethods;
 
     public Client() {
-        
+
         countId++;
         
         this.id = countId;   
+        
+        this.paymentMethods = new ArrayList<>(2);
     }
 
-    public Client(String name, String lastName, Integer age, Integer ssn, boolean availability, String phoneNumber, PaymentMethod paymentMethod) {
+    public Client(String name, String lastName, Integer age, Integer ssn, boolean availability, String phoneNumber, PaymentMethod paymentMethod) { 
         
         countId++;
         
@@ -49,6 +51,8 @@ public class Client implements IClient<Client, Integer>{
         this.availability = availability;
         
         this.phoneNumber = phoneNumber;   
+        
+        this.paymentMethods = new ArrayList<>(2);
         
         this.paymentMethods.add(new Cash());
         
@@ -126,9 +130,19 @@ public class Client implements IClient<Client, Integer>{
                 this.paymentMethods.set(1, paymentMethod);            
             }    
     }
+    
+    
 
     @Override
     public String toString() {
         return "Client{" + "id=" + id + ", name=" + name + ", lastName=" + lastName + ", age=" + age + ", ssn=" + ssn + ", availability=" + availability + ", phoneNumber=" + phoneNumber + ", paymentMethods=" + paymentMethods + '}';
+    }
+
+    public List<PaymentMethod> getPaymentMethods() {
+        return paymentMethods;
+    }
+
+    public void setPaymentMethods(List<PaymentMethod> paymentMethods) {
+        this.paymentMethods = paymentMethods;
     }
 }

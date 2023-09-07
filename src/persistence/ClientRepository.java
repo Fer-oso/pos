@@ -6,10 +6,11 @@ import interfaces.all.IFindByName;
 import services.interfaces.clientservice.IFindByAge;
 import services.interfaces.clientservice.IFindBySsn;
 import java.util.Optional;
-import services.interfaces.clientservice.IFindByLastName;
-import services.interfaces.clientservice.IFindByPhoneNumber;
+import services.interfaces.clientservice.IfindByLastName;
+import services.interfaces.clientservice.IfindByPhoneNumber;
 
-public class ClientRepository extends DaoRepository<Client, Integer> implements IFindByName<Client>, IFindByLastName<Client>, IFindByAge<Client>, IFindBySsn<Client>, IFindByPhoneNumber<Client> {
+
+public class ClientRepository extends DaoRepository<Client, Integer> implements IFindByName<Client>, IfindByLastName<Client>, IFindByAge<Client>, IFindBySsn<Client>, IfindByPhoneNumber<Client> {
 
     public List<Client> listClients = super.entityList;
 

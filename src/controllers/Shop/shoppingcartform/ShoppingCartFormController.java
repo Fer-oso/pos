@@ -8,13 +8,14 @@ import java.awt.event.MouseAdapter;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import services.ShoppingCartServiceImp;
+import views.Shop.CheckOutFormView;
 
 import views.Shop.ShoppingCartFormView;
 
 public class ShoppingCartFormController extends MouseAdapter implements ActionListener {
 
     /*Views*/
-    private final ShoppingCartFormView shoppingCartForm;
+    private final ShoppingCartFormView shoppingCartFormView;
 
     /*Entitys*/
     private final ShoppingCart shoppingCart;
@@ -28,9 +29,9 @@ public class ShoppingCartFormController extends MouseAdapter implements ActionLi
     private DefaultTableModel model = new DefaultTableModel();
 
     /*Constructors*/
-    public ShoppingCartFormController(ShoppingCartFormView shoppingCartForm, ShoppingCart shoppingCart, ShoppingCartServiceImp shoppingCartServiceImp) {
+    public ShoppingCartFormController(ShoppingCartFormView shoppingCartFormView, ShoppingCart shoppingCart, ShoppingCartServiceImp shoppingCartServiceImp) {
 
-        this.shoppingCartForm = shoppingCartForm;
+        this.shoppingCartFormView = shoppingCartFormView;
 
         this.shoppingCart = shoppingCart;
 
@@ -46,35 +47,40 @@ public class ShoppingCartFormController extends MouseAdapter implements ActionLi
     /*Actions Events*/
     private void addActionsListeners() {
 
-        shoppingCartForm.getBtnGenerateOrder().addActionListener(this);
+        shoppingCartFormView.getBtnGenerateOrder().addActionListener(this);
 
-        shoppingCartForm.getBtnCancel().addActionListener(this);
+        shoppingCartFormView.getBtnCancel().addActionListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if (e.getSource() == shoppingCartForm.getBtnCancel()) {
+        if (e.getSource() == shoppingCartFormView.getBtnCancel()) {
 
-            shoppingCartForm.setVisible(false);
+            shoppingCartFormView.setVisible(false);
 
-            shoppingCartForm.setDefaultCloseOperation(2);
+            shoppingCartFormView.setDefaultCloseOperation(2);
         }
 
-        if (e.getSource() == shoppingCartForm.getBtnGenerateOrder()) {
+        if (e.getSource() == shoppingCartFormView.getBtnGenerateOrder()) {
 
             shoppingCartServiceImp.save(shoppingCart);
 
             shoppingCartServiceImp.show(shoppingCart);
+            
+            CheckOutFormView checkOutFormView = new CheckOutFormView(shoppingCart);
+            
+            shoppingCartFormView.setVisible(false);
+            
+            checkOutFormView.setVisible(true);
         }
     }
 
     /*Functions*/
     private void listProductsCarshop() {
 
-        model = (DefaultTableModel) shoppingCartForm.getjTableProducts().getModel();
+        model = (DefaultTableModel) shoppingCartFormView.getjTableProducts().getModel();
 
-        //MODELO TABLA
        for (SelectedProduct sp : listShoppingCartProducts) {
 
             Object[] objectProduct = {sp.getProductCode(), sp.getProductName(), sp.getProductBrand(),
@@ -83,12 +89,12 @@ public class ShoppingCartFormController extends MouseAdapter implements ActionLi
             model.addRow(objectProduct);
         }
 
-        shoppingCartForm.getjTableProducts().setModel(model);
+        shoppingCartFormView.getjTableProducts().setModel(model);
 
-        shoppingCartForm.getLblTotal().setText("" + shoppingCart.getFinalPrice());
+        shoppingCartFormView.getLblTotal().setText("" + shoppingCart.getFinalPrice());
 
-        shoppingCartForm.getTxtClientName().setText("" + shoppingCart.getClient().getName());
+        shoppingCartFormView.getTxtClientName().setText("" + shoppingCart.getClient().getName());
 
-        shoppingCartForm.getTxtClientSsn().setText("" + shoppingCart.getClient().getSsn());
+        shoppingCartFormView.getTxtClientSsn().setText("" + shoppingCart.getClient().getSsn());
     }
 }
