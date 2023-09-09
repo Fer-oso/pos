@@ -31,7 +31,6 @@ public class ProductRegisterFormController extends MouseAdapter implements Actio
         listProducts();
         
         addACtionsListeners();
-
     }
 
     /*Actions*/
@@ -94,6 +93,8 @@ public class ProductRegisterFormController extends MouseAdapter implements Actio
         String productCode = productRegisterFormView.getTxtCode().getText();
      
         product = new Product(name, price, availability, stock, brand, productCode);
+        
+        System.out.println(product);
     }
     
     private Product save() {

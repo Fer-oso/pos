@@ -35,7 +35,6 @@ public class ShoppingCartFormView extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
 
-        jpNuevaVenta.setBackground(new java.awt.Color(255, 255, 255));
         jpNuevaVenta.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jpNuevaVenta.setPreferredSize(new java.awt.Dimension(1034, 490));
         jpNuevaVenta.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());

@@ -44,16 +44,15 @@ public class ShopFormView extends javax.swing.JInternalFrame {
         jTableProducts = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 255, 255));
-        setBorder(null);
+        setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Shopping from", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Roboto", 0, 14))); // NOI18N
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setMaximumSize(new java.awt.Dimension(1016, 512));
-        setPreferredSize(new java.awt.Dimension(1016, 512));
+        setMaximumSize(new java.awt.Dimension(1040, 535));
+        setPreferredSize(new java.awt.Dimension(1040, 535));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jpNuevaVenta.setBackground(new java.awt.Color(255, 255, 255));
         jpNuevaVenta.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jpNuevaVenta.setPreferredSize(new java.awt.Dimension(1034, 490));
 
@@ -114,7 +113,7 @@ public class ShopFormView extends javax.swing.JInternalFrame {
         jpNuevaVentaLayout.setHorizontalGroup(
             jpNuevaVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpNuevaVentaLayout.createSequentialGroup()
-                .addContainerGap(138, Short.MAX_VALUE)
+                .addContainerGap(168, Short.MAX_VALUE)
                 .addGroup(jpNuevaVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpNuevaVentaLayout.createSequentialGroup()
                         .addGroup(jpNuevaVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -204,7 +203,7 @@ public class ShopFormView extends javax.swing.JInternalFrame {
                 .addGap(27, 27, 27))
         );
 
-        getContentPane().add(jpNuevaVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1020, -1));
+        getContentPane().add(jpNuevaVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1050, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

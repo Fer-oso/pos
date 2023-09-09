@@ -1,119 +1,105 @@
 package views.Products;
 
+import controllers.products.ProductFindByNameController;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import controllers.products.ProductFindByNameController;
 import services.ProductServiceImp;
 
 public class ProductFindByNameView extends javax.swing.JInternalFrame {
 
     private static final long serialVersionUID = 1L;
-  
+
+ 
     public ProductFindByNameView(ProductServiceImp productService) {
         initComponents();
-        var productFindByNameController = new ProductFindByNameController(this,productService);
+        var productFindByPcController = new ProductFindByNameController(this, productService);
     }
-    
+
+    public JButton getBtnSearch() {
+        return btnSearch;
+    }
+
+    public void setBtnSearch(JButton btnSearch) {
+        this.btnSearch = btnSearch;
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jpContainer = new javax.swing.JPanel();
-        lblId = new javax.swing.JLabel();
         jpForm = new javax.swing.JPanel();
-        txtName = new javax.swing.JTextField();
         lblName = new javax.swing.JLabel();
         lblPrice = new javax.swing.JLabel();
         txtPrice = new javax.swing.JTextField();
-        txtStock = new javax.swing.JTextField();
+        txtCode = new javax.swing.JTextField();
         lblStock = new javax.swing.JLabel();
         lblAvailability = new javax.swing.JLabel();
         jcbAvailability = new javax.swing.JCheckBox();
         lblBrand = new javax.swing.JLabel();
-        txtBrand = new javax.swing.JTextField();
         lblCode = new javax.swing.JLabel();
-        txtCode = new javax.swing.JTextField();
-        btnDelete = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
-        lblSearch = new javax.swing.JLabel();
-        txtSearch = new javax.swing.JTextField();
-        btnSearch = new javax.swing.JButton();
-        btnEdit = new javax.swing.JButton();
-        jpTable = new javax.swing.JPanel();
+        lblId = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtTableProducts = new javax.swing.JTable();
+        jpContainer = new javax.swing.JPanel();
+        jpTable = new javax.swing.JPanel();
+        btnEdit = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
+        txtName = new javax.swing.JTextField();
+        txtStock = new javax.swing.JTextField();
+        txtBrand = new javax.swing.JTextField();
+        btnSave1 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        txtSearch = new javax.swing.JTextField();
+        btnSearch = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(255, 255, 255));
-        setBorder(null);
+        setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Product register form", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Roboto", 0, 14))); // NOI18N
         setClosable(true);
         setIconifiable(true);
-        setMaximizable(true);
-        setResizable(true);
-        setMaximumSize(new java.awt.Dimension(1016, 512));
-        setPreferredSize(new java.awt.Dimension(1016, 512));
+        setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        setMaximumSize(new java.awt.Dimension(1030, 535));
+        setPreferredSize(new java.awt.Dimension(1040, 535));
+        setVerifyInputWhenFocusTarget(false);
 
-        jpContainer.setBackground(new java.awt.Color(255, 255, 255));
-
-        jpForm.setBackground(new java.awt.Color(255, 255, 255));
         jpForm.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jpForm.add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 140, 30));
 
         lblName.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         lblName.setText("Name");
-        jpForm.add(lblName, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 70, 30));
+        jpForm.add(lblName, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 70, 30));
 
         lblPrice.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         lblPrice.setText("Price");
-        jpForm.add(lblPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 60, 30));
-        jpForm.add(txtPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 140, 30));
-        jpForm.add(txtStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, 140, 30));
+        jpForm.add(lblPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 60, 30));
+        jpForm.add(txtPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, 140, 30));
+        jpForm.add(txtCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 210, 140, 30));
 
         lblStock.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         lblStock.setText("Stock");
-        jpForm.add(lblStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 70, 30));
+        jpForm.add(lblStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 70, 30));
 
         lblAvailability.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         lblAvailability.setText("Availability");
-        jpForm.add(lblAvailability, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 100, 30));
+        jpForm.add(lblAvailability, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 100, 30));
 
         jcbAvailability.setText("YES/NO");
-        jpForm.add(jcbAvailability, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 180, 100, 30));
+        jpForm.add(jcbAvailability, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, 100, 30));
 
         lblBrand.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         lblBrand.setText("Brand");
-        jpForm.add(lblBrand, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 70, 30));
-        jpForm.add(txtBrand, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 220, 140, 30));
+        jpForm.add(lblBrand, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 50, 30));
 
         lblCode.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         lblCode.setText("Code");
-        jpForm.add(lblCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 60, 30));
-        jpForm.add(txtCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 260, 140, 30));
-
-        btnDelete.setText("Delete");
-        jpForm.add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 90, 30));
+        jpForm.add(lblCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 40, 30));
 
         btnCancel.setText("Cancel");
-        jpForm.add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 310, 90, 30));
-
-        lblSearch.setText("Search");
-        jpForm.add(lblSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 20));
-
-        txtSearch.setMinimumSize(new java.awt.Dimension(100, 22));
-        txtSearch.setPreferredSize(new java.awt.Dimension(100, 22));
-        jpForm.add(txtSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 100, 30));
-
-        btnSearch.setText("Search");
-        jpForm.add(btnSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, 70, -1));
-
-        btnEdit.setText("Edit");
-        jpForm.add(btnEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 90, 30));
-
-        jpTable.setBackground(new java.awt.Color(255, 255, 255));
+        jpForm.add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 300, 90, 30));
+        jpForm.add(lblId, new org.netbeans.lib.awtextra.AbsoluteConstraints(98, 417, -1, -1));
 
         jtTableProducts.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -123,20 +109,24 @@ public class ProductFindByNameView extends javax.swing.JInternalFrame {
                 "Id", "Name", "Price", "Stock", "Availability", "Brand", "Product code"
             }
         ));
+        jtTableProducts.setFocusable(false);
         jScrollPane1.setViewportView(jtTableProducts);
+
+        jpForm.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(248, 6, 760, 330));
+
+        jpContainer.setBackground(new java.awt.Color(255, 255, 255));
+
+        jpTable.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout jpTableLayout = new javax.swing.GroupLayout(jpTable);
         jpTable.setLayout(jpTableLayout);
         jpTableLayout.setHorizontalGroup(
             jpTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpTableLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 759, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jpTableLayout.setVerticalGroup(
             jpTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jpContainerLayout = new javax.swing.GroupLayout(jpContainer);
@@ -144,65 +134,62 @@ public class ProductFindByNameView extends javax.swing.JInternalFrame {
         jpContainerLayout.setHorizontalGroup(
             jpContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpContainerLayout.createSequentialGroup()
-                .addGroup(jpContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jpForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jpContainerLayout.createSequentialGroup()
-                        .addGap(68, 68, 68)
-                        .addComponent(lblId)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jpTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jpContainerLayout.setVerticalGroup(
             jpContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpContainerLayout.createSequentialGroup()
-                .addComponent(jpForm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(jpContainerLayout.createSequentialGroup()
-                .addGroup(jpContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpContainerLayout.createSequentialGroup()
-                        .addGap(107, 107, 107)
-                        .addComponent(lblId))
-                    .addComponent(jpTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jpTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jpForm.add(jpContainer, new org.netbeans.lib.awtextra.AbsoluteConstraints(996, 423, -1, -1));
+
+        btnEdit.setText("Edit");
+        jpForm.add(btnEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 90, 30));
+
+        btnDelete.setText("Delete");
+        jpForm.add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, 90, 30));
+        jpForm.add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, 140, 30));
+        jpForm.add(txtStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 140, 30));
+        jpForm.add(txtBrand, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 140, 30));
+
+        btnSave1.setText("Save");
+        jpForm.add(btnSave1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 90, 30));
+
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Find by name form");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 0, 220, 30));
+        jPanel1.add(txtSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 87, 30));
+
+        btnSearch.setText("Find");
+        jPanel1.add(btnSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 0, 68, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpContainer, javax.swing.GroupLayout.DEFAULT_SIZE, 1016, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jpForm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpContainer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(2, 2, 2)
+                .addComponent(jpForm, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public JButton getBtnDelete() {
-        return btnDelete;
-    }
-
-    public void setBtnDelete(JButton btnDelete) {
-        this.btnDelete = btnDelete;
-    }
-
-    public JLabel getLblId() {
-        return lblId;
-    }
-
-    public void setLblId(JLabel lblId) {
-        this.lblId = lblId;
-    }
-    
     public JButton getBtnCancel() {
         return btnCancel;
-    }
-
-    public void setBtnCancel(JButton btnCancel) {
-        this.btnCancel = btnCancel;
     }
 
     public JButton getBtnEdit() {
@@ -213,12 +200,24 @@ public class ProductFindByNameView extends javax.swing.JInternalFrame {
         this.btnEdit = btnEdit;
     }
 
-    public JButton getBtnSearch() {
+    public JTextField getTxtSearch() {
+        return txtSearch;
+    }
+
+    public void setTxtSearch(JTextField txtSearch) {
+        this.txtSearch = txtSearch;
+    }
+    
+    public void setBtnCancel(JButton btnCancel) {
+        this.btnCancel = btnCancel;
+    }
+
+    public JButton getBtnSave() {
         return btnSearch;
     }
 
-    public void setBtnSearch(JButton jButton1) {
-        this.btnSearch = jButton1;
+    public void setBtnSave(JButton btnSave) {
+        this.btnSearch = btnSave;
     }
 
     public JScrollPane getjScrollPane1() {
@@ -286,11 +285,11 @@ public class ProductFindByNameView extends javax.swing.JInternalFrame {
     }
 
     public JTextField getTxtName() {
-        return txtName;
+        return txtSearch;
     }
 
     public void setTxtName(JTextField txtName) {
-        this.txtName = txtName;
+        this.txtSearch = txtName;
     }
 
     public JTextField getTxtPrice() {
@@ -301,20 +300,12 @@ public class ProductFindByNameView extends javax.swing.JInternalFrame {
         this.txtPrice = txtPrice;
     }
 
-    public JTextField getTxtSearch() {
-        return txtSearch;
-    }
-
-    public void setTxtSearch(JTextField txtSearch) {
-        this.txtSearch = txtSearch;
-    }
-
     public JTextField getTxtStock() {
-        return txtStock;
+        return txtCode;
     }
 
     public void setTxtStock(JTextField txtStock) {
-        this.txtStock = txtStock;
+        this.txtCode = txtStock;
     }
 
 
@@ -322,7 +313,10 @@ public class ProductFindByNameView extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnEdit;
+    private javax.swing.JButton btnSave1;
     private javax.swing.JButton btnSearch;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JCheckBox jcbAvailability;
     private javax.swing.JPanel jpContainer;
@@ -335,7 +329,6 @@ public class ProductFindByNameView extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblId;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblPrice;
-    private javax.swing.JLabel lblSearch;
     private javax.swing.JLabel lblStock;
     private javax.swing.JTextField txtBrand;
     private javax.swing.JTextField txtCode;
@@ -344,4 +337,20 @@ public class ProductFindByNameView extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtSearch;
     private javax.swing.JTextField txtStock;
     // End of variables declaration//GEN-END:variables
+
+    public javax.swing.JLabel getLblId() {
+        return lblId;
+    }
+
+    public void setLblId(javax.swing.JLabel lblId) {
+        this.lblId = lblId;
+    }
+
+    public javax.swing.JButton getBtnDelete() {
+        return btnDelete;
+    }
+
+    public void setBtnDelete(javax.swing.JButton btnDelete) {
+        this.btnDelete = btnDelete;
+    }
 }
