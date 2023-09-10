@@ -1,15 +1,20 @@
 package views.Products;
 
-import controllers.products.ProductRegisterFormController;
+import views.clients.*;
+import controllers.clients.ClientFindByNameController;
+import controllers.products.ProductFindByPcController;
+import javax.swing.JButton;
+import javax.swing.JTextField;
+import services.ClientServiceImp;
 import services.ProductServiceImp;
 
-public class ProductRegisterFormView extends javax.swing.JInternalFrame {
+public class ProductFindByPcFormView extends javax.swing.JInternalFrame {
 
     private static final long serialVersionUID = 1L;
 
-    public ProductRegisterFormView(ProductServiceImp productServiceImp) {
+    public ProductFindByPcFormView(ProductServiceImp productServiceImp) {
         initComponents();
-        var productRegisterFormController = new ProductRegisterFormController(this, productServiceImp);
+        var productRegisterFormController = new ProductFindByPcController(this, productServiceImp);
     }
 
     @SuppressWarnings("unchecked")
@@ -23,6 +28,8 @@ public class ProductRegisterFormView extends javax.swing.JInternalFrame {
         jtTableProducts = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        btnSearch = new javax.swing.JButton();
+        txtSearch = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         lblName = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
@@ -32,7 +39,7 @@ public class ProductRegisterFormView extends javax.swing.JInternalFrame {
         txtStock = new javax.swing.JTextField();
         lblBrand = new javax.swing.JLabel();
         txtBrand = new javax.swing.JTextField();
-        lblCode = new javax.swing.JLabel();
+        lblPhone = new javax.swing.JLabel();
         txtCode = new javax.swing.JTextField();
         btnSave = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
@@ -84,7 +91,15 @@ public class ProductRegisterFormView extends javax.swing.JInternalFrame {
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Roboto", 0, 48)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel1.setText("Product register form");
+        jLabel1.setText("Find client form");
+
+        btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/market icons/menuclientsicons/find icon.png"))); // NOI18N
+        btnSearch.setText("Search");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -92,11 +107,19 @@ public class ProductRegisterFormView extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnSearch)
+                .addGap(12, 12, 12)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 740, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 51, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(btnSearch, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         lblName.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
@@ -111,8 +134,8 @@ public class ProductRegisterFormView extends javax.swing.JInternalFrame {
         lblBrand.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         lblBrand.setText("Brand");
 
-        lblCode.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        lblCode.setText("Code");
+        lblPhone.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        lblPhone.setText("Code");
 
         btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/market icons/menuclientsicons/client save icon 2.png"))); // NOI18N
         btnSave.setText("Save");
@@ -146,7 +169,7 @@ public class ProductRegisterFormView extends javax.swing.JInternalFrame {
                     .addComponent(txtStock, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblBrand, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtBrand, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblCode, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCode, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(80, 80, 80)
@@ -180,7 +203,7 @@ public class ProductRegisterFormView extends javax.swing.JInternalFrame {
                 .addGap(0, 0, 0)
                 .addComponent(txtBrand, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(lblCode, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(txtCode, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -233,6 +256,10 @@ public class ProductRegisterFormView extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSearchActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -240,6 +267,7 @@ public class ProductRegisterFormView extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnSave;
+    private javax.swing.JButton btnSearch;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -250,15 +278,16 @@ public class ProductRegisterFormView extends javax.swing.JInternalFrame {
     private javax.swing.JTable jtTableProducts;
     private javax.swing.JLabel lblAvailability;
     private javax.swing.JLabel lblBrand;
-    private javax.swing.JLabel lblCode;
     private javax.swing.JLabel lblId;
     private javax.swing.JLabel lblName;
+    private javax.swing.JLabel lblPhone;
     private javax.swing.JLabel lblPrice;
     private javax.swing.JLabel lblStock;
     private javax.swing.JTextField txtBrand;
     private javax.swing.JTextField txtCode;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPrice;
+    private javax.swing.JTextField txtSearch;
     private javax.swing.JTextField txtStock;
     // End of variables declaration//GEN-END:variables
 
@@ -310,6 +339,23 @@ public class ProductRegisterFormView extends javax.swing.JInternalFrame {
         this.jcbAvailability = jcbAvailability;
     }
 
+ 
+    public JButton getBtnSearch() {
+        return btnSearch;
+    }
+
+    public void setBtnSearch(JButton btnSearch) {
+        this.btnSearch = btnSearch;
+    }
+
+    public JTextField getTxtSearch() {
+        return txtSearch;
+    }
+
+    public void setTxtSearch(JTextField txtSearch) {
+        this.txtSearch = txtSearch;
+    }
+
     public javax.swing.JTable getJtTableProducts() {
         return jtTableProducts;
     }
@@ -357,6 +403,6 @@ public class ProductRegisterFormView extends javax.swing.JInternalFrame {
     public void setTxtStock(javax.swing.JTextField txtStock) {
         this.txtStock = txtStock;
     }
-
+    
     
 }

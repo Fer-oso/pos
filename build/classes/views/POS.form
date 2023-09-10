@@ -96,17 +96,6 @@
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                   </AuxValues>
                 </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItemClientBySsn">
-                  <Properties>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/img/market icons/menuproductsicons/find all icon.png"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="by SSN"/>
-                  </Properties>
-                  <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-                  </AuxValues>
-                </MenuItem>
               </SubComponents>
             </Menu>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemClientRegister">
@@ -144,17 +133,6 @@
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
               </AuxValues>
               <SubComponents>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItemProductByName">
-                  <Properties>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/img/market icons/menuproductsicons/find all icon.png"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="by name"/>
-                  </Properties>
-                  <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-                  </AuxValues>
-                </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItemProductByPC">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">

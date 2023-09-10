@@ -88,7 +88,7 @@ public class ClientFindByNameFormView extends javax.swing.JInternalFrame {
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Roboto", 0, 48)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel1.setText("Client find by name form");
+        jLabel1.setText("Find client form");
 
         btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/market icons/menuclientsicons/find icon.png"))); // NOI18N
         btnSearch.setText("Search");
@@ -116,7 +116,7 @@ public class ClientFindByNameFormView extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(btnSearch, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
+            .addComponent(btnSearch, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         lblName.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N

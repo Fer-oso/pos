@@ -28,11 +28,9 @@ public class POS extends javax.swing.JFrame {
         jMenuClient = new javax.swing.JMenu();
         jMenuClientFind = new javax.swing.JMenu();
         jMenuItemClientByName = new javax.swing.JMenuItem();
-        jMenuItemClientBySsn = new javax.swing.JMenuItem();
         jMenuItemClientRegister = new javax.swing.JMenuItem();
         jMenuProduct = new javax.swing.JMenu();
         jMenuProductFind = new javax.swing.JMenu();
-        jMenuItemProductByName = new javax.swing.JMenuItem();
         jMenuItemProductByPC = new javax.swing.JMenuItem();
         jMenuItemProductRegister = new javax.swing.JMenuItem();
 
@@ -95,10 +93,6 @@ public class POS extends javax.swing.JFrame {
         jMenuItemClientByName.setText("by name");
         jMenuClientFind.add(jMenuItemClientByName);
 
-        jMenuItemClientBySsn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/market icons/menuproductsicons/find all icon.png"))); // NOI18N
-        jMenuItemClientBySsn.setText("by SSN");
-        jMenuClientFind.add(jMenuItemClientBySsn);
-
         jMenuClient.add(jMenuClientFind);
 
         jMenuItemClientRegister.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/market icons/menuclientsicons/register client icon.png"))); // NOI18N
@@ -112,10 +106,6 @@ public class POS extends javax.swing.JFrame {
 
         jMenuProductFind.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/market icons/menuproductsicons/product find icon.png"))); // NOI18N
         jMenuProductFind.setText("Find");
-
-        jMenuItemProductByName.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/market icons/menuproductsicons/find all icon.png"))); // NOI18N
-        jMenuItemProductByName.setText("by name");
-        jMenuProductFind.add(jMenuItemProductByName);
 
         jMenuItemProductByPC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/market icons/menuproductsicons/find all icon.png"))); // NOI18N
         jMenuItemProductByPC.setText("by PC");
@@ -161,9 +151,7 @@ public class POS extends javax.swing.JFrame {
     public javax.swing.JMenu jMenuClient;
     public javax.swing.JMenu jMenuClientFind;
     public javax.swing.JMenuItem jMenuItemClientByName;
-    public javax.swing.JMenuItem jMenuItemClientBySsn;
     public javax.swing.JMenuItem jMenuItemClientRegister;
-    public javax.swing.JMenuItem jMenuItemProductByName;
     public javax.swing.JMenuItem jMenuItemProductByPC;
     public javax.swing.JMenuItem jMenuItemProductRegister;
     public javax.swing.JMenuItem jMenuItemShopCarHistory;

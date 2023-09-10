@@ -9,11 +9,11 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import entitys.Product;
 import services.ProductServiceImp;
-import views.Products.ProductFindByPcView;
+import views.Products.ProductFindByPcFormView;
 
 public class ProductFindByPcController extends MouseAdapter implements ActionListener {
 
-    private final ProductFindByPcView productFindByPcView;
+    private final ProductFindByPcFormView productFindByPcFormView;
 
     private final ProductServiceImp productService;
 
@@ -26,9 +26,9 @@ public class ProductFindByPcController extends MouseAdapter implements ActionLis
 
     /*Constructors*/
     
-    public ProductFindByPcController(ProductFindByPcView productFindByPcView, ProductServiceImp productService) {
+    public ProductFindByPcController(ProductFindByPcFormView productFindByPcFormView, ProductServiceImp productService) {
 
-        this.productFindByPcView = productFindByPcView;
+        this.productFindByPcFormView = productFindByPcFormView;
 
         this.productService = productService;
 
@@ -42,21 +42,21 @@ public class ProductFindByPcController extends MouseAdapter implements ActionLis
     /*Actions*/
     private void addACtionsListeners() {
 
-        this.productFindByPcView.getJtTableProducts().addMouseListener(this);
+        this.productFindByPcFormView.getJtTableProducts().addMouseListener(this);
 
-        this.productFindByPcView.getBtnSearch().addActionListener(this);
+        this.productFindByPcFormView.getBtnSearch().addActionListener(this);
 
-        this.productFindByPcView.getBtnEdit().addActionListener(this);
+        this.productFindByPcFormView.getBtnEdit().addActionListener(this);
 
-        this.productFindByPcView.getBtnDelete().addActionListener(this);
+        this.productFindByPcFormView.getBtnDelete().addActionListener(this);
 
-        this.productFindByPcView.getBtnCancel().addActionListener(this);
+        this.productFindByPcFormView.getBtnCancel().addActionListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if (e.getSource() == productFindByPcView.getBtnSearch()) {
+        if (e.getSource() == productFindByPcFormView.getBtnSearch()) {
 
             listProducts = findByPc();
 
@@ -67,7 +67,7 @@ public class ProductFindByPcController extends MouseAdapter implements ActionLis
             System.out.println(listProducts);
         }
 
-        if (e.getSource() == productFindByPcView.getBtnEdit()) {
+        if (e.getSource() == productFindByPcFormView.getBtnEdit()) {
 
             editProduct();
 
@@ -78,7 +78,7 @@ public class ProductFindByPcController extends MouseAdapter implements ActionLis
             System.out.println(listProducts);
         }
 
-        if (e.getSource() == productFindByPcView.getBtnDelete()) {
+        if (e.getSource() == productFindByPcFormView.getBtnDelete()) {
 
             deleteProduct();
 
@@ -89,7 +89,7 @@ public class ProductFindByPcController extends MouseAdapter implements ActionLis
             System.out.println(listProducts);
         }
 
-        if (e.getSource() == productFindByPcView.getBtnCancel()) {
+        if (e.getSource() == productFindByPcFormView.getBtnCancel()) {
 
             clearForm();
         }
@@ -98,7 +98,7 @@ public class ProductFindByPcController extends MouseAdapter implements ActionLis
     @Override
     public void mouseClicked(MouseEvent e) {
 
-        if (e.getSource() == productFindByPcView.getJtTableProducts()) {
+        if (e.getSource() == productFindByPcFormView.getJtTableProducts()) {
 
             getProductSelectedOfTable();
 
@@ -108,7 +108,7 @@ public class ProductFindByPcController extends MouseAdapter implements ActionLis
 
     private void listProducts() {
 
-        model = (DefaultTableModel) this.productFindByPcView.getJtTableProducts().getModel();
+        model = (DefaultTableModel) this.productFindByPcFormView.getJtTableProducts().getModel();
 
         for (var pr : listProducts) {
 
@@ -117,7 +117,7 @@ public class ProductFindByPcController extends MouseAdapter implements ActionLis
 
             model.addRow(productObject);
         }
-        this.productFindByPcView.getJtTableProducts().setModel(model);
+        this.productFindByPcFormView.getJtTableProducts().setModel(model);
 
     }
 
@@ -135,7 +135,7 @@ public class ProductFindByPcController extends MouseAdapter implements ActionLis
 
     private List<Product> findByPc() {
 
-        String productCode = this.productFindByPcView.getTxtSearch().getText();
+        String productCode = this.productFindByPcFormView.getTxtSearch().getText();
 
         product = productService.findByPc(productCode).get();
 
@@ -148,7 +148,7 @@ public class ProductFindByPcController extends MouseAdapter implements ActionLis
 
     private void getProductSelectedOfTable() {
 
-        row = this.productFindByPcView.getJtTableProducts().getSelectedRow();
+        row = this.productFindByPcFormView.getJtTableProducts().getSelectedRow();
 
         product = listProducts.get(row);
 
@@ -157,45 +157,45 @@ public class ProductFindByPcController extends MouseAdapter implements ActionLis
 
     private void setProductWithDataOfForm() {
 
-        product.setName(productFindByPcView.getTxtName().getText());
+        product.setName(productFindByPcFormView.getTxtName().getText());
 
-        product.setPrice(Double.valueOf(productFindByPcView.getTxtPrice().getText()));
+        product.setPrice(Double.valueOf(productFindByPcFormView.getTxtPrice().getText()));
 
-        product.setStock(Integer.valueOf(productFindByPcView.getTxtStock().getText()));
+        product.setStock(Integer.valueOf(productFindByPcFormView.getTxtStock().getText()));
 
-        product.setAvailability(productFindByPcView.getJcbAvailability().isSelected());
+        product.setAvailability(productFindByPcFormView.getJcbAvailability().isSelected());
 
-        product.setBrand(productFindByPcView.getTxtBrand().getText());
+        product.setBrand(productFindByPcFormView.getTxtBrand().getText());
 
-        product.setProductCode(productFindByPcView.getTxtCode().getText());
+        product.setProductCode(productFindByPcFormView.getTxtCode().getText());
     }
 
     private void setFormWithSelectedProduct(Product product) {
 
-        this.productFindByPcView.getLblId().setText(String.valueOf(product.getId()));
+        this.productFindByPcFormView.getLblId().setText(String.valueOf(product.getId()));
 
-        this.productFindByPcView.getTxtName().setText(product.getName());
+        this.productFindByPcFormView.getTxtName().setText(product.getName());
 
-        this.productFindByPcView.getTxtPrice().setText(String.valueOf(product.getPrice()));
+        this.productFindByPcFormView.getTxtPrice().setText(String.valueOf(product.getPrice()));
 
-        this.productFindByPcView.getTxtStock().setText(String.valueOf(product.getStock()));
+        this.productFindByPcFormView.getTxtStock().setText(String.valueOf(product.getStock()));
 
         checkAvailability();
 
-        this.productFindByPcView.getTxtBrand().setText(product.getBrand());
+        this.productFindByPcFormView.getTxtBrand().setText(product.getBrand());
 
-        this.productFindByPcView.getTxtCode().setText(product.getProductCode());
+        this.productFindByPcFormView.getTxtCode().setText(product.getProductCode());
     }
 
     private void checkAvailability() {
 
         if (product.isAvailability()) {
 
-            this.productFindByPcView.getJcbAvailability().setSelected(true);
+            this.productFindByPcFormView.getJcbAvailability().setSelected(true);
 
         } else {
 
-            this.productFindByPcView.getJcbAvailability().setSelected(false);
+            this.productFindByPcFormView.getJcbAvailability().setSelected(false);
         }
     }
 
@@ -211,18 +211,18 @@ public class ProductFindByPcController extends MouseAdapter implements ActionLis
 
     private void clearForm() {
 
-        this.productFindByPcView.getLblId().setText("");
+        this.productFindByPcFormView.getLblId().setText("");
 
-        this.productFindByPcView.getTxtName().setText("");
+        this.productFindByPcFormView.getTxtName().setText("");
 
-        this.productFindByPcView.getTxtPrice().setText("");
+        this.productFindByPcFormView.getTxtPrice().setText("");
 
-        this.productFindByPcView.getTxtStock().setText("");
+        this.productFindByPcFormView.getTxtStock().setText("");
 
-        this.productFindByPcView.getJcbAvailability().setSelected(false);
+        this.productFindByPcFormView.getJcbAvailability().setSelected(false);
 
-        this.productFindByPcView.getTxtBrand().setText("");
+        this.productFindByPcFormView.getTxtBrand().setText("");
 
-        this.productFindByPcView.getTxtCode().setText("");
+        this.productFindByPcFormView.getTxtCode().setText("");
     }
 }
