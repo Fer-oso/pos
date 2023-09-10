@@ -37,10 +37,9 @@ public class POS extends javax.swing.JFrame {
         jMenuItemProductRegister = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1057, 575));
         setSize(new java.awt.Dimension(1057, 575));
 
-        jDesktopPane1.setPreferredSize(new java.awt.Dimension(1050, 535));
+        jDesktopPane1.setPreferredSize(new java.awt.Dimension(1020, 535));
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -57,23 +56,28 @@ public class POS extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1057, Short.MAX_VALUE)
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 552, Short.MAX_VALUE)
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
+        jMenuShop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/market icons/menushopicons/shop icon.png"))); // NOI18N
         jMenuShop.setText("Shop");
 
-        jMenuItemShopForm.setText("Shop Form");
+        jMenuItemShopForm.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/market icons/menushopicons/shopping cart form icon.png"))); // NOI18N
+        jMenuItemShopForm.setText("Shopping cart form");
         jMenuShop.add(jMenuItemShopForm);
 
-        jMenuShopCar.setText("Shop Car");
+        jMenuShopCar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/market icons/menushopicons/shopping cart info icon.png"))); // NOI18N
+        jMenuShopCar.setText("Shopping cart info");
 
+        jMenuItemShopCarLast.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/market icons/menushopicons/shopping cart last icon.png"))); // NOI18N
         jMenuItemShopCarLast.setText("Last");
         jMenuShopCar.add(jMenuItemShopCarLast);
 
+        jMenuItemShopCarHistory.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/market icons/menushopicons/shopping cart history icon.png"))); // NOI18N
         jMenuItemShopCarHistory.setText("History");
         jMenuShopCar.add(jMenuItemShopCarHistory);
 
@@ -81,35 +85,45 @@ public class POS extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenuShop);
 
+        jMenuClient.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/market icons/menuclientsicons/clients menu icon.png"))); // NOI18N
         jMenuClient.setText("Client");
 
+        jMenuClientFind.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/market icons/menuclientsicons/find client icon.png"))); // NOI18N
         jMenuClientFind.setText("Find");
 
+        jMenuItemClientByName.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/market icons/menuproductsicons/find all icon.png"))); // NOI18N
         jMenuItemClientByName.setText("by name");
         jMenuClientFind.add(jMenuItemClientByName);
 
+        jMenuItemClientBySsn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/market icons/menuproductsicons/find all icon.png"))); // NOI18N
         jMenuItemClientBySsn.setText("by SSN");
         jMenuClientFind.add(jMenuItemClientBySsn);
 
         jMenuClient.add(jMenuClientFind);
 
+        jMenuItemClientRegister.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/market icons/menuclientsicons/register client icon.png"))); // NOI18N
         jMenuItemClientRegister.setText("Register");
         jMenuClient.add(jMenuItemClientRegister);
 
         jMenuBar1.add(jMenuClient);
 
+        jMenuProduct.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/market icons/menuproductsicons/menu product icon.png"))); // NOI18N
         jMenuProduct.setText("Product");
 
+        jMenuProductFind.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/market icons/menuproductsicons/product find icon.png"))); // NOI18N
         jMenuProductFind.setText("Find");
 
+        jMenuItemProductByName.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/market icons/menuproductsicons/find all icon.png"))); // NOI18N
         jMenuItemProductByName.setText("by name");
         jMenuProductFind.add(jMenuItemProductByName);
 
+        jMenuItemProductByPC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/market icons/menuproductsicons/find all icon.png"))); // NOI18N
         jMenuItemProductByPC.setText("by PC");
         jMenuProductFind.add(jMenuItemProductByPC);
 
         jMenuProduct.add(jMenuProductFind);
 
+        jMenuItemProductRegister.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/market icons/menuproductsicons/product register icon.png"))); // NOI18N
         jMenuItemProductRegister.setText("Register");
         jMenuProduct.add(jMenuItemProductRegister);
 

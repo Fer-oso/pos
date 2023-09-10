@@ -13,8 +13,8 @@ import views.Products.ProductFindByNameView;
 import views.Products.ProductFindByPcView;
 import views.Products.ProductRegisterFormView;
 import views.Shop.ShopFormView;
+import views.clients.ClientFindByNameFormView;
 import views.clients.ClientFindBySsnView;
-import views.clients.ClientFindByNameView;
 import views.clients.ClientRegisterFormView;
 
 public class POSController implements ActionListener {
@@ -77,7 +77,7 @@ public class POSController implements ActionListener {
         }
 
         if (e.getSource() == pos.jMenuItemClientByName) {
-            pos.jDesktopPane1.add(new ClientFindByNameView(clientServiceImp)).setVisible(true);
+            pos.jDesktopPane1.add(new ClientFindByNameFormView(clientServiceImp)).setVisible(true);
         }
 
         if (e.getSource() == pos.jMenuItemClientBySsn) {
