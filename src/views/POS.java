@@ -35,6 +35,8 @@ public class POS extends javax.swing.JFrame {
         jMenuItemProductRegister = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(1057, 575));
+        setResizable(false);
         setSize(new java.awt.Dimension(1057, 575));
 
         jDesktopPane1.setPreferredSize(new java.awt.Dimension(1020, 535));

@@ -20,7 +20,6 @@ public class ShoppingCartFormView extends javax.swing.JFrame {
     private void initComponents() {
 
         jpNuevaVenta = new javax.swing.JPanel();
-        lblProductCode = new javax.swing.JLabel();
         btnCancel = new javax.swing.JButton();
         lblSsn = new javax.swing.JLabel();
         txtClientSsn = new javax.swing.JTextField();
@@ -29,49 +28,88 @@ public class ShoppingCartFormView extends javax.swing.JFrame {
         btnGenerateOrder = new javax.swing.JButton();
         lblTotalPrice = new javax.swing.JLabel();
         lblTotal = new javax.swing.JLabel();
+        jpTitle = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableProducts = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setAlwaysOnTop(true);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setMaximumSize(new java.awt.Dimension(1020, 570));
+        setPreferredSize(new java.awt.Dimension(1020, 570));
+        setResizable(false);
 
         jpNuevaVenta.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jpNuevaVenta.setPreferredSize(new java.awt.Dimension(1034, 490));
         jpNuevaVenta.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblProductCode.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
-        lblProductCode.setText("Shopping Cart");
-        jpNuevaVenta.add(lblProductCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 20, -1, -1));
+        btnCancel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/market icons/shoppingsystemicons/cancel shopping cart icon 48px.png"))); // NOI18N
+        btnCancel.setText("Cancel Order ");
+        jpNuevaVenta.add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 500, 180, 50));
 
-        btnCancel.setText("Cancel ");
-        jpNuevaVenta.add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 450, 90, 30));
-
-        lblSsn.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lblSsn.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         lblSsn.setText("SSN");
-        jpNuevaVenta.add(lblSsn, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 360, -1, -1));
+        jpNuevaVenta.add(lblSsn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, -1, -1));
 
         txtClientSsn.setEditable(false);
+        txtClientSsn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtClientSsn.setFocusable(false);
-        jpNuevaVenta.add(txtClientSsn, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 400, 150, 30));
+        txtClientSsn.setOpaque(true);
+        jpNuevaVenta.add(txtClientSsn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, 150, 30));
 
         txtClientName.setEditable(false);
-        jpNuevaVenta.add(txtClientName, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 400, 150, 30));
+        txtClientName.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtClientName.setFocusable(false);
+        txtClientName.setOpaque(true);
+        jpNuevaVenta.add(txtClientName, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 450, 150, 30));
 
-        lblNameClient.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lblNameClient.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         lblNameClient.setText("Name");
-        jpNuevaVenta.add(lblNameClient, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 360, -1, -1));
+        jpNuevaVenta.add(lblNameClient, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 410, -1, -1));
 
+        btnGenerateOrder.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnGenerateOrder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/market icons/shoppingsystemicons/accept shopping cart icon 48px.png"))); // NOI18N
         btnGenerateOrder.setText("Generate Order");
-        jpNuevaVenta.add(btnGenerateOrder, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 450, -1, 30));
+        jpNuevaVenta.add(btnGenerateOrder, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 430, -1, 50));
 
-        lblTotalPrice.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lblTotalPrice.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         lblTotalPrice.setText("Total $");
-        jpNuevaVenta.add(lblTotalPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 400, -1, -1));
+        jpNuevaVenta.add(lblTotalPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 500, -1, -1));
 
-        lblTotal.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        lblTotal.setText("    ");
-        jpNuevaVenta.add(lblTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 400, 96, -1));
+        lblTotal.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        lblTotal.setText("15000");
+        jpNuevaVenta.add(lblTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 500, 170, 30));
 
+        jpTitle.setPreferredSize(new java.awt.Dimension(1020, 57));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/market icons/shoppingsystemicons/shopping cart icon 64px.png"))); // NOI18N
+
+        jLabel2.setFont(new java.awt.Font("Roboto", 0, 48)); // NOI18N
+        jLabel2.setText("Shopping Cart");
+
+        javax.swing.GroupLayout jpTitleLayout = new javax.swing.GroupLayout(jpTitle);
+        jpTitle.setLayout(jpTitleLayout);
+        jpTitleLayout.setHorizontalGroup(
+            jpTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpTitleLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jLabel1)
+                .addGap(248, 248, 248)
+                .addComponent(jLabel2)
+                .addContainerGap(393, Short.MAX_VALUE))
+        );
+        jpTitleLayout.setVerticalGroup(
+            jpTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
+            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        jpNuevaVenta.add(jpTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 1020, 80));
+
+        jTableProducts.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jTableProducts.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -81,7 +119,7 @@ public class ShoppingCartFormView extends javax.swing.JFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                true, true, true, true, true, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -90,7 +128,18 @@ public class ShoppingCartFormView extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTableProducts);
 
-        jpNuevaVenta.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, 669, 260));
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1010, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+        );
+
+        jpNuevaVenta.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 1010, 300));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -98,19 +147,13 @@ public class ShoppingCartFormView extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1020, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jpNuevaVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 1020, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jpNuevaVenta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1020, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 490, Short.MAX_VALUE)
+            .addGap(0, 570, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jpNuevaVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jpNuevaVenta, javax.swing.GroupLayout.DEFAULT_SIZE, 570, Short.MAX_VALUE))
         );
 
         pack();
@@ -119,11 +162,14 @@ public class ShoppingCartFormView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnGenerateOrder;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableProducts;
     public javax.swing.JPanel jpNuevaVenta;
+    private javax.swing.JPanel jpTitle;
     private javax.swing.JLabel lblNameClient;
-    public javax.swing.JLabel lblProductCode;
     public javax.swing.JLabel lblSsn;
     public javax.swing.JLabel lblTotal;
     private javax.swing.JLabel lblTotalPrice;
