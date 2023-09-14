@@ -29,11 +29,11 @@ public class POSController implements ActionListener {
     ShoppingCartServiceImp shoppingCartServiceImp = new ShoppingCartServiceImp(shoppingCartRepository);
 
     ShopFormView shopForm = new ShopFormView(productServiceImp, clientServiceImp, shoppingCartServiceImp);
+    
+    ProductRegisterFormView productRegisterFormView = new ProductRegisterFormView(productServiceImp);
 
     ProductFindByPcFormView productFindByPcFormView = new ProductFindByPcFormView(productServiceImp);
-  
-    ProductRegisterFormView productRegisterFormView = new ProductRegisterFormView(productServiceImp);
-    
+
     ClientRegisterFormView clientRegisterFormView = new ClientRegisterFormView(clientServiceImp);
     
     ClientFindByNameFormView clientFindByNameFormView = new ClientFindByNameFormView(clientServiceImp);
@@ -66,35 +66,35 @@ public class POSController implements ActionListener {
             
             pos.jTabbedPane1.removeAll();
             
-            pos.jTabbedPane1.addTab("shopform", shopForm);     
+            pos.jTabbedPane1.addTab("", shopForm);     
         }
 
         if (e.getSource() == pos.jMenuItemProductByPC) {
     
             pos.jTabbedPane1.removeAll();
             
-            pos.jTabbedPane1.addTab("findbypc", productFindByPcFormView);   
+            pos.jTabbedPane1.addTab("", productFindByPcFormView);   
         }
 
         if (e.getSource() == pos.jMenuItemProductRegister) {
             
             pos.jTabbedPane1.removeAll();
             
-            pos.jTabbedPane1.addTab("register product", productRegisterFormView); 
+            pos.jTabbedPane1.addTab("", productRegisterFormView); 
         }
 
         if (e.getSource() == pos.jMenuItemClientRegister) {
             
             pos.jTabbedPane1.removeAll();
             
-            pos.jTabbedPane1.addTab("register client", clientRegisterFormView);  
+            pos.jTabbedPane1.addTab("", clientRegisterFormView);  
         }
 
         if (e.getSource() == pos.jMenuItemClientByName) {
             
             pos.jTabbedPane1.removeAll();
             
-            pos.jTabbedPane1.addTab("findbyname", clientFindByNameFormView); 
+            pos.jTabbedPane1.addTab("", clientFindByNameFormView); 
         }
     }
 }

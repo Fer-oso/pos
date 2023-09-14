@@ -375,9 +375,16 @@ public class ShopFormController extends MouseAdapter implements ActionListener {
 
     private void addToShoppingCart() {
 
-        if (client == null) {
+        if (client == null || shopFormView.getTxtClientName().getText().equals("") || shopFormView.getTxtClientSsn().getText().equals("")) {
 
             JOptionPane.showMessageDialog(null, "client required");
+
+            return;
+        }
+        
+        if (shopFormView.getjTableProducts().getRowCount() == 0) {
+            
+            JOptionPane.showMessageDialog(null, "Need add products");
 
             return;
         }
