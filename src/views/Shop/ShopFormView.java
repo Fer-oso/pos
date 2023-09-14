@@ -1,4 +1,3 @@
-
 package views.Shop;
 
 import controllers.Shop.shopformcontroller.ShopFormController;
@@ -8,13 +7,13 @@ import services.ClientServiceImp;
 import services.ProductServiceImp;
 import services.ShoppingCartServiceImp;
 
-public class ShopFormView extends javax.swing.JInternalFrame {
+public class ShopFormView extends javax.swing.JPanel {
 
     private static final long serialVersionUID = 1L;
 
     public ShopFormView(ProductServiceImp productServiceImp, ClientServiceImp clientServiceImp, ShoppingCartServiceImp shoppingCartServiceImp) {
         initComponents();
-        ShopFormController shopFormController = new ShopFormController(this, productServiceImp, clientServiceImp, shoppingCartServiceImp);
+        var shopFormController = new ShopFormController(this, productServiceImp, clientServiceImp, shoppingCartServiceImp);
     }
 
     @SuppressWarnings("unchecked")
@@ -53,12 +52,8 @@ public class ShopFormView extends javax.swing.JInternalFrame {
         lblTotal = new javax.swing.JLabel();
         btnFindClient = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(255, 255, 255));
-        setBorder(null);
-        setClosable(true);
-        setIconifiable(true);
-        setFrameIcon(null);
         setMaximumSize(new java.awt.Dimension(1020, 535));
+        setMinimumSize(new java.awt.Dimension(1020, 535));
         setPreferredSize(new java.awt.Dimension(1020, 535));
 
         jpNuevaVenta.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -67,7 +62,7 @@ public class ShopFormView extends javax.swing.JInternalFrame {
 
         jpTitle.setPreferredSize(new java.awt.Dimension(1020, 57));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/market icons/shoppingsystemicons/shopping system icon.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/market icons/shoppingsystemicons/shopping system icon 64px.png"))); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Roboto", 0, 48)); // NOI18N
         jLabel2.setText("Shopping System");
@@ -108,14 +103,17 @@ public class ShopFormView extends javax.swing.JInternalFrame {
         lblProductBrand.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblProductBrand.setText("Brand");
 
+        txtProductBrand.setEditable(false);
         txtProductBrand.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
+        txtProductStock.setEditable(false);
         txtProductStock.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtProductStock.setFocusable(false);
 
         lblProductStock.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblProductStock.setText("Stock");
 
+        txtProductPrice.setEditable(false);
         txtProductPrice.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         lblProductPrice.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
@@ -129,6 +127,7 @@ public class ShopFormView extends javax.swing.JInternalFrame {
         btnRemove.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/market icons/general icons/cancel icon 2 20px.png"))); // NOI18N
         btnRemove.setFocusable(false);
 
+        txtProductName.setEditable(false);
         txtProductName.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         btnFindProduct.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/market icons/general icons/find icon 20px.png"))); // NOI18N
@@ -304,8 +303,8 @@ public class ShopFormView extends javax.swing.JInternalFrame {
 
         jpNuevaVenta.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 420, 900, 90));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jpNuevaVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 1020, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -314,48 +313,8 @@ public class ShopFormView extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jpNuevaVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    
-    
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton btnAddToShoppingCart;
-    private javax.swing.JButton btnFindClient;
-    private javax.swing.JButton btnFindProduct;
-    private javax.swing.JButton btnRemove;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTableProducts;
-    public javax.swing.JPanel jpNuevaVenta;
-    private javax.swing.JPanel jpProductFind;
-    private javax.swing.JPanel jpTableShoppingForm;
-    private javax.swing.JPanel jpTitle;
-    private javax.swing.JLabel lblNameClient;
-    public javax.swing.JLabel lblProductBrand;
-    public javax.swing.JLabel lblProductCode;
-    public javax.swing.JLabel lblProductName;
-    public javax.swing.JLabel lblProductPrice;
-    public javax.swing.JLabel lblProductQuantity;
-    public javax.swing.JLabel lblProductStock;
-    public javax.swing.JLabel lblSsn;
-    public javax.swing.JLabel lblTotal;
-    private javax.swing.JLabel lblTotalPrice;
-    public javax.swing.JTextField txtClientName;
-    public javax.swing.JTextField txtClientSsn;
-    private javax.swing.JTextField txtProductBrand;
-    private javax.swing.JTextField txtProductCode;
-    private javax.swing.JTextField txtProductName;
-    private javax.swing.JTextField txtProductPrice;
-    private javax.swing.JTextField txtProductQuantityToSell;
-    private javax.swing.JTextField txtProductStock;
-    // End of variables declaration//GEN-END:variables
-
-    public javax.swing.JLabel getLblNameClient() {
+   public javax.swing.JLabel getLblNameClient() {
         return lblNameClient;
     }
 
@@ -427,8 +386,6 @@ public class ShopFormView extends javax.swing.JInternalFrame {
         this.lblTotalPrice = lblTotalPrice;
     }
 
-    
-
     public javax.swing.JTextField getTxtClientName() {
         return txtClientName;
     }
@@ -485,8 +442,6 @@ public class ShopFormView extends javax.swing.JInternalFrame {
         this.txtProductName = txtProductName;
     }
 
- 
-
     public javax.swing.JTextField getTxtProductPrice() {
         return txtProductPrice;
     }
@@ -542,4 +497,38 @@ public class ShopFormView extends javax.swing.JInternalFrame {
     public void setBtnAddToShoppingCart(javax.swing.JButton btnAddToShoppingCart) {
         this.btnAddToShoppingCart = btnAddToShoppingCart;
     }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton btnAddToShoppingCart;
+    private javax.swing.JButton btnFindClient;
+    private javax.swing.JButton btnFindProduct;
+    private javax.swing.JButton btnRemove;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTableProducts;
+    public javax.swing.JPanel jpNuevaVenta;
+    private javax.swing.JPanel jpProductFind;
+    private javax.swing.JPanel jpTableShoppingForm;
+    private javax.swing.JPanel jpTitle;
+    private javax.swing.JLabel lblNameClient;
+    public javax.swing.JLabel lblProductBrand;
+    public javax.swing.JLabel lblProductCode;
+    public javax.swing.JLabel lblProductName;
+    public javax.swing.JLabel lblProductPrice;
+    public javax.swing.JLabel lblProductQuantity;
+    public javax.swing.JLabel lblProductStock;
+    public javax.swing.JLabel lblSsn;
+    public javax.swing.JLabel lblTotal;
+    private javax.swing.JLabel lblTotalPrice;
+    public javax.swing.JTextField txtClientName;
+    public javax.swing.JTextField txtClientSsn;
+    private javax.swing.JTextField txtProductBrand;
+    private javax.swing.JTextField txtProductCode;
+    private javax.swing.JTextField txtProductName;
+    private javax.swing.JTextField txtProductPrice;
+    private javax.swing.JTextField txtProductQuantityToSell;
+    private javax.swing.JTextField txtProductStock;
+    // End of variables declaration//GEN-END:variables
 }

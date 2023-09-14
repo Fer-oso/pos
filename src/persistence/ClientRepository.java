@@ -3,6 +3,8 @@ package persistence;
 import java.util.List;
 import entitys.Client;
 import interfaces.all.IFindByName;
+import java.io.Serializable;
+import java.util.ArrayList;
 import services.interfaces.clientservice.IFindByAge;
 import services.interfaces.clientservice.IFindBySsn;
 import java.util.Optional;
@@ -10,9 +12,11 @@ import services.interfaces.clientservice.IfindByLastName;
 import services.interfaces.clientservice.IfindByPhoneNumber;
 
 
-public class ClientRepository extends DaoRepository<Client, Integer> implements IFindByName<Client>, IfindByLastName<Client>, IFindByAge<Client>, IFindBySsn<Client>, IfindByPhoneNumber<Client> {
+public class ClientRepository extends DaoRepository<Client, Integer> implements IFindByName<Client>, IfindByLastName<Client>, IFindByAge<Client>, IFindBySsn<Client>, IfindByPhoneNumber<Client>,Serializable {
 
-    public List<Client> listClients = super.entityList;
+    private static final long serialVersionUID = 1L;
+
+    public ArrayList<Client> listClients = super.entityList;
 
     @Override
     public List<Client> findByName(String name) {

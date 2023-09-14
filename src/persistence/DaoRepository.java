@@ -3,13 +3,12 @@ package persistence;
 import persistence.interfaces.CrudRepository;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Optional;
 import interfaces.entity.Entity;
 
 public abstract class DaoRepository<T extends Entity<ID>, ID> implements CrudRepository<T, ID> {
 
-    List<T> entityList = new ArrayList<>();
+    ArrayList<T> entityList = new ArrayList<>();
 
     @Override
     public <S extends T> S save(S t) {
@@ -55,7 +54,7 @@ public abstract class DaoRepository<T extends Entity<ID>, ID> implements CrudRep
     }
 
     @Override
-    public List<T> findAll() {
+    public ArrayList<T> findAll() {
 
         return entityList;
     }

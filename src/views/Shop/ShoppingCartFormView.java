@@ -37,8 +37,9 @@ public class ShoppingCartFormView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setMaximumSize(new java.awt.Dimension(1020, 570));
-        setPreferredSize(new java.awt.Dimension(1020, 570));
+        setMaximumSize(new java.awt.Dimension(1020, 535));
+        setMinimumSize(new java.awt.Dimension(1020, 535));
+        setPreferredSize(new java.awt.Dimension(1020, 535));
         setResizable(false);
 
         jpNuevaVenta.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -48,40 +49,40 @@ public class ShoppingCartFormView extends javax.swing.JFrame {
         btnCancel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/market icons/shoppingsystemicons/cancel shopping cart icon 48px.png"))); // NOI18N
         btnCancel.setText("Cancel Order ");
-        jpNuevaVenta.add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 500, 180, 50));
+        jpNuevaVenta.add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 450, 180, 50));
 
         lblSsn.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         lblSsn.setText("SSN");
-        jpNuevaVenta.add(lblSsn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, -1, -1));
+        jpNuevaVenta.add(lblSsn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, -1, -1));
 
         txtClientSsn.setEditable(false);
         txtClientSsn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtClientSsn.setFocusable(false);
         txtClientSsn.setOpaque(true);
-        jpNuevaVenta.add(txtClientSsn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, 150, 30));
+        jpNuevaVenta.add(txtClientSsn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 150, 30));
 
         txtClientName.setEditable(false);
         txtClientName.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtClientName.setFocusable(false);
         txtClientName.setOpaque(true);
-        jpNuevaVenta.add(txtClientName, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 450, 150, 30));
+        jpNuevaVenta.add(txtClientName, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 430, 150, 30));
 
         lblNameClient.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         lblNameClient.setText("Name");
-        jpNuevaVenta.add(lblNameClient, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 410, -1, -1));
+        jpNuevaVenta.add(lblNameClient, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 390, -1, -1));
 
         btnGenerateOrder.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnGenerateOrder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/market icons/shoppingsystemicons/accept shopping cart icon 48px.png"))); // NOI18N
         btnGenerateOrder.setText("Generate Order");
-        jpNuevaVenta.add(btnGenerateOrder, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 430, -1, 50));
+        jpNuevaVenta.add(btnGenerateOrder, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 390, -1, 50));
 
         lblTotalPrice.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         lblTotalPrice.setText("Total $");
-        jpNuevaVenta.add(lblTotalPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 500, -1, -1));
+        jpNuevaVenta.add(lblTotalPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, -1, -1));
 
         lblTotal.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         lblTotal.setText("15000");
-        jpNuevaVenta.add(lblTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 500, 170, 30));
+        jpNuevaVenta.add(lblTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 470, 170, 30));
 
         jpTitle.setPreferredSize(new java.awt.Dimension(1020, 57));
 
@@ -107,7 +108,7 @@ public class ShoppingCartFormView extends javax.swing.JFrame {
             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jpNuevaVenta.add(jpTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 1020, 80));
+        jpNuevaVenta.add(jpTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1020, 80));
 
         jTableProducts.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jTableProducts.setModel(new javax.swing.table.DefaultTableModel(
@@ -139,7 +140,7 @@ public class ShoppingCartFormView extends javax.swing.JFrame {
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
         );
 
-        jpNuevaVenta.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 1010, 300));
+        jpNuevaVenta.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 1010, 300));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -151,9 +152,9 @@ public class ShoppingCartFormView extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 570, Short.MAX_VALUE)
+            .addGap(0, 535, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jpNuevaVenta, javax.swing.GroupLayout.DEFAULT_SIZE, 570, Short.MAX_VALUE))
+                .addComponent(jpNuevaVenta, javax.swing.GroupLayout.DEFAULT_SIZE, 535, Short.MAX_VALUE))
         );
 
         pack();

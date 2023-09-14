@@ -1,17 +1,19 @@
 package views.clients;
 
 import controllers.clients.ClientFindByNameController;
-import javax.swing.JButton;
-import javax.swing.JTextField;
 import services.ClientServiceImp;
 
-public class ClientFindByNameFormView extends javax.swing.JInternalFrame {
+public class ClientFindByNameFormView extends javax.swing.JPanel {
 
     private static final long serialVersionUID = 1L;
 
+    ClientFindByNameController clientFindByNameController;
+
     public ClientFindByNameFormView(ClientServiceImp clientService) {
+
         initComponents();
-        var productRegisterFormController = new ClientFindByNameController(this, clientService);
+
+        clientFindByNameController = new ClientFindByNameController(this, clientService);
     }
 
     @SuppressWarnings("unchecked")
@@ -39,24 +41,20 @@ public class ClientFindByNameFormView extends javax.swing.JInternalFrame {
         txtSsn = new javax.swing.JTextField();
         lblPhone = new javax.swing.JLabel();
         txtPhone = new javax.swing.JTextField();
-        btnSave = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
         btnEdit = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
         lblAvailability = new javax.swing.JLabel();
         jcbAvailability = new javax.swing.JCheckBox();
 
-        setBorder(null);
-        setClosable(true);
-        setIconifiable(true);
-        setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        setFrameIcon(null);
         setMaximumSize(new java.awt.Dimension(1020, 535));
         setMinimumSize(new java.awt.Dimension(1020, 535));
-        setOpaque(true);
         setPreferredSize(new java.awt.Dimension(1020, 535));
-        setRequestFocusEnabled(false);
-        setVerifyInputWhenFocusTarget(false);
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
         jtTableClients.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -77,11 +75,11 @@ public class ClientFindByNameFormView extends javax.swing.JInternalFrame {
         );
         jpFormLayout.setVerticalGroup(
             jpFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
         );
 
         jPanel1.setFocusable(false);
-        jPanel1.setPreferredSize(new java.awt.Dimension(1012, 57));
+        jPanel1.setPreferredSize(new java.awt.Dimension(1020, 80));
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Roboto", 0, 48)); // NOI18N
@@ -90,11 +88,6 @@ public class ClientFindByNameFormView extends javax.swing.JInternalFrame {
 
         btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/market icons/general icons/find icon.png"))); // NOI18N
         btnSearch.setText("Search");
-        btnSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSearchActionPerformed(evt);
-            }
-        });
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/market icons/menuclientsicons/client register form icon 64px.png"))); // NOI18N
 
@@ -119,11 +112,9 @@ public class ClientFindByNameFormView extends javax.swing.JInternalFrame {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
-                            .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                        .addContainerGap())))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnSearch)
+                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         lblName.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
@@ -140,9 +131,6 @@ public class ClientFindByNameFormView extends javax.swing.JInternalFrame {
 
         lblPhone.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         lblPhone.setText(" Phone");
-
-        btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/market icons/menuclientsicons/client save icon 2.png"))); // NOI18N
-        btnSave.setText("Save");
 
         btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/market icons/menuclientsicons/client remove icon 2.png"))); // NOI18N
         btnDelete.setText("Delete");
@@ -176,17 +164,14 @@ public class ClientFindByNameFormView extends javax.swing.JInternalFrame {
                     .addComponent(lblPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(80, 80, 80)
-                        .addComponent(jcbAvailability, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lblAvailability, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lblAvailability)
+                        .addGap(45, 45, 45)
+                        .addComponent(jcbAvailability))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30)
-                        .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,43 +195,41 @@ public class ClientFindByNameFormView extends javax.swing.JInternalFrame {
                 .addComponent(lblPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jcbAvailability, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblAvailability, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblAvailability, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jcbAvailability, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jpForm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1020, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
+                        .addGap(30, 30, 30)
                         .addComponent(jpForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -255,21 +238,20 @@ public class ClientFindByNameFormView extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnSearchActionPerformed
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
 
+        clientFindByNameController.refreshTable();
+
+        clientFindByNameController.listClients();
+    }//GEN-LAST:event_formComponentShown
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnEdit;
-    private javax.swing.JButton btnSave;
     private javax.swing.JButton btnSearch;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -295,12 +277,12 @@ public class ClientFindByNameFormView extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtSsn;
     // End of variables declaration//GEN-END:variables
 
-    public javax.swing.JLabel getLblId() {
-        return lblId;
+    public javax.swing.JButton getBtnCancel() {
+        return btnCancel;
     }
 
-    public void setLblId(javax.swing.JLabel lblId) {
-        this.lblId = lblId;
+    public void setBtnCancel(javax.swing.JButton btnCancel) {
+        this.btnCancel = btnCancel;
     }
 
     public javax.swing.JButton getBtnDelete() {
@@ -311,14 +293,6 @@ public class ClientFindByNameFormView extends javax.swing.JInternalFrame {
         this.btnDelete = btnDelete;
     }
 
-    public javax.swing.JButton getBtnCancel() {
-        return btnCancel;
-    }
-
-    public void setBtnCancel(javax.swing.JButton btnCancel) {
-        this.btnCancel = btnCancel;
-    }
-
     public javax.swing.JButton getBtnEdit() {
         return btnEdit;
     }
@@ -327,12 +301,12 @@ public class ClientFindByNameFormView extends javax.swing.JInternalFrame {
         this.btnEdit = btnEdit;
     }
 
-    public javax.swing.JButton getBtnSave() {
-        return btnSave;
+    public javax.swing.JButton getBtnSearch() {
+        return btnSearch;
     }
 
-    public void setBtnSave(javax.swing.JButton btnSave) {
-        this.btnSave = btnSave;
+    public void setBtnSearch(javax.swing.JButton btnSearch) {
+        this.btnSearch = btnSearch;
     }
 
     public javax.swing.JCheckBox getJcbAvailability() {
@@ -351,6 +325,14 @@ public class ClientFindByNameFormView extends javax.swing.JInternalFrame {
         this.jtTableClients = jtTableClients;
     }
 
+    public javax.swing.JLabel getLblId() {
+        return lblId;
+    }
+
+    public void setLblId(javax.swing.JLabel lblId) {
+        this.lblId = lblId;
+    }
+
     public javax.swing.JTextField getTxtAge() {
         return txtAge;
     }
@@ -367,12 +349,28 @@ public class ClientFindByNameFormView extends javax.swing.JInternalFrame {
         this.txtLastname = txtLastname;
     }
 
+    public javax.swing.JTextField getTxtName() {
+        return txtName;
+    }
+
+    public void setTxtName(javax.swing.JTextField txtName) {
+        this.txtName = txtName;
+    }
+
     public javax.swing.JTextField getTxtPhone() {
         return txtPhone;
     }
 
     public void setTxtPhone(javax.swing.JTextField txtPhone) {
         this.txtPhone = txtPhone;
+    }
+
+    public javax.swing.JTextField getTxtSearch() {
+        return txtSearch;
+    }
+
+    public void setTxtSearch(javax.swing.JTextField txtSearch) {
+        this.txtSearch = txtSearch;
     }
 
     public javax.swing.JTextField getTxtSsn() {
@@ -382,30 +380,4 @@ public class ClientFindByNameFormView extends javax.swing.JInternalFrame {
     public void setTxtSsn(javax.swing.JTextField txtSsn) {
         this.txtSsn = txtSsn;
     }
-
-    public javax.swing.JTextField getTxtName() {
-        return txtName;
-    }
-
-    public void setTxtName(javax.swing.JTextField txtName) {
-        this.txtName = txtName;
-    }
-
-    public JButton getBtnSearch() {
-        return btnSearch;
-    }
-
-    public void setBtnSearch(JButton btnSearch) {
-        this.btnSearch = btnSearch;
-    }
-
-    public JTextField getTxtSearch() {
-        return txtSearch;
-    }
-
-    public void setTxtSearch(JTextField txtSearch) {
-        this.txtSearch = txtSearch;
-    }
-    
-    
 }

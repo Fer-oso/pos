@@ -1,15 +1,24 @@
 package views.Products;
 
 import controllers.products.ProductRegisterFormController;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 import services.ProductServiceImp;
 
-public class ProductRegisterFormView extends javax.swing.JInternalFrame {
+public class ProductRegisterFormView extends javax.swing.JPanel {
 
     private static final long serialVersionUID = 1L;
 
+    ProductRegisterFormController productRegisterFormController;
+
     public ProductRegisterFormView(ProductServiceImp productServiceImp) {
+
         initComponents();
-        var productRegisterFormController = new ProductRegisterFormController(this, productServiceImp);
+
+        productRegisterFormController = new ProductRegisterFormController(this, productServiceImp);
     }
 
     @SuppressWarnings("unchecked")
@@ -42,18 +51,14 @@ public class ProductRegisterFormView extends javax.swing.JInternalFrame {
         lblAvailability = new javax.swing.JLabel();
         jcbAvailability = new javax.swing.JCheckBox();
 
-        setBorder(null);
-        setClosable(true);
-        setIconifiable(true);
-        setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        setFrameIcon(null);
         setMaximumSize(new java.awt.Dimension(1020, 535));
-        setOpaque(true);
+        setMinimumSize(new java.awt.Dimension(1020, 535));
         setPreferredSize(new java.awt.Dimension(1020, 535));
-        setRequestFocusEnabled(false);
-        setVerifyInputWhenFocusTarget(false);
-
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
         jtTableProducts.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -70,16 +75,12 @@ public class ProductRegisterFormView extends javax.swing.JInternalFrame {
         jpForm.setLayout(jpFormLayout);
         jpFormLayout.setHorizontalGroup(
             jpFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 750, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 748, Short.MAX_VALUE)
         );
         jpFormLayout.setVerticalGroup(
             jpFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpFormLayout.createSequentialGroup()
-                .addGap(0, 31, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
         );
-
-        jPanel3.add(jpForm, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 80, 750, 300));
 
         jPanel1.setFocusable(false);
         jPanel1.setPreferredSize(new java.awt.Dimension(1020, 80));
@@ -104,12 +105,8 @@ public class ProductRegisterFormView extends javax.swing.JInternalFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-
-        jPanel3.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1020, 80));
 
         lblName.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         lblName.setText(" Name");
@@ -148,7 +145,7 @@ public class ProductRegisterFormView extends javax.swing.JInternalFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(0, 0, 0)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -161,9 +158,9 @@ public class ProductRegisterFormView extends javax.swing.JInternalFrame {
                     .addComponent(lblCode, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCode, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(80, 80, 80)
-                        .addComponent(jcbAvailability, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lblAvailability, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblAvailability)
+                        .addGap(45, 45, 45)
+                        .addComponent(jcbAvailability))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30)
@@ -195,9 +192,9 @@ public class ProductRegisterFormView extends javax.swing.JInternalFrame {
                 .addComponent(lblCode, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(txtCode, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jcbAvailability, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblAvailability, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblAvailability, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jcbAvailability, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -208,10 +205,34 @@ public class ProductRegisterFormView extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel3.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 81, 270, 430));
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jpForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(jpForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(35, Short.MAX_VALUE))
+        );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -220,11 +241,110 @@ public class ProductRegisterFormView extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
 
+        productRegisterFormController.refreshTable();
+
+        productRegisterFormController.listProducts();
+    }//GEN-LAST:event_formComponentShown
+
+    public JButton getBtnCancel() {
+        return btnCancel;
+    }
+
+    public void setBtnCancel(JButton btnCancel) {
+        this.btnCancel = btnCancel;
+    }
+
+    public JButton getBtnDelete() {
+        return btnDelete;
+    }
+
+    public void setBtnDelete(JButton btnDelete) {
+        this.btnDelete = btnDelete;
+    }
+
+    public JButton getBtnEdit() {
+        return btnEdit;
+    }
+
+    public void setBtnEdit(JButton btnEdit) {
+        this.btnEdit = btnEdit;
+    }
+
+    public JButton getBtnSave() {
+        return btnSave;
+    }
+
+    public void setBtnSave(JButton btnSave) {
+        this.btnSave = btnSave;
+    }
+
+    public JCheckBox getJcbAvailability() {
+        return jcbAvailability;
+    }
+
+    public void setJcbAvailability(JCheckBox jcbAvailability) {
+        this.jcbAvailability = jcbAvailability;
+    }
+
+    public JTable getJtTableProducts() {
+        return jtTableProducts;
+    }
+
+    public void setJtTableProducts(JTable jtTableProducts) {
+        this.jtTableProducts = jtTableProducts;
+    }
+
+    public JLabel getLblId() {
+        return lblId;
+    }
+
+    public void setLblId(JLabel lblId) {
+        this.lblId = lblId;
+    }
+
+    public JTextField getTxtBrand() {
+        return txtBrand;
+    }
+
+    public void setTxtBrand(JTextField txtBrand) {
+        this.txtBrand = txtBrand;
+    }
+
+    public JTextField getTxtCode() {
+        return txtCode;
+    }
+
+    public void setTxtCode(JTextField txtCode) {
+        this.txtCode = txtCode;
+    }
+
+    public JTextField getTxtName() {
+        return txtName;
+    }
+
+    public void setTxtName(JTextField txtName) {
+        this.txtName = txtName;
+    }
+
+    public JTextField getTxtPrice() {
+        return txtPrice;
+    }
+
+    public void setTxtPrice(JTextField txtPrice) {
+        this.txtPrice = txtPrice;
+    }
+
+    public JTextField getTxtStock() {
+        return txtStock;
+    }
+
+    public void setTxtStock(JTextField txtStock) {
+        this.txtStock = txtStock;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
@@ -253,102 +373,4 @@ public class ProductRegisterFormView extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtPrice;
     private javax.swing.JTextField txtStock;
     // End of variables declaration//GEN-END:variables
-
-    public javax.swing.JLabel getLblId() {
-        return lblId;
-    }
-
-    public void setLblId(javax.swing.JLabel lblId) {
-        this.lblId = lblId;
-    }
-
-    public javax.swing.JButton getBtnDelete() {
-        return btnDelete;
-    }
-
-    public void setBtnDelete(javax.swing.JButton btnDelete) {
-        this.btnDelete = btnDelete;
-    }
-
-    public javax.swing.JButton getBtnCancel() {
-        return btnCancel;
-    }
-
-    public void setBtnCancel(javax.swing.JButton btnCancel) {
-        this.btnCancel = btnCancel;
-    }
-
-    public javax.swing.JButton getBtnEdit() {
-        return btnEdit;
-    }
-
-    public void setBtnEdit(javax.swing.JButton btnEdit) {
-        this.btnEdit = btnEdit;
-    }
-
-    public javax.swing.JButton getBtnSave() {
-        return btnSave;
-    }
-
-    public void setBtnSave(javax.swing.JButton btnSave) {
-        this.btnSave = btnSave;
-    }
-
-    public javax.swing.JCheckBox getJcbAvailability() {
-        return jcbAvailability;
-    }
-
-    public void setJcbAvailability(javax.swing.JCheckBox jcbAvailability) {
-        this.jcbAvailability = jcbAvailability;
-    }
-
-    public javax.swing.JTable getJtTableProducts() {
-        return jtTableProducts;
-    }
-
-    public void setJtTableProducts(javax.swing.JTable jtTableProducts) {
-        this.jtTableProducts = jtTableProducts;
-    }
-
-    public javax.swing.JTextField getTxtBrand() {
-        return txtBrand;
-    }
-
-    public void setTxtBrand(javax.swing.JTextField txtBrand) {
-        this.txtBrand = txtBrand;
-    }
-
-    public javax.swing.JTextField getTxtCode() {
-        return txtCode;
-    }
-
-    public void setTxtCode(javax.swing.JTextField txtCode) {
-        this.txtCode = txtCode;
-    }
-
-    public javax.swing.JTextField getTxtName() {
-        return txtName;
-    }
-
-    public void setTxtName(javax.swing.JTextField txtName) {
-        this.txtName = txtName;
-    }
-
-    public javax.swing.JTextField getTxtPrice() {
-        return txtPrice;
-    }
-
-    public void setTxtPrice(javax.swing.JTextField txtPrice) {
-        this.txtPrice = txtPrice;
-    }
-
-    public javax.swing.JTextField getTxtStock() {
-        return txtStock;
-    }
-
-    public void setTxtStock(javax.swing.JTextField txtStock) {
-        this.txtStock = txtStock;
-    }
-
-    
 }

@@ -2,12 +2,16 @@ package services;
 
 import java.util.List;
 import entitys.Client;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Optional;
 import persistence.ClientRepository;
 import services.interfaces.clientservice.IclientService;
 
 
-public class ClientServiceImp implements IclientService<Client, Integer> {
+public class ClientServiceImp implements IclientService<Client, Integer>, Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private final ClientRepository clientRepository;
 
@@ -36,7 +40,7 @@ public class ClientServiceImp implements IclientService<Client, Integer> {
     }
 
     @Override
-    public List<Client> findAll() {
+    public ArrayList<Client> findAll() {
         return clientRepository.findAll();
     }
 

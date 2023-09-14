@@ -5,36 +5,34 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import entitys.Product;
+import java.io.Serializable;
+import javax.swing.JOptionPane;
 import services.ProductServiceImp;
 import views.Products.ProductFindByPcFormView;
 
-public class ProductFindByPcController extends MouseAdapter implements ActionListener {
+public class ProductFindByPcController extends MouseAdapter implements ActionListener,Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private final ProductFindByPcFormView productFindByPcFormView;
 
-    private final ProductServiceImp productService;
+    private final ProductServiceImp productServiceImp;
 
     private DefaultTableModel model = new DefaultTableModel();
 
-    List<Product> listProducts = new ArrayList<>();
-    int row;
-    int id;
-    Product product;
+    private ArrayList<Product> listProducts;
+    private int row;
+    private int id;
+    private Product product;
 
     /*Constructors*/
-    
-    public ProductFindByPcController(ProductFindByPcFormView productFindByPcFormView, ProductServiceImp productService) {
+    public ProductFindByPcController(ProductFindByPcFormView productFindByPcFormView, ProductServiceImp productServiceImp) {
 
         this.productFindByPcFormView = productFindByPcFormView;
 
-        this.productService = productService;
-
-        listProducts = productService.findAll();
-
-        listProducts();
+        this.productServiceImp = productServiceImp;
 
         addACtionsListeners();
     }
@@ -58,22 +56,32 @@ public class ProductFindByPcController extends MouseAdapter implements ActionLis
 
         if (e.getSource() == productFindByPcFormView.getBtnSearch()) {
 
-            listProducts = findByPc();
+            if (searchButton()) {
 
-            refreshTable();
+                refreshTable();
 
-            listProducts();
+                listProducts = findByPc();
+
+                listProducts();
+
+                System.out.println(listProducts);
+            }
 
             System.out.println(listProducts);
         }
 
         if (e.getSource() == productFindByPcFormView.getBtnEdit()) {
 
-            editProduct();
+            if (setProductWithDataOfForm()) {
 
-            refreshTable();
+                editProduct();
+                
+                clearForm();
 
-            listProducts();
+                refreshTable();
+
+                listProducts();
+            }
 
             System.out.println(listProducts);
         }
@@ -92,6 +100,12 @@ public class ProductFindByPcController extends MouseAdapter implements ActionLis
         if (e.getSource() == productFindByPcFormView.getBtnCancel()) {
 
             clearForm();
+
+            refreshTable();
+
+            listProducts = productServiceImp.findAll();
+
+            listProducts();
         }
     }
 
@@ -106,7 +120,9 @@ public class ProductFindByPcController extends MouseAdapter implements ActionLis
         }
     }
 
-    private void listProducts() {
+    public void listProducts() {
+        
+        listProducts = productServiceImp.findAll();
 
         model = (DefaultTableModel) this.productFindByPcFormView.getJtTableProducts().getModel();
 
@@ -117,29 +133,29 @@ public class ProductFindByPcController extends MouseAdapter implements ActionLis
 
             model.addRow(productObject);
         }
+        
         this.productFindByPcFormView.getJtTableProducts().setModel(model);
-
     }
 
     private Product editProduct() {
 
         setProductWithDataOfForm();
 
-        return productService.update(row, product);
+        return productServiceImp.update(row, product);
     }
 
     private void deleteProduct() {
 
-        productService.delete(id);
+        productServiceImp.delete(id);
     }
 
-    private List<Product> findByPc() {
+    private ArrayList<Product> findByPc() {
 
         String productCode = this.productFindByPcFormView.getTxtSearch().getText();
 
-        product = productService.findByPc(productCode).get();
+        product = productServiceImp.findByPc(productCode).get();
 
-        List<Product> listProductByName = new ArrayList<>();
+        ArrayList<Product> listProductByName = new ArrayList<>();
 
         listProductByName.add(product);
 
@@ -155,7 +171,15 @@ public class ProductFindByPcController extends MouseAdapter implements ActionLis
         id = product.getId();
     }
 
-    private void setProductWithDataOfForm() {
+    private boolean setProductWithDataOfForm() {
+
+        if (productFindByPcFormView.getTxtName().getText().equals("") || productFindByPcFormView.getTxtPrice().getText().equals("")
+                || productFindByPcFormView.getTxtStock().getText().equals("") || productFindByPcFormView.getTxtBrand().getText().equals("") || productFindByPcFormView.getTxtCode().getText().equals("")) {
+
+           JOptionPane.showMessageDialog(null, "All fields required");
+
+            return false;
+        }
 
         product.setName(productFindByPcFormView.getTxtName().getText());
 
@@ -168,6 +192,8 @@ public class ProductFindByPcController extends MouseAdapter implements ActionLis
         product.setBrand(productFindByPcFormView.getTxtBrand().getText());
 
         product.setProductCode(productFindByPcFormView.getTxtCode().getText());
+
+        return true;
     }
 
     private void setFormWithSelectedProduct(Product product) {
@@ -199,7 +225,7 @@ public class ProductFindByPcController extends MouseAdapter implements ActionLis
         }
     }
 
-    private void refreshTable() {
+    public void refreshTable() {
 
         for (int i = 0; i < model.getRowCount(); i++) {
 
@@ -209,7 +235,7 @@ public class ProductFindByPcController extends MouseAdapter implements ActionLis
         }
     }
 
-    private void clearForm() {
+    public void clearForm() {
 
         this.productFindByPcFormView.getLblId().setText("");
 
@@ -225,4 +251,17 @@ public class ProductFindByPcController extends MouseAdapter implements ActionLis
 
         this.productFindByPcFormView.getTxtCode().setText("");
     }
+
+    private boolean searchButton() {
+
+        if (productFindByPcFormView.getTxtSearch().getText().equals("")) {
+
+            JOptionPane.showMessageDialog(null, "Input search value");
+
+            return false;
+        }
+
+        return true;
+    }
+
 }

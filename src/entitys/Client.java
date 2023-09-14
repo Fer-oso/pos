@@ -2,10 +2,13 @@ package entitys;
 
 import interfaces.entity.client.IClient;
 import interfaces.entity.paymentMethod.PaymentMethod;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Client implements IClient<Client, Integer>{
+public class Client implements IClient<Client, Integer>,Serializable{
+
+    private static final long serialVersionUID = 1L;
 
     private Integer id;
     
@@ -23,7 +26,7 @@ public class Client implements IClient<Client, Integer>{
     
     private static Integer countId = 0;
     
-    private List<PaymentMethod> paymentMethods;
+    private ArrayList<PaymentMethod> paymentMethods;
 
     public Client() {
 
@@ -142,7 +145,7 @@ public class Client implements IClient<Client, Integer>{
         return paymentMethods;
     }
 
-    public void setPaymentMethods(List<PaymentMethod> paymentMethods) {
+    public void setPaymentMethods(ArrayList<PaymentMethod> paymentMethods) {
         this.paymentMethods = paymentMethods;
     }
 }

@@ -194,7 +194,7 @@ public class ShopFormController extends MouseAdapter implements ActionListener {
 
                 shopFormView.getTxtProductQuantityToSell().setText("");
 
-                addProductToList(selectedProduct); // añade a la lista el producto seleccionado
+                addProductToList(); // añade a la lista el producto seleccionado
 
                 actualStock = (productStock - productQuantityToSell);
 
@@ -232,7 +232,7 @@ public class ShopFormController extends MouseAdapter implements ActionListener {
         return new SelectedProduct(id, productCode, productName, productBrand, productPrice, productQuantityToSell, finalPrice);
     }
 
-    private void addProductToList(SelectedProduct selectedProduct) {
+    private void addProductToList() {
 
         boolean existDuplicate = false; //Flag to check duplicate existence
 
@@ -338,6 +338,8 @@ public class ShopFormController extends MouseAdapter implements ActionListener {
                 System.out.println("" + selectedProduct);
 
                 iteratorList.remove();
+                
+                shopFormView.getLblTotal().setText("" + (total - selectedProduct.getFinalPrice()*1.21));
 
                 break;
             }

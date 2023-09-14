@@ -1,8 +1,11 @@
 package entitys;
 
 import interfaces.entity.product.IProduct;
+import java.io.Serializable;
 
-public class Product implements IProduct<Product,Integer> {
+public class Product implements IProduct<Product,Integer>,Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private Integer id;
 

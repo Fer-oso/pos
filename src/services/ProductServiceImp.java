@@ -4,10 +4,14 @@ import java.util.List;
 import persistence.ProductRepository;
 
 import entitys.Product;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Optional;
 import services.interfaces.productservice.IProductService;
 
-public class ProductServiceImp implements IProductService<Product, Integer> {
+public class ProductServiceImp implements IProductService<Product, Integer>,Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private final ProductRepository productRepository;
 
@@ -36,7 +40,7 @@ public class ProductServiceImp implements IProductService<Product, Integer> {
     }
 
     @Override
-    public List<Product> findAll() {
+    public ArrayList<Product> findAll() {
         return productRepository.findAll();
     }
 

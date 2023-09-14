@@ -4,32 +4,33 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import entitys.Client;
 import entitys.CreditCard;
+import java.io.Serializable;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import services.ClientServiceImp;
 import views.clients.ClientRegisterFormView;
 
-public class ClientRegisterFormController extends MouseAdapter implements ActionListener {
+public class ClientRegisterFormController extends MouseAdapter implements ActionListener, Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private final ClientRegisterFormView clientRegisterFormView;
 
     private final ClientServiceImp clientServiceImp;
 
     private DefaultTableModel model = new DefaultTableModel();
-    private List<Client> listClients;
+    private ArrayList<Client> listClients;
     private Client client;
 
     /*Constructors*/
-    
     public ClientRegisterFormController(ClientRegisterFormView clientRegisterFormView, ClientServiceImp clientServiceImp) {
 
         this.clientRegisterFormView = clientRegisterFormView;
 
         this.clientServiceImp = clientServiceImp;
-
-        listClients();
 
         addACtionsListeners();
     }
@@ -49,13 +50,16 @@ public class ClientRegisterFormController extends MouseAdapter implements Action
 
         if (e.getSource() == clientRegisterFormView.getBtnSave()) {
 
-            createNewClient();
+            if (createNewClient()) {
 
-            save();
+                save();
 
-            refreshTable();
+                clearForm();
 
-            listClients();
+                refreshTable();
+
+                listClients();
+            }
 
             System.out.println(listClients);
         }
@@ -63,6 +67,12 @@ public class ClientRegisterFormController extends MouseAdapter implements Action
         if (e.getSource() == clientRegisterFormView.getBtnCancel()) {
 
             clearForm();
+
+            refreshTable();
+
+            listClients = clientServiceImp.findAll();
+
+            listClients();
         }
     }
 
@@ -78,7 +88,15 @@ public class ClientRegisterFormController extends MouseAdapter implements Action
     }
 
     /*Functions*/
-    private void createNewClient() {
+    private boolean createNewClient() {
+
+        if (clientRegisterFormView.getTxtName().getText().equals("") || clientRegisterFormView.getTxtLastname().getText().equals("")
+                || clientRegisterFormView.getTxtAge().getText().equals("") || clientRegisterFormView.getTxtSsn().getText().equals("") || clientRegisterFormView.getTxtPhone().getText().equals("")) {
+
+            JOptionPane.showMessageDialog(null, "All fields required");
+
+            return false;
+        }
 
         String name = clientRegisterFormView.getTxtName().getText();
 
@@ -93,6 +111,8 @@ public class ClientRegisterFormController extends MouseAdapter implements Action
         String phoneNumber = clientRegisterFormView.getTxtPhone().getText();
 
         client = new Client(name, lastName, age, ssn, availability, phoneNumber, new CreditCard());
+
+        return true;
     }
 
     private Client save() {
@@ -100,9 +120,9 @@ public class ClientRegisterFormController extends MouseAdapter implements Action
         return clientServiceImp.save(client);
     }
 
-    private void listClients() {
+    public void listClients() {
 
-        listClients = clientServiceImp.findAll();
+        this.listClients = clientServiceImp.findAll();
 
         model = (DefaultTableModel) clientRegisterFormView.getJtTableClients().getModel();
 
@@ -115,7 +135,6 @@ public class ClientRegisterFormController extends MouseAdapter implements Action
 
             model.addRow(clientObject);
         }
-
     }
 
     private void getClientSelectedOfTable() {
@@ -171,7 +190,7 @@ public class ClientRegisterFormController extends MouseAdapter implements Action
         clientRegisterFormView.getTxtPhone().setText("");
     }
 
-    private void refreshTable() {
+    public void refreshTable() {
 
         for (int i = 0; i < model.getRowCount(); i++) {
 
