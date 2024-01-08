@@ -107,6 +107,7 @@ public class CheckOutFormView extends javax.swing.JFrame {
         jPanel2.add(jrbCreditCard, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, 20, 30));
 
         jcbCuotes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1  6%", "2  11%", "6  18%", "12 24%" }));
+        jcbCuotes.setEnabled(false);
         jPanel2.add(jcbCuotes, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, 100, 30));
 
         txtFinalPriceCc.setEditable(false);

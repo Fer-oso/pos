@@ -33,7 +33,7 @@ public class CheckOutFormController implements ActionListener {
     CreditCard creditCard;
 
     CheckOut checkOut;
-    
+
     Double creditCardPriceByFee;
 
     public CheckOutFormController(CheckOutFormView checkOutFormView, ShoppingCart shoppingCart, CheckOutServiceImp checkOutServiceImp) {
@@ -66,15 +66,52 @@ public class CheckOutFormController implements ActionListener {
         checkOutFormView.getTxtCreditCardQuantity().addActionListener(this);
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        if (e.getSource() == checkOutFormView.getTxtCash()) {
+
+            inputCash();
+        }
+
+        if (e.getSource() == checkOutFormView.getJrbCash()) {
+
+            jrbCashButtonActions();
+        }
+
+        if (e.getSource() == checkOutFormView.getJrbCreditCard()) {
+
+            jrbCreditCardButtonActions();
+        }
+
+        if (e.getSource() == checkOutFormView.getJcbCuotes()) {
+
+            selectedFees();
+        }
+
+        if (e.getSource() == checkOutFormView.getTxtCreditCardQuantity()) {
+
+            inputCreditCardQuantity();
+            selectedFees();
+        }
+    }
+
     private void jrbCreditCardButtonActions() {
 
         if (checkOutFormView.getJrbCreditCard().isSelected()) {
 
+            checkOutFormView.getJcbCuotes().setEnabled(true);
+
             checkOutFormView.getTxtFinalPriceCc().setVisible(true);
 
+//            creditCardPriceByFee = shoppingCart.getFinalPrice() * 1.06;
+//
+//            checkOutFormView.getTxtFinalPriceCc().setText(String.format("%.2f", creditCardPriceByFee));
         } else {
 
             checkOutFormView.getTxtFinalPriceCc().setVisible(false);
+
+            checkOutFormView.getJcbCuotes().setSelectedIndex(0);
         }
     }
 
@@ -101,40 +138,10 @@ public class CheckOutFormController implements ActionListener {
 
         inputCash = Double.valueOf(checkOutFormView.getTxtCash().getText());
     }
-    
-    private void inputCreditCardQuantity(){
-        
-    creditCardPriceByFee = Double.valueOf(checkOutFormView.getTxtCreditCardQuantity().getText());
-    }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
+    private void inputCreditCardQuantity() {
 
-        if (e.getSource() == checkOutFormView.getTxtCash()) {
-
-            inputCash();
-        }
-
-        if (e.getSource() == checkOutFormView.getJrbCash()) {
-
-            jrbCashButtonActions();
-        }
-
-        if (e.getSource() == checkOutFormView.getJrbCreditCard()) {
-
-            jrbCreditCardButtonActions();
-        }
-
-        if (e.getSource() == checkOutFormView.getJcbCuotes()) {
-
-            selectedFees();
-        }
-
-        if (e.getSource() == checkOutFormView.getTxtCreditCardQuantity()) {
-
-           inputCreditCardQuantity();
-           selectedFees();
-        }
+        creditCardPriceByFee = Double.valueOf(checkOutFormView.getTxtCreditCardQuantity().getText());
     }
 
     private void listProductsCarshop() {
@@ -154,31 +161,35 @@ public class CheckOutFormController implements ActionListener {
 
     private void selectedFees() {
 
-        Double creditCardQuantity= 0.0;
+        Double creditCardQuantity = 0.0;
 
         if (checkOutFormView.getJcbCuotes().getSelectedIndex() == 0 && checkOutFormView.getTxtCreditCardQuantity().getText().equals("")) {
 
             creditCardPriceByFee = shoppingCart.getFinalPrice() * 1.06;
 
-            checkOutFormView.getTxtFinalPriceCc().setText(String.format("%.2f", creditCardPriceByFee));
+          //  checkOutFormView.getTxtFinalPriceCc().setText(String.format("%.2f", creditCardPriceByFee));
 
         } else {
-
+            
             if (!checkOutFormView.getTxtCreditCardQuantity().getText().equals("")) {
+                
+                
+            creditCardQuantity = Double.valueOf(checkOutFormView.getTxtCreditCardQuantity().getText());
 
-                creditCardQuantity = Double.valueOf(checkOutFormView.getTxtCreditCardQuantity().getText());
-
-                creditCardPriceByFee = creditCardQuantity * 1.06;
-
-                checkOutFormView.getTxtFinalPriceCc().setText(String.format("%.2f", creditCardPriceByFee));
+            creditCardPriceByFee = creditCardQuantity * 1.06;
+                
             }
+
+
+         //   checkOutFormView.getTxtFinalPriceCc().setText(String.format("%.2f", creditCardPriceByFee));
+
         }
 
         if (checkOutFormView.getJcbCuotes().getSelectedIndex() == 1 && checkOutFormView.getTxtCreditCardQuantity().getText().equals("")) {
 
             creditCardPriceByFee = shoppingCart.getFinalPrice() * 1.11;
 
-            checkOutFormView.getTxtFinalPriceCc().setText(String.format("%.2f", creditCardPriceByFee));
+        //    checkOutFormView.getTxtFinalPriceCc().setText(String.format("%.2f", creditCardPriceByFee));
 
         } else {
 
@@ -188,7 +199,7 @@ public class CheckOutFormController implements ActionListener {
 
                 creditCardPriceByFee = creditCardQuantity * 1.11;
 
-                checkOutFormView.getTxtFinalPriceCc().setText(String.format("%.2f", creditCardPriceByFee));
+      //          checkOutFormView.getTxtFinalPriceCc().setText(String.format("%.2f", creditCardPriceByFee));
             }
         }
 
@@ -196,7 +207,7 @@ public class CheckOutFormController implements ActionListener {
 
             creditCardPriceByFee = shoppingCart.getFinalPrice() * 1.18;
 
-            checkOutFormView.getTxtFinalPriceCc().setText(String.format("%.2f", creditCardPriceByFee));
+        //    checkOutFormView.getTxtFinalPriceCc().setText(String.format("%.2f", creditCardPriceByFee));
 
         } else {
 
@@ -206,7 +217,7 @@ public class CheckOutFormController implements ActionListener {
 
                 creditCardPriceByFee = creditCardQuantity * 1.18;
 
-                checkOutFormView.getTxtFinalPriceCc().setText(String.format("%.2f", creditCardPriceByFee));
+        //        checkOutFormView.getTxtFinalPriceCc().setText(String.format("%.2f", creditCardPriceByFee));
             }
         }
 
@@ -214,7 +225,7 @@ public class CheckOutFormController implements ActionListener {
 
             creditCardPriceByFee = shoppingCart.getFinalPrice() * 1.24;
 
-            checkOutFormView.getTxtFinalPriceCc().setText(String.format("%.2f", creditCardPriceByFee));
+        //    checkOutFormView.getTxtFinalPriceCc().setText(String.format("%.2f", creditCardPriceByFee));
 
         } else {
 
@@ -224,18 +235,11 @@ public class CheckOutFormController implements ActionListener {
 
                 creditCardPriceByFee = creditCardQuantity * 1.24;
 
-                checkOutFormView.getTxtFinalPriceCc().setText(String.format("%.2f", creditCardPriceByFee));
+         //       checkOutFormView.getTxtFinalPriceCc().setText(String.format("%.2f", creditCardPriceByFee));
             }
         }
+        
+        checkOutFormView.getTxtFinalPriceCc().setText(String.format("%.2f", creditCardPriceByFee));
     }
-
-    private void createCheckOut() {
-
-        checkOut = new CheckOut(shoppingCart);
-
-        if (true) {
-
-        }
-    }
-
+    
 }
